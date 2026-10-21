@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Smart Pricing Engine – Approver view</title>
 <script>
   // Load React from this site's own files instead of the jsDelivr CDN.
@@ -218,6 +219,32 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 .row span:last-child{text-align:right;color:var(--ink);font-weight:500}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
+.ap{--bg:#F2F4F8;--card:#FFFFFF;--ink:#0E2240;--text:#1E2A3B;--muted:#586374;--line:#E3E7EE;--field:#C9D1DD;--accent:#1F5FBF;--accent-ink:#FFFFFF;--accent-soft:#E8F0FC;--link:#1F5FBF;--light:#6E9BE0;--up:#0E2240;--bar-cost:#A3AEBD;--skel:#E6EAF0;--head:#0B1B33;font-family:'Manrope','Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.005em}
+.ap.dark{--bg:#0B111C;--card:#141C2B;--ink:#EEF2F8;--text:#D3DBE6;--muted:#9AA7B8;--line:#253247;--field:#3B4B63;--accent:#3D7BE0;--accent-soft:#18284A;--link:#8DB6F2;--light:#5F8FDB;--up:#C9D6E8;--bar-cost:#56657A;--skel:#1E2A3D;--head:#070C15;}
+@media (prefers-color-scheme:dark){.ap.auto{--bg:#0B111C;--card:#141C2B;--ink:#EEF2F8;--text:#D3DBE6;--muted:#9AA7B8;--line:#253247;--field:#3B4B63;--accent:#3D7BE0;--accent-soft:#18284A;--link:#8DB6F2;--light:#5F8FDB;--up:#C9D6E8;--bar-cost:#56657A;--skel:#1E2A3D;--head:#070C15;}}
+.ap h1,.ap h2,.ap h3{letter-spacing:-.02em}
+.ap input[type=text],.ap select,.ap textarea{border-radius:10px;border-color:var(--field);transition:border-color .15s,box-shadow .15s}
+.ap input[type=text]:hover,.ap select:hover,.ap textarea:hover{border-color:var(--light)}
+.ap input[type=text]:focus,.ap select:focus,.ap textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.ap :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.ap .btn{border-radius:10px;font-weight:700;letter-spacing:-.005em;transition:background .15s,border-color .15s,transform .1s,box-shadow .15s;box-shadow:0 1px 2px rgba(14,34,64,.12)}
+.ap .btn:not(.sec):not(.ghost):not(:disabled):hover{background:color-mix(in oklch,var(--accent) 86%,black);border-color:color-mix(in oklch,var(--accent) 86%,black);box-shadow:0 4px 14px color-mix(in oklch,var(--accent) 30%,transparent)}
+.ap .btn:not(:disabled):active{transform:translateY(1px)}
+.ap .btn.sec{background:var(--card);border-color:var(--field);box-shadow:none}
+.ap .btn.sec:not(:disabled):hover{border-color:var(--accent);background:var(--accent-soft)}
+.ap .btn.ghost{box-shadow:none}
+.ap .chip{border-radius:999px;border-color:var(--line);background:var(--card);transition:background .15s,border-color .15s}
+.ap button.chip:hover{border-color:var(--accent)}
+.ap .badge{border-radius:999px}
+.ap details>summary{font-size:16px;letter-spacing:-.01em}
+.ap .tbl th{text-transform:uppercase;letter-spacing:.06em;font-size:11px;font-weight:700;padding-bottom:10px}
+.ap .tbl td{padding-top:11px;padding-bottom:11px}
+.ap .tbl tbody tr:hover td{background:var(--accent-soft)}
+.ap .tbl tbody tr:last-child td{border-bottom:0}
+
+.ap .btn{min-height:52px;border-radius:12px}
+</style>
 </helmet>
 <div class="ap {{themeClass}}" style="width: 390px; height: 844px; display: flex; flex-direction: column; overflow: hidden">
 
@@ -240,7 +267,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <p style="color: var(--ink); font-weight: 500">{{doneText}}</p>
 <p style="font-size: 13px; color: var(--muted)">The decision has been sent back to the sales rep with the reason. No other pending requests.</p>
 <button type="button" class="btn sec" sc-camel-on-click="{{restart}}">Restart the demo</button>
-<a href="./" style="font-size: 14px; min-height: 44px; display: inline-flex; align-items: center">Back to the sales rep view</a>
+<a href="sales-rep.html" style="font-size: 14px; min-height: 44px; display: inline-flex; align-items: center">Back to the sales rep view</a>
 </div>
 </sc-if>
 

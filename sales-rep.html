@@ -1,10 +1,1311 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="utf-8">
-<title>Redirecting…</title>
-<meta http-equiv="refresh" content="0; url=./">
-<link rel="canonical" href="./">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Pricing Engine – Sales rep</title>
+<script>
+  // Load React from this site's own files instead of the jsDelivr CDN.
+  window.__resources = {
+    "https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js": "assets/react.production.min.js",
+    "https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/react-dom.production.min.js"
+  };
+</script>
+<script src="assets/dc-runtime.js"></script>
 </head>
-<body><a href="./">Go to the sales rep view</a></body>
-</html>
+<body>
+<x-dc>
+<helmet>
+<style>/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459WRhyzbi.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459W1hyzbi.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459WZhyzbi.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459Wdhyzbi.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/montserrat-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459WRhyzbi.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459W1hyzbi.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459WZhyzbi.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459Wdhyzbi.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/montserrat-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459WRhyzbi.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459W1hyzbi.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459WZhyzbi.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459Wdhyzbi.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/montserrat-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459WRhyzbi.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459W1hyzbi.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459WZhyzbi.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459Wdhyzbi.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/montserrat-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+body{margin:0}
+.spe{--bg:#F3F4F6;--card:#FFFFFF;--ink:#142C45;--text:#1F2933;--muted:#5C5D5E;--line:#E5E5E5;--field:#AEB7C2;--accent:#2B5680;--accent-ink:#FFFFFF;--accent-soft:#E6EDF5;--link:#2B5680;--light:#5687BA;--up:#142C45;--bar-cost:#9AA5B1;--skel:#E4E8ED;--head:#142C45;font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;font-variant-numeric:tabular-nums;font-size:15px;line-height:1.45;color:var(--text);background:var(--bg);min-height:100vh;box-sizing:border-box}
+.spe *,.spe *::before,.spe *::after{box-sizing:border-box}
+.spe.dark{--bg:#0F1622;--card:#172131;--ink:#E8EDF3;--text:#D5DCE5;--muted:#A3AFBE;--line:#2A3A50;--field:#4A5D75;--accent:#3E6E9E;--accent-soft:#1E3047;--link:#8DB3DA;--light:#6E9CCB;--up:#C9D6E5;--bar-cost:#5E6B7A;--skel:#223047;--head:#0B111B}
+@media (prefers-color-scheme:dark){.spe.auto{--bg:#0F1622;--card:#172131;--ink:#E8EDF3;--text:#D5DCE5;--muted:#A3AFBE;--line:#2A3A50;--field:#4A5D75;--accent:#3E6E9E;--accent-soft:#1E3047;--link:#8DB3DA;--light:#6E9CCB;--up:#C9D6E5;--bar-cost:#5E6B7A;--skel:#223047;--head:#0B111B}}
+.spe a{color:var(--link)}
+.spe a:hover{color:var(--ink)}
+.spe h1,.spe h2,.spe h3,.spe p{margin:0}
+.spe input[type=text],.spe select,.spe textarea{width:100%;min-height:44px;padding:10px 12px;border:1px solid var(--field);border-radius:0;background:var(--card);color:var(--text);font:inherit}
+.spe textarea{min-height:72px;resize:vertical}
+.spe :focus-visible{outline:2px solid var(--link);outline-offset:2px}
+.spe label{font-weight:500;font-size:13px;color:var(--ink)}
+.spe input[type=range]{width:100%;accent-color:var(--accent);height:44px;margin:0}
+.spe input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent);margin:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);font:inherit;font-weight:600;border-radius:0;cursor:pointer;text-decoration:none}
+.spe a.btn{color:var(--accent-ink)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.sec,.spe a.btn.sec{background:transparent;color:var(--link);border-color:var(--field)}
+.btn.ghost{background:transparent;border-color:transparent;color:var(--link);padding:0 10px}
+.btn.full{width:100%}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:2px 10px;border:1px solid var(--field);font-size:13px;font-weight:500;color:var(--ink);background:var(--card)}
+button.chip{min-height:44px;cursor:pointer;font-family:inherit}
+button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#FFFFFF}
+.badge{display:inline-flex;align-items:center;gap:8px;min-height:32px;padding:4px 12px;font-weight:600;font-size:14px}
+.opt{display:block;width:100%;text-align:left;min-height:44px;padding:8px 12px;border:0;border-bottom:1px solid var(--line);background:var(--card);color:var(--text);font:inherit;cursor:pointer}
+.opt:hover,.opt:focus-visible{background:var(--accent-soft)}
+.layout{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;max-width:1360px;margin:0 auto;padding:24px}
+.params{flex:1 1 340px;min-width:0;position:sticky;top:16px}
+.result{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:20px}
+.card{background:var(--card);border:1px solid var(--line);padding:24px}
+.anim{transition:left .18s ease,width .18s ease,opacity .2s ease}
+.skel{background:var(--skel);animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.55}}
+.mobilebar{display:none}
+.crow{display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr) 128px;gap:12px;align-items:center;min-height:30px}
+.frow{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr) 80px;gap:12px;align-items:center;min-height:30px}
+.spe details>summary{cursor:pointer;list-style:none;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:600;color:var(--ink)}
+.spe details>summary::-webkit-details-marker{display:none}
+.spe details[open]>summary .chev{transform:rotate(180deg)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th{font-weight:500;color:var(--muted);text-align:right;padding:6px 0 6px 12px;border-bottom:1px solid var(--line);font-size:12px}
+.tbl td{text-align:right;padding:8px 0 8px 12px;border-bottom:1px solid var(--line)}
+.tbl th:first-child,.tbl td:first-child{text-align:left;padding-left:0}
+@media (max-width:767px){
+.layout{padding:16px}
+.params{position:static}
+.calc-bar{position:sticky;bottom:0;background:var(--bg);padding:12px 0;z-index:2}
+.mobilebar{display:flex;position:sticky;bottom:0;z-index:3}
+.crow,.frow{grid-template-columns:minmax(0,1fr) 110px}
+.crow .cbar,.frow .cbar{grid-column:1 / -1;order:3}
+.big{font-size:44px !important}
+.card{padding:16px}
+.hide-m{display:none !important}
+}
+@media (prefers-reduced-motion:reduce){.anim{transition:none}.skel{animation:none}}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
+.spe{--bg:#F2F4F8;--card:#FFFFFF;--ink:#0E2240;--text:#1E2A3B;--muted:#586374;--line:#E3E7EE;--field:#C9D1DD;--accent:#1F5FBF;--accent-ink:#FFFFFF;--accent-soft:#E8F0FC;--link:#1F5FBF;--light:#6E9BE0;--up:#0E2240;--bar-cost:#A3AEBD;--skel:#E6EAF0;--head:#0B1B33;font-family:'Manrope','Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.005em}
+.spe.dark{--bg:#0B111C;--card:#141C2B;--ink:#EEF2F8;--text:#D3DBE6;--muted:#9AA7B8;--line:#253247;--field:#3B4B63;--accent:#3D7BE0;--accent-soft:#18284A;--link:#8DB6F2;--light:#5F8FDB;--up:#C9D6E8;--bar-cost:#56657A;--skel:#1E2A3D;--head:#070C15;}
+@media (prefers-color-scheme:dark){.spe.auto{--bg:#0B111C;--card:#141C2B;--ink:#EEF2F8;--text:#D3DBE6;--muted:#9AA7B8;--line:#253247;--field:#3B4B63;--accent:#3D7BE0;--accent-soft:#18284A;--link:#8DB6F2;--light:#5F8FDB;--up:#C9D6E8;--bar-cost:#56657A;--skel:#1E2A3D;--head:#070C15;}}
+.spe h1,.spe h2,.spe h3{letter-spacing:-.02em}
+.spe input[type=text],.spe select,.spe textarea{border-radius:10px;border-color:var(--field);transition:border-color .15s,box-shadow .15s}
+.spe input[type=text]:hover,.spe select:hover,.spe textarea:hover{border-color:var(--light)}
+.spe input[type=text]:focus,.spe select:focus,.spe textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.spe :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.spe .btn{border-radius:10px;font-weight:700;letter-spacing:-.005em;transition:background .15s,border-color .15s,transform .1s,box-shadow .15s;box-shadow:0 1px 2px rgba(14,34,64,.12)}
+.spe .btn:not(.sec):not(.ghost):not(:disabled):hover{background:color-mix(in oklch,var(--accent) 86%,black);border-color:color-mix(in oklch,var(--accent) 86%,black);box-shadow:0 4px 14px color-mix(in oklch,var(--accent) 30%,transparent)}
+.spe .btn:not(:disabled):active{transform:translateY(1px)}
+.spe .btn.sec{background:var(--card);border-color:var(--field);box-shadow:none}
+.spe .btn.sec:not(:disabled):hover{border-color:var(--accent);background:var(--accent-soft)}
+.spe .btn.ghost{box-shadow:none}
+.spe .chip{border-radius:999px;border-color:var(--line);background:var(--card);transition:background .15s,border-color .15s}
+.spe button.chip:hover{border-color:var(--accent)}
+.spe .badge{border-radius:999px}
+.spe details>summary{font-size:16px;letter-spacing:-.01em}
+.spe .tbl th{text-transform:uppercase;letter-spacing:.06em;font-size:11px;font-weight:700;padding-bottom:10px}
+.spe .tbl td{padding-top:11px;padding-bottom:11px}
+.spe .tbl tbody tr:hover td{background:var(--accent-soft)}
+.spe .tbl tbody tr:last-child td{border-bottom:0}
+
+.spe .card{border-radius:18px;border-color:var(--line);box-shadow:0 1px 2px rgba(14,34,64,.04),0 10px 30px -12px rgba(14,34,64,.12)}
+.spe .card{padding:28px}
+.spe .layout{gap:28px;padding:32px 24px 48px}
+.spe header{position:sticky;top:0;z-index:5;box-shadow:0 1px 0 rgba(255,255,255,.06),0 6px 20px -10px rgba(0,0,0,.5)}
+.spe .opt{border-radius:0;transition:background .12s}
+.spe [role=listbox]{border-radius:0 0 12px 12px;box-shadow:0 12px 28px -10px rgba(14,34,64,.25)}
+.spe .cbar .anim{border-radius:4px}
+.spe details{border-top-color:var(--line)!important}
+@media (max-width:767px){.spe .card{padding:18px;border-radius:14px}.spe .layout{padding:16px}}
+</style>
+</helmet>
+<div class="spe {{themeClass}}">
+
+<header style="background: var(--head); color: #FFFFFF; padding: 12px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
+<div style="border: 1px dashed #8DA6C2; padding: 8px 12px; font-size: 12px; color: #C9D6E5">[Irinox Quadri Elettrici logo]</div>
+<div style="display: flex; flex-direction: column">
+<span style="font-weight: 700; font-size: 17px; letter-spacing: .2px">Smart Pricing Engine</span>
+<span style="font-size: 12px; color: #C9D6E5">Prototype · synthetic demo data</span>
+</div>
+</div>
+<div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 13px">
+<a href="approver.html" style="color: #FFFFFF; min-height: 44px; display: inline-flex; align-items: center">Approver view</a>
+<span style="color: #C9D6E5">Demo user · Sales rep</span>
+</div>
+</header>
+
+<main class="layout">
+
+<section class="params" aria-labelledby="h-param">
+<form sc-camel-on-submit="{{onSubmit}}" class="card" style="display: flex; flex-direction: column; gap: 20px">
+<h2 id="h-param" style="font-size: 18px; font-weight: 700">Quote parameters</h2>
+
+<div style="display: flex; flex-direction: column; gap: 6px; position: relative">
+<label for="f-cli">Customer *</label>
+<div style="position: relative">
+<input id="f-cli" type="text" autocomplete="off" placeholder="Customer code or name" value="{{custQuery}}" sc-camel-on-change="{{onCustQuery}}" sc-camel-on-focus="{{openCust}}" aria-expanded="{{custOpen}}" aria-controls="l-cli">
+</div>
+<sc-if value="{{custOpen}}" hint-placeholder-val="{{ false }}">
+<div id="l-cli" role="listbox" style="border: 1px solid var(--field); border-top: 0; background: var(--card); max-height: 280px; overflow: auto">
+<div style="padding: 6px 12px; font-size: 12px; font-weight: 600; color: var(--muted); border-bottom: 1px solid var(--line)">{{custListTitle}}</div>
+<sc-for list="{{custOptions}}" as="o" hint-placeholder-count="3">
+<button type="button" class="opt" sc-camel-on-click="{{o.pick}}">
+<span style="display: block; font-weight: 600; color: var(--ink)">{{o.label}}</span>
+<span style="display: block; font-size: 13px; color: var(--muted)">{{o.sub}}</span>
+</button>
+</sc-for>
+<sc-if value="{{custNoMatch}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 10px 12px; font-size: 13px; color: var(--muted)">No customer found. Try the code (e.g. C-10234).</div>
+</sc-if>
+</div>
+</sc-if>
+<sc-if value="{{hasCust}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; color: var(--muted)">
+<span>{{custSummary}}</span>
+<button type="button" class="btn ghost" style="min-height: 32px; padding: 0 4px; font-size: 13px" sc-camel-on-click="{{openAdv}}">Edit</button>
+</div>
+</sc-if>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="f-art">Item *</label>
+<input id="f-art" type="text" autocomplete="off" placeholder="Code or size (e.g. 300×300)" value="{{artQuery}}" sc-camel-on-change="{{onArtQuery}}" sc-camel-on-focus="{{openArt}}" aria-expanded="{{artOpen}}" aria-controls="l-art">
+<sc-if value="{{artOpen}}" hint-placeholder-val="{{ false }}">
+<div id="l-art" role="listbox" style="border: 1px solid var(--field); border-top: 0; background: var(--card); max-height: 300px; overflow: auto">
+<div style="padding: 6px 12px; font-size: 12px; font-weight: 600; color: var(--muted); border-bottom: 1px solid var(--line)">{{artListTitle}}</div>
+<sc-for list="{{artOptions}}" as="o" hint-placeholder-count="3">
+<button type="button" class="opt" sc-camel-on-click="{{o.pick}}">
+<span style="display: block; font-weight: 600; color: var(--ink)">{{o.label}}</span>
+<span style="display: block; font-size: 13px; color: var(--muted)">{{o.sub}}</span>
+</button>
+</sc-for>
+<sc-if value="{{artNoMatch}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 10px 12px; font-size: 13px; color: var(--muted)">No item found. Search by family (EKO, ADH, APH) or size.</div>
+</sc-if>
+</div>
+</sc-if>
+<sc-if value="{{hasArt}}" hint-placeholder-val="{{ true }}">
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; font-size: 13px">
+<div style="display: flex; flex-direction: column"><span style="color: var(--muted)">Family</span><span style="color: var(--ink); font-weight: 500">{{artFamily}}</span></div>
+<div style="display: flex; flex-direction: column"><span style="color: var(--muted)">Standard cost</span><span style="color: var(--ink); font-weight: 500">{{artCost}}</span></div>
+<div style="display: flex; flex-direction: column"><span style="color: var(--muted)">List price</span><span style="color: var(--ink); font-weight: 500">{{artList}}</span></div>
+</div>
+</sc-if>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="f-qty">Quantity (pcs) *</label>
+<input id="f-qty" type="text" sc-camel-input-mode="numeric" autocomplete="off" placeholder="E.g. 20" value="{{qty}}" sc-camel-on-change="{{onQty}}" aria-invalid="{{qtyInvalid}}" aria-describedby="e-qty">
+<sc-if value="{{qtyError}}" hint-placeholder-val="{{ false }}">
+<p id="e-qty" style="font-size: 13px; color: #C00000; font-weight: 500">{{qtyError}}</p>
+</sc-if>
+<sc-if value="{{lotHint}}" hint-placeholder-val="{{ false }}">
+<p style="font-size: 13px; color: var(--muted)">{{lotHint}}</p>
+</sc-if>
+</div>
+
+<div style="border-top: 1px solid var(--line); padding-top: 8px">
+<button type="button" class="btn ghost" style="padding: 0; width: 100%; justify-content: space-between; color: var(--ink)" aria-expanded="{{advOpen}}" aria-controls="adv" sc-camel-on-click="{{toggleAdv}}">
+<span>Advanced details <span style="font-weight: 500; color: var(--muted)">{{advCountTxt}}</span></span>
+<svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="{{advChevStyle}}"><polyline points="6 9 12 15 18 9"></polyline></svg>
+</button>
+<sc-if value="{{advOpen}}" hint-placeholder-val="{{ false }}">
+<div id="adv" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; padding-top: 8px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="a-ch">Channel</label>
+<sc-raw-select id="a-ch" value="{{ov.channel}}" sc-camel-on-change="{{onCh}}">
+<option value="">From customer ({{defs.channel}})</option>
+<option value="OEM">OEM</option>
+<option value="Panel Builder">Panel Builder</option>
+<option value="Dealer">Dealer</option>
+<option value="End User">End User</option>
+</sc-raw-select>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="a-na">Country</label>
+<sc-raw-select id="a-na" value="{{ov.nation}}" sc-camel-on-change="{{onNa}}">
+<option value="">From customer ({{defs.nation}})</option>
+<option value="Italy">Italy</option>
+<option value="Germany">Germany</option>
+<option value="France">France</option>
+<option value="Spain">Spain</option>
+</sc-raw-select>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="a-cl">Class (industry)</label>
+<sc-raw-select id="a-cl" value="{{ov.cls}}" sc-camel-on-change="{{onCl}}">
+<option value="">From customer ({{defs.cls}})</option>
+<option value="Food &amp; Beverage">Food &amp; Beverage</option>
+<option value="Pharma">Pharma</option>
+<option value="Oil &amp; Gas">Oil &amp; Gas</option>
+</sc-raw-select>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="a-cu">Cluster</label>
+<sc-raw-select id="a-cu" value="{{ov.cluster}}" sc-camel-on-change="{{onCu}}">
+<option value="">From CRM ({{defs.cluster}})</option>
+<option value="A">A – high potential</option>
+<option value="B">B – medium</option>
+<option value="C">C – low</option>
+</sc-raw-select>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="a-wf">Workflow</label>
+<sc-raw-select id="a-wf" value="{{ov.workflow}}" sc-camel-on-change="{{onWf}}">
+<option value="">From item ({{defs.workflow}})</option>
+<option value="Q1">Q1</option>
+<option value="Q2">Q2</option>
+<option value="Q3">Q3</option>
+<option value="C3">C3</option>
+<option value="C4">C4 (case by case)</option>
+</sc-raw-select>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="a-dr">Drawing provided by customer</label>
+<sc-raw-select id="a-dr" value="{{ov.drawing}}" sc-camel-on-change="{{onDr}}">
+<option value="si">Yes</option>
+<option value="no">No (design support)</option>
+</sc-raw-select>
+</div>
+<div style="display: flex; align-items: center; gap: 10px; min-height: 44px">
+<input id="a-qg" type="checkbox" checked="{{ov.quality}}" sc-camel-on-change="{{onQg}}">
+<label for="a-qg">Special checks (quality gate)</label>
+</div>
+<div style="display: flex; align-items: center; gap: 10px; min-height: 44px">
+<input id="a-pr" type="checkbox" checked="{{ov.priority}}" sc-camel-on-change="{{onPr}}">
+<label for="a-pr">Priority delivery</label>
+</div>
+</div>
+</sc-if>
+</div>
+
+<div class="calc-bar" style="display: flex; flex-direction: column; gap: 8px">
+<button type="submit" class="btn full" disabled="{{cannotCalc}}">Calculate discount</button>
+<div style="display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap">
+<button type="button" class="btn ghost" sc-camel-on-click="{{reset}}">Clear</button>
+<button type="button" class="btn ghost" sc-camel-on-click="{{repeatLast}}" disabled="{{noLast}}">Repeat last calculation</button>
+</div>
+</div>
+</form>
+</section>
+
+<section class="result" aria-label="Result">
+
+<sc-if value="{{showEmpty}}" hint-placeholder-val="{{ false }}">
+<div class="card" style="min-height: 360px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; text-align: center">
+<svg width="40" height="40" sc-camel-view-box="0 0 24 24" fill="none" stroke="var(--light)" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="9" y1="15" x2="15" y2="9"></line><circle cx="9.5" cy="9.5" r="1"></circle><circle cx="14.5" cy="14.5" r="1"></circle></svg>
+<p style="max-width: 380px; color: var(--ink); font-weight: 500">{{emptyText}}</p>
+<button type="button" class="btn" sc-camel-on-click="{{loadDemo}}">Load demo scenario</button>
+</div>
+</sc-if>
+
+<sc-if value="{{showSkeleton}}" hint-placeholder-val="{{ false }}">
+<div class="card" aria-busy="true" style="display: flex; flex-direction: column; gap: 18px">
+<p style="font-size: 13px; color: var(--muted)">Calculating...</p>
+<div class="skel" style="width: 160px; height: 14px"></div>
+<div class="skel" style="width: 260px; height: 64px"></div>
+<div class="skel" style="width: 200px; height: 32px"></div>
+<div class="skel" style="width: 100%; height: 18px"></div>
+<div class="skel" style="width: 100%; height: 120px"></div>
+</div>
+</sc-if>
+
+<sc-if value="{{showMissing}}" hint-placeholder-val="{{ false }}">
+<div class="card" role="alert" style="display: flex; gap: 14px; align-items: flex-start">
+<svg width="24" height="24" sc-camel-view-box="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="2" aria-hidden="true" style="flex: none"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="13"></line><line x1="12" y1="16.5" x2="12" y2="16.5"></line></svg>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<p style="font-weight: 600; color: var(--ink)">No price can be calculated</p>
+<p>The standard cost for this item is missing. Choose a similar item or contact Management Control.</p>
+<div><button type="button" class="btn sec" sc-camel-on-click="{{pickSimilar}}">Choose EKO 400×400×150 (similar)</button></div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{showResult}}" hint-placeholder-val="{{ true }}">
+<div style="{{dimStyle}}" class="anim">
+
+<sc-if value="{{loading}}" hint-placeholder-val="{{ false }}">
+<p style="font-size: 13px; color: var(--muted); margin-bottom: 8px">Calculating...</p>
+</sc-if>
+
+<div style="display: flex; flex-direction: column; gap: 20px">
+
+<div class="card" style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; align-items: flex-end">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; align-items: center; gap: 10px">
+<span style="font-size: 13px; font-weight: 500; color: var(--muted)">Suggested discount</span>
+<sc-if value="{{r.indicative}}" hint-placeholder-val="{{ false }}"><span class="chip">Indicative</span></sc-if>
+</div>
+<sc-if value="{{r.indicative}}" hint-placeholder-val="{{ false }}">
+<div aria-live="polite">
+<span class="big" style="font-size: 56px; font-weight: 700; line-height: 1.05; color: var(--ink)">{{r.rangeTxt}}</span>
+<p style="font-size: 14px; color: var(--muted); margin-top: 4px">Midpoint {{r.suggTxt}}: little data, so the range is what counts.</p>
+</div>
+</sc-if>
+<sc-if value="{{r.precise}}" hint-placeholder-val="{{ true }}">
+<span class="big" aria-live="polite" style="font-size: 72px; font-weight: 700; line-height: 1; color: var(--ink)">{{r.suggTxt}}</span>
+</sc-if>
+<sc-if value="{{r.isCustomChosen}}" hint-placeholder-val="{{ false }}">
+<p style="font-size: 14px; font-weight: 600; color: var(--link)">Discount you are trying: {{r.chosenTxt}}</p>
+</sc-if>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px; text-align: right" aria-live="polite">
+<span style="font-size: 13px; font-weight: 500; color: var(--muted)">Net price</span>
+<span style="font-size: 30px; font-weight: 700; color: var(--ink)">{{r.netUnitTxt}} <span style="font-size: 15px; font-weight: 500; color: var(--muted)">/ pc</span></span>
+<span style="font-size: 14px; color: var(--muted)">Line total {{r.netTotTxt}}</span>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<span class="badge" style="{{r.st.style}}" role="status">
+<sc-if value="{{r.st.ok}}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></sc-if>
+<sc-if value="{{r.st.warn}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 3 2 21h20L12 3z"></path><line x1="12" y1="10" x2="12" y2="14"></line><line x1="12" y1="17.5" x2="12" y2="17.5"></line></svg></sc-if>
+<sc-if value="{{r.st.stop}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polygon points="7.9 2 16.1 2 22 7.9 22 16.1 16.1 22 7.9 22 2 16.1 2 7.9"></polygon><line x1="8" y1="12" x2="16" y2="12"></line></svg></sc-if>
+<span>{{r.st.label}}</span>
+</span>
+<sc-for list="{{r.causes}}" as="c" hint-placeholder-count="2">
+<span class="chip">{{c}}</span>
+</sc-for>
+</div>
+<p style="font-size: 14px; color: var(--text)">{{r.st.todo}}</p>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: baseline; border-top: 1px solid var(--line); padding-top: 16px" aria-live="polite">
+<div style="display: flex; flex-direction: column">
+<span style="font-size: 13px; font-weight: 500; color: var(--muted)">Expected margin</span>
+<span style="font-size: 26px; font-weight: 700; color: var(--ink)">{{r.marginEurTxt}} <span style="font-weight: 600">· {{r.marginPctTxt}}</span></span>
+</div>
+<span style="font-size: 14px; color: var(--muted)">{{r.marginVsTxt}}</span>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; font-weight: 500; color: var(--muted)">Discount range</span>
+<div style="position: relative; height: 28px" aria-hidden="true">
+<div style="position: absolute; left: 0; right: 0; top: 12px; height: 4px; background: var(--line)"></div>
+<div class="anim" style="{{r.bar.seg}}"></div>
+<div class="anim" style="{{r.bar.thr}}"></div>
+<div class="anim" style="{{r.bar.sugg}}"></div>
+<sc-if value="{{r.isCustomChosen}}" hint-placeholder-val="{{ false }}"><div class="anim" style="{{r.bar.chosen}}"></div></sc-if>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--muted)">
+<span><span style="display: inline-block; width: 14px; height: 6px; background: var(--light); vertical-align: middle; margin-right: 6px"></span>Min {{r.minTxt}} – Max {{r.maxTxt}}</span>
+<span><span style="display: inline-block; width: 4px; height: 12px; background: var(--ink); vertical-align: middle; margin-right: 6px"></span>Suggested {{r.suggTxt}}</span>
+<sc-if value="{{r.isCustomChosen}}" hint-placeholder-val="{{ false }}"><span><span style="display: inline-block; width: 10px; height: 10px; border: 2px solid var(--link); vertical-align: middle; margin-right: 6px"></span>Yours {{r.chosenTxt}}</span></sc-if>
+<span><span style="display: inline-block; width: 0; height: 12px; border-left: 2px dashed #E50000; vertical-align: middle; margin-right: 6px"></span>Approval threshold {{r.thrTxt}}</span>
+</div>
+</div>
+
+<div style="overflow-x: auto">
+<sc-raw-table class="tbl">
+<sc-raw-thead><sc-raw-tr><sc-raw-th>Quote line</sc-raw-th><sc-raw-th>List price</sc-raw-th><sc-raw-th>Discount</sc-raw-th><sc-raw-th>Unit net price</sc-raw-th><sc-raw-th>Quantity</sc-raw-th><sc-raw-th>Line total</sc-raw-th></sc-raw-tr></sc-raw-thead>
+<sc-raw-tbody><sc-raw-tr><sc-raw-td>{{r.artShort}}</sc-raw-td><sc-raw-td>{{r.listTxt}}</sc-raw-td><sc-raw-td>{{r.chosenTxt}}</sc-raw-td><sc-raw-td>{{r.netUnitTxt}}</sc-raw-td><sc-raw-td>{{r.qtyTxt}}</sc-raw-td><sc-raw-td style="font-weight: 600; color: var(--ink)">{{r.netTotTxt}}</sc-raw-td></sc-raw-tr></sc-raw-tbody>
+</sc-raw-table>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<sc-if value="{{r.canUse}}" hint-placeholder-val="{{ true }}">
+<button type="button" class="btn" sc-camel-on-click="{{usePrice}}">Use this price</button>
+</sc-if>
+<sc-if value="{{r.needsApproval}}" hint-placeholder-val="{{ false }}">
+<button type="button" class="btn" sc-camel-on-click="{{openApproval}}">Request approval</button>
+</sc-if>
+<button type="button" class="btn sec" sc-camel-on-click="{{openSim}}" aria-expanded="{{simOpen}}" aria-controls="sim">Try another discount</button>
+<sc-if value="{{r.canUse}}" hint-placeholder-val="{{ true }}">
+<button type="button" class="btn sec" sc-camel-on-click="{{openApproval}}">Request approval</button>
+</sc-if>
+</div>
+</div>
+
+<sc-if value="{{simOpen}}" hint-placeholder-val="{{ false }}">
+<div id="sim" class="card" style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
+<h3 style="font-size: 16px; font-weight: 700">Try another discount</h3>
+<button type="button" class="btn ghost" sc-camel-on-click="{{backToSugg}}">Back to suggested</button>
+</div>
+<div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap">
+<div style="flex: 1 1 320px; min-width: 0; position: relative; padding-top: 10px">
+<div aria-hidden="true" style="position: absolute; left: 8px; right: 8px; top: 0; height: 10px">
+<div style="{{r.ticks.min}}"></div>
+<div style="{{r.ticks.sugg}}"></div>
+<div style="{{r.ticks.max}}"></div>
+<div style="{{r.ticks.thr}}"></div>
+</div>
+<label for="s-range" class="sr">Discount percentage</label>
+<input id="s-range" type="range" min="0" max="60" step="0.5" value="{{r.chosen}}" sc-camel-on-change="{{onSlide}}" sc-camel-on-key-down="{{onSlideKey}}" aria-valuetext="{{r.chosenTxt}}">
+</div>
+<div style="display: flex; align-items: center; gap: 6px; flex: none">
+<label for="s-num" class="sr">Discount (%)</label>
+<input id="s-num" type="text" sc-camel-input-mode="decimal" style="width: 96px; text-align: right; font-weight: 600" value="{{simText}}" sc-camel-on-change="{{onSimText}}" sc-camel-on-blur="{{onSimBlur}}">
+<span style="font-weight: 600; color: var(--ink)">%</span>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" class="chip" sc-camel-on-click="{{jumpMin}}">Min {{r.minTxt}}</button>
+<button type="button" class="chip" sc-camel-on-click="{{jumpSugg}}">Suggested {{r.suggTxt}}</button>
+<button type="button" class="chip" sc-camel-on-click="{{jumpMax}}">Max {{r.maxTxt}}</button>
+<button type="button" class="chip" sc-camel-on-click="{{jumpThr}}" style="border-color: #E50000">Threshold {{r.thrTxt}}</button>
+</div>
+<p aria-live="polite" style="font-size: 15px; color: var(--ink); font-weight: 500">{{r.simEffect}}</p>
+<sc-if value="{{r.belowCost}}" hint-placeholder-val="{{ false }}">
+<div role="alert" style="display: flex; gap: 10px; align-items: flex-start; border: 2px solid #E50000; padding: 12px; background: var(--card)">
+<svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="#E50000" stroke-width="2.2" aria-hidden="true" style="flex: none"><polygon points="7.9 2 16.1 2 22 7.9 22 16.1 16.1 22 7.9 22 2 16.1 2 7.9"></polygon><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+<p style="font-size: 14px"><strong>Below cost.</strong> {{r.belowCostTxt}}</p>
+</div>
+</sc-if>
+<p style="font-size: 12px; color: var(--muted)">Keyboard: arrows ±0.5 points, Shift+arrows ±2 points.</p>
+</div>
+</sc-if>
+
+<sc-if value="{{used}}" hint-placeholder-val="{{ false }}">
+<div class="card" role="status" style="display: flex; flex-direction: column; gap: 12px; border-color: #056A5A">
+<div style="display: flex; align-items: center; gap: 10px">
+<span class="badge" style="background: #056A5A; color: #FFFFFF"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Price recorded</span></span>
+<span style="font-size: 13px; color: var(--muted)">{{used.when}}</span>
+</div>
+<p>{{used.text}}</p>
+<p style="font-size: 13px; color: var(--muted)">{{used.implicit}}</p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button type="button" class="btn sec" sc-camel-on-click="{{copySummary}}">
+<svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="12" height="12"></rect><path d="M5 15H3V3h12v2"></path></svg>
+<span>{{copyLabel}}</span>
+</button>
+<button type="button" class="btn sec" sc-camel-on-click="{{downloadSummary}}">
+<svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12"></path><polyline points="7 10 12 15 17 10"></polyline><path d="M4 21h16"></path></svg>
+<span>Download summary</span>
+</button>
+</div>
+<p style="font-size: 12px; color: var(--muted)">In production: the quote is written to Dynamics CRM.</p>
+</div>
+</sc-if>
+
+<div class="card" style="display: flex; flex-direction: column; gap: 12px">
+<p style="font-weight: 600; color: var(--ink)">Does the suggested discount look right to you?</p>
+<sc-if value="{{fbAsk}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; gap: 10px; flex-wrap: wrap">
+<button type="button" class="chip" aria-pressed="{{fbYesPressed}}" sc-camel-on-click="{{fbYes}}" style="padding: 0 16px">
+<svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 11v10H3V11h4z"></path><path d="M7 11l4-8c1.7 0 3 1.3 3 3v4h5.4c1.2 0 2.1 1.1 1.9 2.3l-1.3 7c-.2 1-1 1.7-2 1.7H7"></path></svg>
+<span>Yes</span>
+</button>
+<button type="button" class="chip" aria-pressed="{{fbNoPressed}}" sc-camel-on-click="{{fbNo}}" style="padding: 0 16px">
+<svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="transform: rotate(180deg)"><path d="M7 11v10H3V11h4z"></path><path d="M7 11l4-8c1.7 0 3 1.3 3 3v4h5.4c1.2 0 2.1 1.1 1.9 2.3l-1.3 7c-.2 1-1 1.7-2 1.7H7"></path></svg>
+<span>No</span>
+</button>
+</div>
+</sc-if>
+<sc-if value="{{fbNoOpen}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--line); padding-top: 12px">
+<span style="font-size: 13px; font-weight: 500; color: var(--ink)">Reason</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{fbReasons}}" as="o" hint-placeholder-count="5">
+<button type="button" class="chip" aria-pressed="{{o.on}}" sc-camel-on-click="{{o.pick}}">{{o.label}}</button>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 6px; flex: 0 1 220px">
+<label for="fb-alt">What discount would you have given? (%)</label>
+<input id="fb-alt" type="text" sc-camel-input-mode="decimal" value="{{fbAlt}}" sc-camel-on-change="{{onFbAlt}}" placeholder="Optional">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 260px">
+<label for="fb-note">Note</label>
+<input id="fb-note" type="text" value="{{fbNote}}" sc-camel-on-change="{{onFbNote}}" placeholder="Optional">
+</div>
+</div>
+<div><button type="button" class="btn" sc-camel-on-click="{{fbSend}}">Send feedback</button></div>
+</div>
+</sc-if>
+<sc-if value="{{fbDone}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+<svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+<span>Feedback recorded. Thank you.</span>
+<button type="button" class="btn ghost" sc-camel-on-click="{{fbEdit}}">Change answer</button>
+</div>
+</sc-if>
+</div>
+
+<sc-if value="{{hasRequests}}" hint-placeholder-val="{{ false }}">
+<div class="card" style="display: flex; flex-direction: column; gap: 12px">
+<h3 style="font-size: 16px; font-weight: 700">Request history</h3>
+<sc-for list="{{requests}}" as="q" hint-placeholder-count="1">
+<div style="display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--line); padding-top: 12px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: center">
+<span style="font-weight: 600; color: var(--ink)">{{q.title}}</span>
+<span class="badge" style="{{q.style}}">{{q.status}}</span>
+</div>
+<span style="font-size: 13px; color: var(--muted)">{{q.sub}}</span>
+<sc-if value="{{q.reply}}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px">{{q.reply}}</span></sc-if>
+<sc-if value="{{q.pending}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
+<span style="font-size: 12px; color: var(--muted)">Demo, simulate the reply:</span>
+<button type="button" class="chip" sc-camel-on-click="{{q.approve}}">Approved</button>
+<button type="button" class="chip" sc-camel-on-click="{{q.approveOther}}">Approved with a different discount</button>
+<button type="button" class="chip" sc-camel-on-click="{{q.reject}}">Rejected</button>
+<a href="approver.html" style="font-size: 13px; min-height: 44px; display: inline-flex; align-items: center">Open the approver view</a>
+</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<div id="perche" class="card" style="display: flex; flex-direction: column; gap: 16px">
+<h3 style="font-size: 18px; font-weight: 700">Why this price</h3>
+<p style="font-size: 16px; color: var(--ink); font-weight: 500">{{r.sentence}}</p>
+
+<details open="{{true}}" style="border-top: 1px solid var(--line)">
+<summary><span>Price waterfall (per piece)</span><svg class="chev" width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 4px 0 12px">
+<sc-for list="{{r.cascade}}" as="w" hint-placeholder-count="8">
+<div class="crow">
+<span style="{{w.labelStyle}}">{{w.label}}</span>
+<div class="cbar" style="position: relative; height: 20px"><div class="anim" style="{{w.bar}}"></div></div>
+<span style="{{w.valStyle}}">{{w.val}}</span>
+</div>
+</sc-for>
+</div>
+</details>
+
+<details open="{{true}}" style="border-top: 1px solid var(--line)">
+<summary><span>Factor contributions (discount points)</span><svg class="chev" width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 4px 0 12px">
+<p style="font-size: 13px; color: var(--muted); margin-bottom: 6px">Starting point: company average discount {{r.avgTxt}}. Factors that increase the discount are on the right, those that reduce it on the left.</p>
+<sc-for list="{{r.factors}}" as="f" hint-placeholder-count="7">
+<div class="frow">
+<span style="font-size: 14px"><strong style="font-weight: 600; color: var(--ink)">{{f.k}}</strong> · {{f.d}}</span>
+<div class="cbar" style="position: relative; height: 18px"><div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--field)"></div><div class="anim" style="{{f.bar}}"></div></div>
+<span style="text-align: right; font-weight: 600; color: var(--ink)">{{f.ptsTxt}}</span>
+</div>
+</sc-for>
+</div>
+</details>
+
+<details open="{{true}}" style="border-top: 1px solid var(--line)">
+<summary><span>Similar cases</span><svg class="chev" width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+<div style="display: flex; flex-direction: column; gap: 20px; padding: 6px 0 16px">
+<p style="font-size: 14px; color: var(--muted); text-wrap: pretty; max-width: 64ch">{{r.casesTxt}}</p>
+<sc-if value="{{r.hasCases}}" hint-placeholder-val="{{ true }}">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line)">
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; background: var(--card)"><span style="font-size: 12px; font-weight: 500; color: var(--muted)">Similar cases</span><span style="font-size: 22px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums">{{r.cs.count}}</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; background: var(--card)"><span style="font-size: 12px; font-weight: 500; color: var(--muted)">Typical range (9 of 10)</span><span style="font-size: 22px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums">{{r.cs.range}}</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; background: var(--card)"><span style="font-size: 12px; font-weight: 500; color: var(--muted)">Average discount</span><span style="font-size: 22px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums">{{r.cs.avg}}</span></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="position: relative; height: 36px">
+<div style="position: absolute; left: 0; right: 0; top: 17px; height: 2px; background: var(--line)"></div>
+<div style="{{r.cs.band}}"></div>
+<sc-for list="{{r.lastCases}}" as="k" hint-placeholder-count="5"><div style="{{k.dot}}" title="{{k.disc}}"></div></sc-for>
+<div style="{{r.cs.sugg}}"></div>
+</div>
+<div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums"><span>{{r.cs.lo}}</span><span>{{r.cs.hi}}</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; font-size: 12px; color: var(--muted)">
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 14px; height: 8px; background: var(--accent-soft); border: 1px solid var(--light)"></span>Typical range</span>
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--card); border: 2px solid var(--accent)"></span>Past case</span>
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 2px; height: 12px; background: var(--ink)"></span>Suggested {{r.cs.suggTxt}}</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><span style="font-size: 13px; font-weight: 600; color: var(--ink)">Most recent cases</span><span style="font-size: 12px; color: var(--muted)">Synthetic demo data</span></div>
+<div style="overflow-x: auto">
+<sc-raw-table class="tbl">
+<sc-raw-thead><sc-raw-tr><sc-raw-th>Date</sc-raw-th><sc-raw-th>Customer</sc-raw-th><sc-raw-th>Item</sc-raw-th><sc-raw-th>Qty</sc-raw-th><sc-raw-th>Discount</sc-raw-th><sc-raw-th>vs suggested</sc-raw-th></sc-raw-tr></sc-raw-thead>
+<sc-raw-tbody>
+<sc-for list="{{r.lastCases}}" as="k" hint-placeholder-count="5">
+<sc-raw-tr><sc-raw-td style="color: var(--muted)">{{k.date}}</sc-raw-td><sc-raw-td>{{k.cli}}</sc-raw-td><sc-raw-td>{{k.art}}</sc-raw-td><sc-raw-td style="font-variant-numeric: tabular-nums">{{k.qty}}</sc-raw-td><sc-raw-td style="font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums">{{k.disc}}</sc-raw-td><sc-raw-td style="color: var(--muted); font-variant-numeric: tabular-nums">{{k.delta}}</sc-raw-td></sc-raw-tr>
+</sc-for>
+</sc-raw-tbody>
+</sc-raw-table>
+</div>
+</div>
+</sc-if>
+</div>
+</details>
+
+<sc-if value="{{r.hasAlts}}" hint-placeholder-val="{{ true }}">
+<details open="{{true}}" style="border-top: 1px solid var(--line)">
+<summary><span>Alternatives</span><svg class="chev" width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 4px 0 12px">
+<sc-for list="{{r.alts}}" as="x" hint-placeholder-count="2">
+<div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; border: 1px solid var(--line); padding: 12px 14px">
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1 1 280px">
+<span style="font-weight: 600; color: var(--ink)">{{x.title}}</span>
+<span style="font-size: 14px">{{x.text}}</span>
+</div>
+<button type="button" class="btn sec" sc-camel-on-click="{{x.apply}}">{{x.cta}}</button>
+</div>
+</sc-for>
+</div>
+</details>
+</sc-if>
+</div>
+
+</div>
+</div>
+</sc-if>
+
+</section>
+</main>
+
+<sc-if value="{{showResult}}" hint-placeholder-val="{{ false }}">
+<div class="mobilebar" style="background: var(--card); border-top: 1px solid var(--line); padding: 10px 16px; justify-content: space-between; align-items: center; gap: 10px">
+<div style="display: flex; flex-direction: column">
+<span style="font-size: 12px; color: var(--muted)">Discount {{r.headlineTxt}} · net {{r.netUnitTxt}}</span>
+<span style="font-size: 13px; font-weight: 600; color: var(--ink)">Margin {{r.marginPctTxt}}</span>
+</div>
+<span class="badge" style="{{r.st.style}}">{{r.st.label}}</span>
+</div>
+</sc-if>
+
+<sc-if value="{{panelOpen}}" hint-placeholder-val="{{ false }}">
+<div style="position: fixed; inset: 0; background: rgba(15,22,34,.5); display: flex; justify-content: flex-end; z-index: 10" sc-camel-on-click="{{closePanelBackdrop}}">
+<div role="dialog" aria-modal="true" aria-labelledby="h-appr" sc-camel-on-key-down="{{panelKey}}" style="background: var(--card); width: 480px; max-width: 100%; height: 100%; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 18px; border-left: 1px solid var(--line)">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<h2 id="h-appr" style="font-size: 20px; font-weight: 700">Request approval</h2>
+<button type="button" class="btn ghost" aria-label="Close" sc-camel-on-click="{{closePanel}}"><svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></button>
+</div>
+<sc-raw-table class="tbl">
+<sc-raw-tbody>
+<sc-raw-tr><sc-raw-td>Customer</sc-raw-td><sc-raw-td>{{r.custTxt}}</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Item</sc-raw-td><sc-raw-td>{{r.artShort}}</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Quantity</sc-raw-td><sc-raw-td>{{r.qtyTxt}}</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Suggested discount</sc-raw-td><sc-raw-td>{{r.suggTxt}}</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Requested discount</sc-raw-td><sc-raw-td style="font-weight: 700; color: var(--ink)">{{r.chosenTxt}}</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Net price</sc-raw-td><sc-raw-td>{{r.netUnitTxt}} / pc</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Margin</sc-raw-td><sc-raw-td>{{r.marginPctTxt}} ({{r.marginEurTxt}})</sc-raw-td></sc-raw-tr>
+</sc-raw-tbody>
+</sc-raw-table>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{r.causes}}" as="c" hint-placeholder-count="2"><span class="chip">{{c}}</span></sc-for>
+</div>
+<p style="font-size: 14px">{{r.sentence}} <a href="#perche" sc-camel-on-click="{{closePanel}}">See the explanation</a></p>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="ap-to">Recipient (sales manager, from CRM)</label>
+<sc-raw-select id="ap-to" value="{{recipient}}" sc-camel-on-change="{{onRecipient}}">
+<option value="area">Sales manager, Italy area – [name from CRM]</option>
+<option value="export">Sales manager, Export – [name from CRM]</option>
+<option value="dir">Sales management – [name from CRM]</option>
+</sc-raw-select>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="ap-note">Note (optional)</label>
+<textarea id="ap-note" value="{{apNote}}" sc-camel-on-change="{{onApNote}}" placeholder="E.g. strategic customer, competitor quoting lower"></textarea>
+</div>
+<div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto">
+<button type="button" class="btn" sc-camel-on-click="{{sendRequest}}">Send request</button>
+<button type="button" class="btn sec" sc-camel-on-click="{{closePanel}}">Cancel</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;section&quot;:&quot;Appearance&quot;},&quot;minMargin&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;min&quot;:5,&quot;max&quot;:50,&quot;default&quot;:25,&quot;unit&quot;:&quot;%&quot;,&quot;section&quot;:&quot;Thresholds&quot;},&quot;maxDiscount&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;min&quot;:10,&quot;max&quot;:60,&quot;default&quot;:38,&quot;unit&quot;:&quot;%&quot;,&quot;section&quot;:&quot;Thresholds&quot;},&quot;minCases&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;min&quot;:1,&quot;max&quot;:30,&quot;default&quot;:8,&quot;section&quot;:&quot;Thresholds&quot;},&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1700}}">
+const LOCALE = 'en-GB';
+const AVG = 27;
+const CUSTOMERS = [
+  { id: 'C-10234', name: 'Demo customer North-East', channel: 'Dealer', nation: 'Italy', cls: 'Food & Beverage', cluster: 'B', hist: 34, isNew: false },
+  { id: 'C-20871', name: 'Demo customer Bavaria', channel: 'OEM', nation: 'Germany', cls: 'Pharma', cluster: 'A', hist: 21, isNew: false },
+  { id: 'C-31006', name: 'Demo customer Lyon', channel: 'Panel Builder', nation: 'France', cls: 'Oil & Gas', cluster: 'C', hist: 9, isNew: false },
+  { id: 'C-40519', name: 'Demo customer Valencia (new)', channel: 'End User', nation: 'Spain', cls: 'Food & Beverage', cluster: '', hist: 0, isNew: true }
+];
+const ARTICLES = [
+  { id: 'EKO-303015', label: 'EKO 300×300×150', desc: 'EKO stainless enclosure, standard', family: 'EKO enclosures', base: 29, cost: 78.40, mult: 2.2, minLot: 10, custom: false, wf: 'Q1' },
+  { id: 'EKO-383815-SM', label: 'EKO 380×380×150 custom', desc: 'EKO stainless enclosure, non-standard size', family: 'EKO enclosures', base: 29, cost: 112.60, mult: 2.2, minLot: 10, custom: true, wf: 'Q3', alt: 'EKO-404015' },
+  { id: 'EKO-404015', label: 'EKO 400×400×150', desc: 'EKO stainless enclosure, standard', family: 'EKO enclosures', base: 29, cost: 104.90, mult: 2.2, minLot: 10, custom: false, wf: 'Q1' },
+  { id: 'ADH-03', label: 'ADH 3 holes', desc: 'ADH stainless push-button box, standard', family: 'ADH/APH push-button boxes', base: 25, cost: 41.20, mult: 2.4, minLot: 20, custom: false, wf: 'Q1' },
+  { id: 'APH-06-SM', label: 'APH 6 holes custom', desc: 'APH stainless push-button box, non-standard', family: 'ADH/APH push-button boxes', base: 25, cost: 66.80, mult: 2.4, minLot: 20, custom: true, wf: 'C3', noHistory: true },
+  { id: 'EKO-604020', label: 'EKO 600×400×200', desc: 'EKO stainless enclosure, cost not available', family: 'EKO enclosures', base: 29, cost: null, mult: 2.2, minLot: 10, custom: false, wf: 'Q1' }
+];
+const NAT = { Italy: 1.5, Germany: -1, France: 0, Spain: 0.5 };
+const NAT_ADJ = { Italy: 'Italian', Germany: 'German', France: 'French', Spain: 'Spanish' };
+const CH = { OEM: 4, 'Panel Builder': 1.5, Dealer: 2, 'End User': -3 };
+const CLS = { 'Food & Beverage': 0, Pharma: -1.5, 'Oil & Gas': -1 };
+const CLU = { A: 2.5, B: 0.5, C: -1 };
+const WF = { Q1: 0, Q2: 0, Q3: -1, C3: -1.5, C4: -2.5 };
+const SCALE = 60;
+const EUR = new Intl.NumberFormat(LOCALE, { style: 'currency', currency: 'EUR' });
+const fE = (v) => EUR.format(v);
+const fN = (v, d) => Number(v).toLocaleString(LOCALE, { minimumFractionDigits: d, maximumFractionDigits: d });
+const fP = (v) => fN(v, 1) + '%';
+const fPt = (v) => (v > 0 ? '+' : v < 0 ? '−' : '±') + fN(Math.abs(v), 1) + ' pt';
+const fPts = (v) => fN(v, 1).replace(/\.0$/, '');
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const r05 = (v) => Math.round(v * 2) / 2;
+const pct = (v) => (clamp(v, 0, SCALE) / SCALE * 100).toFixed(2) + '%';
+const EMPTY_OV = { channel: '', nation: '', cls: '', cluster: '', workflow: '', drawing: 'si', quality: false, priority: false };
+const ST = {
+  ok: { label: 'Ready to use', style: 'background: #056A5A; color: #FFFFFF', todo: 'You can use this price.' },
+  warn: { label: 'Review advised', style: 'background: #F5B700; color: #142C45', todo: 'You can use it: check the cause shown.' },
+  stop: { label: 'Approval required', style: 'background: #E50000; color: #FFFFFF', todo: 'Request approval from the sales manager before quoting it.' }
+};
+const REASONS = ['Too high', 'Too low', 'Customer context not considered', 'Unsuitable product', 'Other'];
+
+function seeded(seed) { let s = seed % 233280; return () => { s = (s * 9301 + 49297) % 233280; return s / 233280; }; }
+function hash(str) { let h = 7; for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) % 100003; return h; }
+function parseNum(t) { const v = parseFloat(String(t).replace(',', '.')); return isNaN(v) ? null : v; }
+
+function engine(p, cfg) {
+  const c = CUSTOMERS.find((x) => x.id === p.customerId);
+  const a = ARTICLES.find((x) => x.id === p.articleId);
+  const q = parseNum(p.qty);
+  if (!c || !a || !(q > 0) || q > 5000 || Math.round(q) !== q) return null;
+  if (a.cost == null) return { missing: true };
+  const ov = p.ov;
+  const channel = ov.channel || c.channel, nation = ov.nation || c.nation, cls = ov.cls || c.cls;
+  const cluster = ov.cluster || c.cluster || '', wf = ov.workflow || a.wf;
+  const f = [];
+  f.push({ k: 'Model', d: a.family, pts: a.base - AVG });
+  f.push({ k: 'Country', d: nation, pts: NAT[nation] || 0 });
+  f.push({ k: 'Channel', d: channel, pts: CH[channel] || 0 });
+  f.push({ k: 'Class', d: cls, pts: CLS[cls] || 0 });
+  f.push({ k: 'Cluster', d: cluster ? 'Cluster ' + cluster : 'not assigned', pts: CLU[cluster] || 0 });
+  f.push({ k: 'Workflow', d: wf, pts: WF[wf] || 0 });
+  let qp = 0, qd;
+  if (q < a.minLot) { qp = -2; qd = q + ' pcs, below minimum lot (' + a.minLot + ')'; }
+  else if (q >= 10 * a.minLot) { qp = 3; qd = q + ' pcs, large lot'; }
+  else if (q >= 3 * a.minLot) { qp = 1.5; qd = q + ' pcs, medium-large lot'; }
+  else { qd = q + ' pcs, in line with minimum lot'; }
+  f.push({ k: 'Quantity', d: qd, pts: qp });
+  if (a.custom) f.push({ k: 'Custom', d: 'non-standard product', pts: -2.5 });
+  if (ov.drawing === 'no') f.push({ k: 'Design', d: 'customer has no drawing', pts: -1 });
+  if (ov.quality) f.push({ k: 'Quality gate', d: 'special checks', pts: -1 });
+  if (ov.priority) f.push({ k: 'Delivery', d: 'priority', pts: -1 });
+  const raw = AVG + f.reduce((s, x) => s + x.pts, 0);
+  const sugg = clamp(r05(raw), 0, SCALE);
+
+  let cases = a.noHistory ? 0 : a.custom ? 3 : c.isNew ? 18 : c.hist;
+  const mc = cfg.minCases;
+  let rel = cases >= mc * 2.5 ? 'high' : cases >= mc ? 'medium' : 'low';
+  const relCauses = [];
+  if (cases === 0) relCauses.push('No similar cases');
+  else if (cases < mc) relCauses.push('Few similar cases (' + cases + ')');
+  else if (rel === 'medium' && !c.isNew) relCauses.push('Limited similar cases (' + cases + ')');
+  if (a.custom) relCauses.push('Custom product');
+  if (wf === 'C4') { rel = rel === 'high' ? 'medium' : 'low'; relCauses.push('Workflow C4, case by case'); }
+  if (c.isNew) { relCauses.push('Customer with no history'); if (rel === 'high') rel = 'medium'; }
+  const spread = rel === 'high' ? 3 : rel === 'medium' ? 4.5 : 7;
+  const min = clamp(sugg - spread, 0, SCALE), max = clamp(sugg + spread, 0, SCALE);
+  const list = Math.round(a.cost * a.mult * 100) / 100;
+  const dAtMargin = (1 - a.cost / ((1 - cfg.minMargin / 100) * list)) * 100;
+  const thr = Math.min(cfg.maxDisc, max, dAtMargin);
+  return { c, a, q, f, raw, sugg, cases, rel, relCauses, min, max, list, thr, dAtMargin, channel, nation, wf };
+}
+
+function evaluate(e, d, cfg) {
+  const net = e.list * (1 - d / 100);
+  const m = net > 0 ? (net - e.a.cost) / net * 100 : -100;
+  const causes = e.relCauses.slice();
+  const overMax = d > e.max + 1e-9 || d > cfg.maxDisc + 1e-9;
+  const below = m < cfg.minMargin;
+  if (overMax) causes.push('Discount above maximum');
+  if (net < e.a.cost) causes.push('Below cost');
+  else if (below) causes.push('Margin below threshold');
+  let st = 'ok';
+  if (e.rel === 'low' || overMax || below) st = 'stop';
+  else if (e.rel === 'medium' || m < cfg.minMargin + 3) { st = 'warn'; if (m < cfg.minMargin + 3) causes.push('Margin close to threshold'); }
+  return { net, m, causes, st, overMax, below };
+}
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      customerId: '', articleId: '', qty: '', custQuery: '', artQuery: '', custOpen: false, artOpen: false,
+      advOpen: false, ov: Object.assign({}, EMPTY_OV), calculated: false, loading: false, hadResult: false, last: null,
+      chosen: null, simText: null, simOpen: false, panelOpen: false, recipient: 'area', apNote: '',
+      requests: [], used: null, copied: false, fb: null, fbReason: '', fbAlt: '', fbNote: '', fbSent: false, showCases: false
+    };
+  }
+  cfg() {
+    return { minMargin: this.props.minMargin ?? 25, maxDisc: this.props.maxDiscount ?? 38, minCases: this.props.minCases ?? 8 };
+  }
+  params() { const s = this.state; return { customerId: s.customerId, articleId: s.articleId, qty: s.qty, ov: s.ov }; }
+  resetResult() { return { chosen: null, simText: null, used: null, fb: null, fbSent: false, fbReason: '', fbAlt: '', fbNote: '', showCases: false, copied: false }; }
+  runCalc(extra) {
+    const s = Object.assign({}, this.state, extra || {});
+    this.setState(Object.assign({}, extra || {}, this.resetResult(), { calculated: true, loading: true, custOpen: false, artOpen: false, hadResult: this.state.calculated && !this.state.loading,
+      last: { customerId: s.customerId, articleId: s.articleId, qty: s.qty, ov: Object.assign({}, s.ov), custQuery: s.custQuery, artQuery: s.artQuery } }));
+    clearTimeout(this.t);
+    this.t = setTimeout(() => this.setState({ loading: false }), 650);
+  }
+  componentWillUnmount() { clearTimeout(this.t); }
+
+  renderVals() {
+    const s = this.state, cfg = this.cfg();
+    const theme = this.props.theme ?? 'auto';
+    const set = (o) => this.setState(o);
+    const c = CUSTOMERS.find((x) => x.id === s.customerId);
+    const a = ARTICLES.find((x) => x.id === s.articleId);
+
+    const cq = s.custQuery.trim().toLowerCase();
+    const custSearching = cq && !(c && s.custQuery === c.id + ' · ' + c.name);
+    const custMatches = CUSTOMERS.filter((x) => (x.id + ' ' + x.name).toLowerCase().includes(cq));
+    const custOptions = (custSearching ? custMatches : CUSTOMERS.slice(0, 3)).map((x) => ({
+      label: x.id + ' · ' + x.name,
+      sub: x.channel + ' · ' + x.nation + ' · ' + x.cls + (x.cluster ? ' · Cluster ' + x.cluster : ' · no history'),
+      pick: () => set(Object.assign({ customerId: x.id, custQuery: x.id + ' · ' + x.name, custOpen: false }, s.calculated ? this.resetResult() : {}))
+    }));
+    const aq = s.artQuery.trim().toLowerCase().replace('x', '×');
+    const artBrowse = !aq || (a && s.artQuery === a.label);
+    const artMatches = ARTICLES.filter((x) => (x.id + ' ' + x.label + ' ' + x.desc + ' ' + x.family).toLowerCase().includes(aq));
+    const artOptions = (artBrowse ? ARTICLES : artMatches).map((x) => ({
+      label: x.label,
+      sub: x.id + ' · ' + x.desc,
+      pick: () => set(Object.assign({ articleId: x.id, artQuery: x.label, artOpen: false }, s.calculated ? this.resetResult() : {}))
+    }));
+
+    const qn = parseNum(s.qty);
+    let qtyError = '';
+    if (s.qty !== '') {
+      if (qn === null || qn <= 0) qtyError = 'Enter a quantity greater than 0.';
+      else if (Math.round(qn) !== qn) qtyError = 'Enter a whole number of pieces.';
+      else if (qn > 5000) qtyError = 'Quantity out of range: enter at most 5,000 pieces or split the order.';
+    }
+    const lotHint = a && !qtyError && qn > 0 && qn < a.minLot ? 'Internal minimum lot: ' + a.minLot + ' pcs. Below the lot the discount is reduced.' : '';
+
+    const ov = s.ov;
+    const advCount = ['channel', 'nation', 'cls', 'cluster', 'workflow'].filter((k) => ov[k]).length + (ov.drawing === 'no' ? 1 : 0) + (ov.quality ? 1 : 0) + (ov.priority ? 1 : 0);
+    const ovSet = (k, isCheck) => (ev) => {
+      const v = isCheck ? ev.target.checked : ev.target.value;
+      set(Object.assign({ ov: Object.assign({}, this.state.ov, { [k]: v }) }, this.state.calculated ? { chosen: null, simText: null, used: null } : {}));
+    };
+
+    const canCalc = !!(c && a && s.qty !== '' && !qtyError);
+    const e = s.calculated ? engine(this.params(), cfg) : null;
+    const showResult = !!(s.calculated && e && !e.missing && !(s.loading && !s.hadResult));
+    if (!e || e.missing) this._ctx = null;
+
+    let r = { st: ST.ok, causes: [], cascade: [], factors: [], alts: [], lastCases: [], cs: {}, bar: {}, ticks: {} };
+    let usedView = null;
+    if (e && !e.missing) {
+      const d = s.chosen == null ? e.sugg : s.chosen;
+      const ev = evaluate(e, d, cfg);
+      const stKey = ev.st;
+      const st = Object.assign({ ok: stKey === 'ok', warn: stKey === 'warn', stop: stKey === 'stop' }, ST[stKey]);
+      const indicative = e.rel === 'low';
+      const netSugg = e.list * (1 - e.sugg / 100);
+      const mSugg = (netSugg - e.a.cost) / netSugg * 100;
+      const marginEur = (ev.net - e.a.cost) * e.q;
+
+      // one-sentence explanation
+      const others = e.f.filter((x) => ['Model', 'Country', 'Channel'].indexOf(x.k) < 0 && Math.abs(x.pts) >= 1)
+        .sort((x, y) => Math.abs(y.pts) - Math.abs(x.pts)).slice(0, 2)
+        .map((x) => (x.pts > 0 ? 'increased by ' : 'reduced by ') + fPts(Math.abs(x.pts)) + ' points for ' + (x.k === 'Quantity' ? (x.pts < 0 ? 'low quantity' : 'high quantity') : x.k === 'Workflow' ? 'workflow ' + e.wf : x.k === 'Custom' ? 'custom product' : x.k.toLowerCase()));
+      let sentence = 'Discount ' + fP(e.sugg) + ': typical for ' + (/^[AEIOU]/.test(NAT_ADJ[e.nation] || '') ? 'an ' : 'a ') + (NAT_ADJ[e.nation] || '') + ' ' + e.channel + ' on ' + e.a.family + (others.length ? ', ' + others.join(' and ') : '') + '.';
+      if (indicative) sentence += ' Indicative value: ' + (e.cases === 0 ? 'no similar cases in the history.' : 'only ' + e.cases + ' similar cases.');
+
+      // waterfall (per piece, explains the suggested discount, plus the trial if any)
+      const L = e.list, mx = L * 1.04;
+      const bar = (from, to, color, extra) => 'position: absolute; top: 3px; bottom: 3px; left: ' + (Math.min(from, to) / mx * 100).toFixed(2) + '%; width: ' + Math.max(0.5, Math.abs(to - from) / mx * 100).toFixed(2) + '%; background: ' + color + ';' + (extra || '');
+      const lbl = 'font-size: 14px; color: var(--text)';
+      const lblB = 'font-size: 14px; font-weight: 700; color: var(--ink)';
+      const val = 'text-align: right; font-size: 14px; color: var(--text)';
+      const valB = 'text-align: right; font-size: 14px; font-weight: 700; color: var(--ink)';
+      const cascade = [];
+      cascade.push({ label: 'Standard cost', val: fE(e.a.cost), bar: bar(0, e.a.cost, 'var(--bar-cost)'), labelStyle: lbl, valStyle: val });
+      cascade.push({ label: 'Multiplier × ' + fN(e.a.mult, 2), val: '+' + fE(L - e.a.cost), bar: bar(e.a.cost, L, 'var(--up)'), labelStyle: lbl, valStyle: val });
+      cascade.push({ label: 'List price', val: fE(L), bar: bar(0, L, 'var(--accent)'), labelStyle: lblB, valStyle: valB });
+      let run = L * (1 - AVG / 100);
+      cascade.push({ label: 'Company average discount ' + fP(AVG), val: '−' + fE(L - run), bar: bar(run, L, 'var(--light)'), labelStyle: lbl, valStyle: val });
+      e.f.filter((x) => x.pts !== 0).forEach((x) => {
+        const next = run - L * x.pts / 100;
+        cascade.push({ label: x.k + ' (' + fPt(x.pts) + ')', val: (next < run ? '−' : '+') + fE(Math.abs(next - run)), bar: bar(next, run, next < run ? 'var(--light)' : 'var(--up)'), labelStyle: lbl, valStyle: val });
+        run = next;
+      });
+      if (Math.abs(run - netSugg) > 0.005) {
+        cascade.push({ label: 'Rounding to 0.5 points', val: (netSugg < run ? '−' : '+') + fE(Math.abs(netSugg - run)), bar: bar(netSugg, run, 'var(--bar-cost)'), labelStyle: lbl, valStyle: val });
+      }
+      cascade.push({ label: 'Suggested net price', val: fE(netSugg), bar: bar(0, netSugg, 'var(--accent)'), labelStyle: lblB, valStyle: valB });
+      if (d !== e.sugg) {
+        cascade.push({ label: 'Your change (' + fPt(d - e.sugg) + ' discount)', val: (ev.net < netSugg ? '−' : '+') + fE(Math.abs(ev.net - netSugg)), bar: bar(ev.net, netSugg, 'transparent', ' border: 2px dashed var(--link);'), labelStyle: lbl, valStyle: val });
+        cascade.push({ label: 'Net price at ' + fP(d), val: fE(ev.net), bar: bar(0, Math.max(0, ev.net), 'var(--accent)'), labelStyle: lblB, valStyle: valB });
+      }
+      cascade.push({ label: 'Margin', val: fE(ev.net - e.a.cost) + ' · ' + fP(ev.m), bar: bar(e.a.cost, Math.max(0, ev.net), ev.net >= e.a.cost ? 'transparent' : '#E50000', ev.net >= e.a.cost ? ' border: 2px solid var(--accent);' : ''), labelStyle: lblB, valStyle: valB });
+
+      const maxAbs = Math.max(1, ...e.f.map((x) => Math.abs(x.pts)));
+      const factors = e.f.slice().sort((x, y) => Math.abs(y.pts) - Math.abs(x.pts)).map((x) => {
+        const w = Math.abs(x.pts) / maxAbs * 48;
+        return { k: x.k, d: x.d, ptsTxt: fPt(x.pts), bar: 'position: absolute; top: 2px; bottom: 2px; left: ' + (x.pts >= 0 ? 50 : 50 - w).toFixed(2) + '%; width: ' + Math.max(w, 0.6).toFixed(2) + '%; background: ' + (x.pts >= 0 ? 'var(--light)' : 'var(--up)') + ';' };
+      });
+
+      // similar cases (synthetic)
+      const rnd = seeded(hash(e.c.id + e.a.id));
+      const lastCases = [];
+      if (e.cases > 0) {
+        const months = ['Sep 2026', 'Jul 2026', 'May 2026', 'Mar 2026', 'Jan 2026'];
+        for (let i = 0; i < Math.min(5, e.cases); i++) {
+          const dd = r05(e.sugg + (rnd() - 0.5) * (e.max - e.min) * 0.9);
+          lastCases.push({ date: months[i], cli: e.c.isNew ? 'C-4' + Math.floor(1000 + rnd() * 8999) : e.c.id, art: e.a.label, qty: String(Math.max(1, Math.round(e.q * (0.5 + rnd())))), disc: fP(dd), dv: dd, delta: fPt(dd - e.sugg) });
+        }
+      }
+      const cLo = Math.floor(e.min - 2), cHi = Math.ceil(e.max + 2);
+      const cp = (v) => (clamp((v - cLo) / (cHi - cLo), 0, 1) * 100).toFixed(2) + '%';
+      lastCases.forEach((k) => { k.dot = 'position: absolute; top: 12px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: var(--card); border: 2px solid var(--accent); left: ' + cp(k.dv) + ';'; });
+      const cs = {
+        count: String(e.cases), range: fP(e.min + 0.5) + ' – ' + fP(e.max - 0.5), avg: fP(e.sugg - 0.5),
+        lo: fP(cLo), hi: fP(cHi), suggTxt: fP(e.sugg),
+        band: 'position: absolute; top: 10px; height: 16px; left: ' + cp(e.min + 0.5) + '; width: calc(' + cp(e.max - 0.5) + ' - ' + cp(e.min + 0.5) + '); background: var(--accent-soft); border: 1px solid var(--light);',
+        sugg: 'position: absolute; top: 2px; height: 32px; width: 2px; margin-left: -1px; background: var(--ink); left: ' + cp(e.sugg) + ';'
+      };
+      const casesTxt = e.cases === 0
+        ? 'No similar cases in the history: range estimated from the ' + e.a.family + ' family (' + fP(e.min) + ' – ' + fP(e.max) + ').'
+        : 'In 9 out of 10 similar cases the discount was between ' + fP(e.min + 0.5) + ' and ' + fP(e.max - 0.5) + '; average discount ' + fP(e.sugg - 0.5) + '.';
+
+      // alternatives
+      const alts = [];
+      if (e.a.alt) {
+        const b = ARTICLES.find((x) => x.id === e.a.alt);
+        const lb = b.cost * b.mult;
+        alts.push({ title: 'Similar product in standard size: ' + b.label, text: 'List price ' + fE(lb) + ' (' + fN((lb / L - 1) * 100, 1) + '%), already in the catalogue: estimated delivery 8 working days earlier. More similar cases, so a more reliable discount.', cta: 'Try ' + b.label, apply: () => set(Object.assign({ articleId: b.id, artQuery: b.label }, this.resetResult())) });
+      }
+      if (e.q < 3 * e.a.minLot) {
+        const lot = 3 * e.a.minLot;
+        const e2 = engine({ customerId: e.c.id, articleId: e.a.id, qty: String(lot), ov: s.ov }, cfg);
+        const n2 = e2.list * (1 - e2.sugg / 100);
+        alts.push({ title: 'Optimal lot: ' + lot + ' pcs', text: 'With ' + lot + ' pieces the suggested discount rises to ' + fP(e2.sugg) + ': unit net price ' + fE(n2) + ' instead of ' + fE(netSugg) + '.', cta: 'Use ' + lot + ' pcs', apply: () => set(Object.assign({ qty: String(lot) }, this.resetResult())) });
+      }
+
+      // effect sentence
+      let simEffect;
+      if (d === e.sugg) simEffect = 'At the suggested discount the margin is ' + fP(ev.m) + ' (threshold ' + fP(cfg.minMargin) + ').';
+      else {
+        simEffect = 'At ' + fP(d) + ' the margin ' + (ev.m < mSugg ? 'drops' : 'rises') + ' to ' + fP(ev.m);
+        if (ev.net < e.a.cost) simEffect += ': price below cost, approval required.';
+        else if (ev.below) simEffect += ', below the threshold: approval required.';
+        else if (ev.overMax) simEffect += ', but the discount is above the maximum: approval required.';
+        else if (stKey === 'stop') simEffect += ': the estimate is still unreliable, approval required.';
+        else if (stKey === 'warn') simEffect += ', close to the threshold: review advised.';
+        else simEffect += ', above the threshold.';
+      }
+
+      const marker = (v, w, color, extra) => 'position: absolute; top: ' + (extra ? 4 : 2) + 'px; height: ' + (extra ? 20 : 24) + 'px; width: ' + w + 'px; margin-left: -' + (w / 2) + 'px; left: ' + pct(v) + '; ' + color;
+      const tick = (v, color, h) => 'position: absolute; left: ' + pct(v) + '; top: ' + (10 - h) + 'px; width: 2px; height: ' + h + 'px; margin-left: -1px; background: ' + color + ';';
+
+      r = {
+        st, causes: ev.causes, indicative, precise: !indicative,
+        suggTxt: fP(e.sugg), chosen: d, chosenTxt: fP(d), isCustomChosen: d !== e.sugg,
+        headlineTxt: indicative ? fP(e.min) + '–' + fP(e.max) : fP(d),
+        rangeTxt: fN(e.min, 1) + '–' + fN(e.max, 1) + '%', minTxt: fP(e.min), maxTxt: fP(e.max), thrTxt: fP(e.thr),
+        netUnitTxt: fE(ev.net), netTotTxt: fE(ev.net * e.q), listTxt: fE(L), qtyTxt: e.q + ' pcs',
+        marginEurTxt: fE(marginEur), marginPctTxt: fP(ev.m),
+        marginVsTxt: (ev.m >= cfg.minMargin ? 'above' : 'below') + ' the ' + fP(cfg.minMargin) + ' threshold · at suggested ' + fP(mSugg),
+        artShort: e.a.label, custTxt: e.c.id + ' · ' + e.c.name,
+        canUse: stKey !== 'stop', needsApproval: stKey === 'stop',
+        sentence, cascade, factors, avgTxt: fP(AVG),
+        casesTxt, cs, hasCases: e.cases > 0, casesBtn: e.cases + ' similar cases', lastCases,
+        alts, hasAlts: alts.length > 0, simEffect,
+        belowCost: ev.net < e.a.cost,
+        belowCostTxt: 'The net price ' + fE(ev.net) + ' is lower than the standard cost ' + fE(e.a.cost) + ': every piece sold loses ' + fE(e.a.cost - ev.net) + '.',
+        bar: {
+          seg: 'position: absolute; top: 9px; height: 10px; left: ' + pct(e.min) + '; width: ' + ((e.max - e.min) / SCALE * 100).toFixed(2) + '%; background: var(--light);',
+          thr: 'position: absolute; top: 0; height: 28px; left: ' + pct(e.thr) + '; width: 0; border-left: 2px dashed #E50000;',
+          sugg: marker(e.sugg, 4, 'background: var(--ink);'),
+          chosen: marker(d, 14, 'border: 3px solid var(--link); background: var(--card);', true)
+        },
+        ticks: { min: tick(e.min, 'var(--light)', 8), sugg: tick(e.sugg, 'var(--ink)', 10), max: tick(e.max, 'var(--light)', 8), thr: tick(e.thr, '#E50000', 10) }
+      };
+
+      if (s.used) {
+        const u = s.used;
+        usedView = {
+          when: u.when,
+          text: 'Discount ' + fP(u.d) + ' on ' + u.art + ', ' + u.q + ' pcs: net ' + fE(u.net) + ' / pc, line total ' + fE(u.net * u.q) + ', margin ' + fP(u.m) + '.',
+          implicit: 'Chosen discount saved next to the suggested one (' + fP(u.sugg) + (u.d === u.sugg ? ', no deviation' : ', deviation ' + fPt(u.d - u.sugg)) + ').'
+        };
+      }
+
+      this._summary = 'Smart Pricing Engine – quote summary\nCustomer: ' + r.custTxt + '\nItem: ' + e.a.label + ' (' + e.a.id + ')\nQuantity: ' + e.q + ' pcs\nList price: ' + fE(L) + '\nDiscount: ' + fP(d) + ' (suggested ' + fP(e.sugg) + ')\nNet price: ' + fE(ev.net) + ' / pc – total ' + fE(ev.net * e.q) + '\nExpected margin: ' + fE(marginEur) + ' (' + fP(ev.m) + ')\nStatus: ' + st.label + '\nWhy: ' + sentence + '\n';
+      this._ctx = { e, d, ev, st };
+    }
+
+    const setChosen = (v) => { if (v == null || !this._ctx) return; const x = clamp(r05(v), 0, SCALE); set({ chosen: x, simText: null, used: null }); };
+    const stepKey = (ev) => {
+      if (!ev.shiftKey) return;
+      const k = ev.key;
+      const delta = k === 'ArrowRight' || k === 'ArrowUp' ? 2 : k === 'ArrowLeft' || k === 'ArrowDown' ? -2 : 0;
+      if (!delta) return;
+      ev.preventDefault();
+      setChosen((this.state.chosen == null ? this._ctx.e.sugg : this.state.chosen) + delta);
+    };
+
+    const requests = s.requests.map((q, i) => {
+      const upd = (patch) => () => { const list = this.state.requests.slice(); list[i] = Object.assign({}, list[i], patch); set({ requests: list }); };
+      const style = q.status === 'Pending' ? 'background: var(--accent-soft); color: var(--ink)' : q.status === 'Rejected' ? 'background: #E50000; color: #FFFFFF' : 'background: #056A5A; color: #FFFFFF';
+      return {
+        title: q.title, sub: q.sub, status: q.status, style, reply: q.reply || '', pending: q.status === 'Pending',
+        approve: upd({ status: 'Approved', reply: 'The sales manager approved the requested discount.' }),
+        approveOther: upd({ status: 'Approved with a different discount', reply: 'Approved at ' + fP(Math.max(0, q.d - 3)) + ' instead of ' + fP(q.d) + '. Reason: margin below threshold, compromise proposed.' }),
+        reject: upd({ status: 'Rejected', reply: 'Rejected. Reason: price below cost for a custom product.' })
+      };
+    });
+
+    const fbReasons = REASONS.map((x) => ({ label: x, on: s.fbReason === x, pick: () => set({ fbReason: x }) }));
+
+    const showCasesList = s.showCases && r.hasCases;
+    const now = () => new Date().toLocaleString(LOCALE, { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+    return {
+      themeClass: theme === 'dark' ? 'dark' : theme === 'light' ? 'light' : 'auto',
+      custQuery: s.custQuery, custOpen: s.custOpen, custOptions, custNoMatch: custOptions.length === 0,
+      custListTitle: custSearching ? 'Results' : 'Recent',
+      onCustQuery: (ev) => set({ custQuery: ev.target.value, custOpen: true, customerId: '' }),
+      openCust: () => set({ custOpen: true, artOpen: false }),
+      hasCust: !!c, custSummary: c ? c.channel + ' · ' + c.nation + ' · ' + c.cls + ' · ' + (c.cluster ? 'Cluster ' + c.cluster : 'Customer with no history') : '',
+      openAdv: () => set({ advOpen: true }),
+      artQuery: s.artQuery, artOpen: s.artOpen, artOptions, artNoMatch: artOptions.length === 0,
+      artListTitle: artBrowse ? 'Recent' : 'Results',
+      onArtQuery: (ev) => set({ artQuery: ev.target.value, artOpen: true, articleId: '' }),
+      openArt: () => set({ artOpen: true, custOpen: false }),
+      hasArt: !!a, artFamily: a ? a.family : '', artCost: a ? (a.cost == null ? 'not available' : fE(a.cost)) : '',
+      artList: a ? (a.cost == null ? '—' : fE(a.cost * a.mult) + ' (× ' + fN(a.mult, 2) + ')') : '',
+      qty: s.qty, onQty: (ev) => set(Object.assign({ qty: ev.target.value.replace(/[^0-9.,]/g, '') }, s.calculated ? { chosen: null, simText: null, used: null } : {})),
+      qtyError, qtyInvalid: qtyError ? 'true' : 'false', lotHint,
+      advOpen: s.advOpen, toggleAdv: () => set({ advOpen: !s.advOpen }),
+      advCountTxt: advCount ? '(' + advCount + ' changed)' : '',
+      advChevStyle: s.advOpen ? 'transform: rotate(180deg)' : '',
+      ov, defs: { channel: c ? c.channel : '—', nation: c ? c.nation : '—', cls: c ? c.cls : '—', cluster: c ? (c.cluster || 'n/a') : '—', workflow: a ? a.wf : '—' },
+      onCh: ovSet('channel'), onNa: ovSet('nation'), onCl: ovSet('cls'), onCu: ovSet('cluster'), onWf: ovSet('workflow'), onDr: ovSet('drawing'),
+      onQg: ovSet('quality', true), onPr: ovSet('priority', true),
+      cannotCalc: !canCalc,
+      onSubmit: (ev) => { ev.preventDefault(); if (canCalc) this.runCalc(); },
+      reset: () => { clearTimeout(this.t); set(Object.assign({ customerId: '', articleId: '', qty: '', custQuery: '', artQuery: '', ov: Object.assign({}, EMPTY_OV), calculated: false, loading: false, hadResult: false, simOpen: false, panelOpen: false }, this.resetResult())); },
+      noLast: !s.last,
+      repeatLast: () => { if (s.last) this.runCalc(Object.assign({}, s.last, { ov: Object.assign({}, s.last.ov) })); },
+      loadDemo: () => this.runCalc({ customerId: 'C-10234', custQuery: 'C-10234 · Demo customer North-East', articleId: 'EKO-303015', artQuery: 'EKO 300×300×150', qty: '20', ov: Object.assign({}, EMPTY_OV) }),
+      pickSimilar: () => set(Object.assign({ articleId: 'EKO-404015', artQuery: 'EKO 400×400×150' }, this.resetResult())),
+      showEmpty: !s.calculated || (!e && !s.loading),
+      emptyText: !s.calculated ? 'Choose customer, item and quantity to see the suggested discount.' : 'Complete customer, item and quantity to update the suggested discount.',
+      showSkeleton: s.calculated && s.loading && !s.hadResult,
+      showMissing: !!(e && e.missing) && !s.loading,
+      showResult, loading: s.loading,
+      dimStyle: s.loading ? 'opacity: .45' : 'opacity: 1',
+      r,
+      simOpen: s.simOpen,
+      openSim: () => { set({ simOpen: true }); setTimeout(() => { const el = document.getElementById('s-range'); if (el) el.focus(); }, 50); },
+      simText: s.simText != null ? s.simText : (r.chosen != null ? fN(r.chosen, 1) : ''),
+      onSlide: (ev) => setChosen(parseFloat(ev.target.value)),
+      onSlideKey: stepKey,
+      onSimText: (ev) => { const t = ev.target.value; const v = parseNum(t); if (v != null && this._ctx) set({ simText: t, chosen: clamp(v, 0, SCALE), used: null }); else set({ simText: t }); },
+      onSimBlur: () => set({ simText: null }),
+      backToSugg: () => set({ chosen: null, simText: null, used: null }),
+      jumpMin: () => this._ctx && setChosen(this._ctx.e.min),
+      jumpSugg: () => set({ chosen: null, simText: null, used: null }),
+      jumpMax: () => this._ctx && setChosen(this._ctx.e.max),
+      jumpThr: () => this._ctx && setChosen(this._ctx.e.thr),
+      usePrice: () => {
+        const x = this._ctx; if (!x) return;
+        set({ used: { d: x.d, sugg: x.e.sugg, net: x.ev.net, m: x.ev.m, q: x.e.q, art: x.e.a.label, when: 'Recorded on ' + now() }, copied: false });
+      },
+      used: usedView,
+      copyLabel: s.copied ? 'Copied' : 'Copy to clipboard',
+      copySummary: () => { try { navigator.clipboard.writeText(this._summary || '').then(() => set({ copied: true }), () => set({ copied: false })); } catch (err) { /* clipboard not available */ } },
+      downloadSummary: () => {
+        const blob = new Blob([this._summary || ''], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url; link.download = 'quote-summary.txt'; link.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      },
+      fbAsk: true,
+      fbYesPressed: s.fb === 'yes' ? 'true' : 'false', fbNoPressed: s.fb === 'no' ? 'true' : 'false',
+      fbYes: () => set({ fb: 'yes', fbSent: true }),
+      fbNo: () => set({ fb: 'no', fbSent: false }),
+      fbNoOpen: s.fb === 'no' && !s.fbSent,
+      fbReasons, fbAlt: s.fbAlt, fbNote: s.fbNote,
+      onFbAlt: (ev) => set({ fbAlt: ev.target.value }), onFbNote: (ev) => set({ fbNote: ev.target.value }),
+      fbSend: () => set({ fbSent: true }),
+      fbDone: s.fbSent, fbEdit: () => set({ fbSent: false }),
+      showCases: s.showCases, showCasesList, toggleCases: () => set({ showCases: !s.showCases }),
+      hasRequests: requests.length > 0, requests,
+      panelOpen: s.panelOpen,
+      openApproval: () => { set({ panelOpen: true }); setTimeout(() => { const el = document.getElementById('ap-to'); if (el) el.focus(); }, 50); },
+      closePanel: () => set({ panelOpen: false }),
+      closePanelBackdrop: (ev) => { if (ev.target === ev.currentTarget) set({ panelOpen: false }); },
+      panelKey: (ev) => { if (ev.key === 'Escape') set({ panelOpen: false }); },
+      recipient: s.recipient, onRecipient: (ev) => set({ recipient: ev.target.value }),
+      apNote: s.apNote, onApNote: (ev) => set({ apNote: ev.target.value }),
+      sendRequest: () => {
+        const x = this._ctx; if (!x) return;
+        const who = { area: 'Sales manager, Italy area', export: 'Sales manager, Export', dir: 'Sales management' }[s.recipient];
+        const item = { title: x.e.a.label + ' · ' + x.e.q + ' pcs · discount ' + fP(x.d), sub: 'Sent on ' + now() + ' to ' + who + (s.apNote ? ' · Note: ' + s.apNote : ''), status: 'Pending', d: x.d };
+        set({ requests: [item].concat(this.state.requests), panelOpen: false, apNote: '' });
+      }
+    };
+  }
+}
+</script>
+
+
+</body></html>
