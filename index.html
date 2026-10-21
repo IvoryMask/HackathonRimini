@@ -329,7 +329,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <div style="display: flex; flex-direction: column; gap: 6px; position: relative">
 <label for="f-cli">Customer *</label>
 <div style="position: relative">
-<input id="f-cli" type="text" autocomplete="off" placeholder="Customer code or name" value="{{custQuery}}" sc-camel-on-change="{{onCustQuery}}" sc-camel-on-focus="{{openCust}}" aria-expanded="{{custOpen}}" aria-controls="l-cli">
+<input id="f-cli" type="text" autocomplete="off" placeholder="Customer code (e.g. C-10234)" value="{{custQuery}}" sc-camel-on-change="{{onCustQuery}}" sc-camel-on-focus="{{openCust}}" aria-expanded="{{custOpen}}" aria-controls="l-cli">
 </div>
 <sc-if value="{{custOpen}}" hint-placeholder-val="{{ false }}">
 <div id="l-cli" role="listbox" style="border: 1px solid var(--field); border-top: 0; background: var(--card); max-height: 280px; overflow: auto">
@@ -753,7 +753,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 </details>
 
 <details open="{{true}}" style="border-top: 1px solid var(--line)">
-<summary><span>Similar cases</span><svg class="chev" width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+<summary><span>Historical cases</span><svg class="chev" width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
 <div style="display: flex; flex-direction: column; gap: 20px; padding: 6px 0 16px">
 <p style="font-size: 14px; color: var(--muted); text-wrap: pretty; max-width: 64ch">{{r.casesTxt}}</p>
 <sc-if value="{{r.hasCases}}" hint-placeholder-val="{{ true }}">
@@ -761,7 +761,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <div class="hf-head">
 <div style="display: flex; flex-direction: column; gap: 2px">
 <span class="hf-title">Historical data</span>
-<span style="font-size: 12px; color: var(--muted)">Narrow the similar cases to the ones closest to this quote.</span>
+<span style="font-size: 12px; color: var(--muted)">Narrow the historical cases to the ones closest to this quote.</span>
 </div>
 <sc-if value="{{r.csAnyFilter}}" hint-placeholder-val="{{ false }}">
 <button type="button" class="btn ghost" sc-camel-on-click="{{r.csClear}}">Clear filters</button>
@@ -783,7 +783,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 </sc-if>
 <sc-if value="{{r.csHasRows}}" hint-placeholder-val="{{ true }}">
 <div class="cs-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden">
-<div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; background: var(--card)"><span style="font-size: 12px; font-weight: 500; color: var(--muted)">Similar cases</span><span style="font-size: 22px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums">{{r.cs.count}}</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; background: var(--card)"><span style="font-size: 12px; font-weight: 500; color: var(--muted)">Historical cases</span><span style="font-size: 22px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums">{{r.cs.count}}</span></div>
 <div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; background: var(--card)"><span style="font-size: 12px; font-weight: 500; color: var(--muted)">Typical range (9 of 10)</span><span style="font-size: 22px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums">{{r.cs.range}}</span></div>
 <div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; background: var(--card)"><span style="font-size: 12px; font-weight: 500; color: var(--muted)">Average discount</span><span style="font-size: 22px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums">{{r.cs.avg}}</span></div>
 </div>
@@ -916,10 +916,10 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 const LOCALE = 'en-GB';
 const AVG = 27;
 const CUSTOMERS = [
-  { id: 'C-10234', name: 'Demo customer North-East', channel: 'Dealer', nation: 'Italy', cls: 'Food & Beverage', cluster: 'B', hist: 34, isNew: false },
-  { id: 'C-20871', name: 'Demo customer Bavaria', channel: 'OEM', nation: 'Germany', cls: 'Pharma', cluster: 'A', hist: 21, isNew: false },
-  { id: 'C-31006', name: 'Demo customer Lyon', channel: 'Panel Builder', nation: 'France', cls: 'Oil & Gas', cluster: 'C', hist: 9, isNew: false },
-  { id: 'C-40519', name: 'Demo customer Valencia (new)', channel: 'End User', nation: 'Spain', cls: 'Food & Beverage', cluster: '', hist: 0, isNew: true }
+  { id: 'C-10234', channel: 'Dealer', nation: 'Italy', cls: 'Food & Beverage', cluster: 'B', hist: 34, isNew: false },
+  { id: 'C-20871', channel: 'OEM', nation: 'Germany', cls: 'Pharma', cluster: 'A', hist: 21, isNew: false },
+  { id: 'C-31006', channel: 'Panel Builder', nation: 'France', cls: 'Oil & Gas', cluster: 'C', hist: 9, isNew: false },
+  { id: 'C-40519', channel: 'End User', nation: 'Spain', cls: 'Food & Beverage', cluster: '', hist: 0, isNew: true }
 ];
 const ARTICLES = [
   { id: 'EKO-303015', label: 'EKO 300×300×150', desc: 'EKO stainless enclosure, standard', family: 'EKO enclosures', base: 29, cost: 78.40, mult: 2.2, minLot: 10, custom: false, wf: 'Q1' },
@@ -997,9 +997,9 @@ function engine(p, cfg) {
   const mc = cfg.minCases;
   let rel = cases >= mc * 2.5 ? 'high' : cases >= mc ? 'medium' : 'low';
   const relCauses = [];
-  if (cases === 0) relCauses.push('No similar cases');
-  else if (cases < mc) relCauses.push('Few similar cases (' + cases + ')');
-  else if (rel === 'medium' && !c.isNew) relCauses.push('Limited similar cases (' + cases + ')');
+  if (cases === 0) relCauses.push('No historical cases');
+  else if (cases < mc) relCauses.push('Few historical cases (' + cases + ')');
+  else if (rel === 'medium' && !c.isNew) relCauses.push('Limited historical cases (' + cases + ')');
   if (a.custom) relCauses.push('Custom product');
   if (wf === 'C4') { rel = rel === 'high' ? 'medium' : 'low'; relCauses.push('Workflow C4, case by case'); }
   if (c.isNew) { relCauses.push('Customer with no history'); if (rel === 'high') rel = 'medium'; }
@@ -1058,12 +1058,12 @@ class Component extends DCLogic {
     const a = ARTICLES.find((x) => x.id === s.articleId);
 
     const cq = s.custQuery.trim().toLowerCase();
-    const custSearching = cq && !(c && s.custQuery === c.id + ' · ' + c.name);
-    const custMatches = CUSTOMERS.filter((x) => (x.id + ' ' + x.name).toLowerCase().includes(cq));
+    const custSearching = cq && !(c && s.custQuery === c.id);
+    const custMatches = CUSTOMERS.filter((x) => x.id.toLowerCase().includes(cq));
     const custOptions = (custSearching ? custMatches : CUSTOMERS.slice(0, 3)).map((x) => ({
-      label: x.id + ' · ' + x.name,
+      label: x.id,
       sub: x.channel + ' · ' + x.nation + ' · ' + x.cls + (x.cluster ? ' · Cluster ' + x.cluster : ' · no history'),
-      pick: () => set(Object.assign({ customerId: x.id, custQuery: x.id + ' · ' + x.name, custOpen: false }, s.calculated ? this.resetResult() : {}))
+      pick: () => set(Object.assign({ customerId: x.id, custQuery: x.id, custOpen: false }, s.calculated ? this.resetResult() : {}))
     }));
     const aq = s.artQuery.trim().toLowerCase().replace('x', '×');
     const artBrowse = !aq || (a && s.artQuery === a.label);
@@ -1112,7 +1112,7 @@ class Component extends DCLogic {
         .sort((x, y) => Math.abs(y.pts) - Math.abs(x.pts)).slice(0, 2)
         .map((x) => (x.pts > 0 ? 'increased by ' : 'reduced by ') + fPts(Math.abs(x.pts)) + ' points for ' + (x.k === 'Quantity' ? (x.pts < 0 ? 'low quantity' : 'high quantity') : x.k === 'Workflow' ? 'workflow ' + e.wf : x.k === 'Custom' ? 'custom product' : x.k.toLowerCase()));
       let sentence = 'Discount ' + fP(e.sugg) + ': typical for ' + (/^[AEIOU]/.test(NAT_ADJ[e.nation] || '') ? 'an ' : 'a ') + (NAT_ADJ[e.nation] || '') + ' ' + e.channel + ' on ' + e.a.family + (others.length ? ', ' + others.join(' and ') : '') + '.';
-      if (indicative) sentence += ' Indicative value: ' + (e.cases === 0 ? 'no similar cases in the history.' : 'only ' + e.cases + ' similar cases.');
+      if (indicative) sentence += ' Indicative value: ' + (e.cases === 0 ? 'no historical cases in the history.' : 'only ' + e.cases + ' historical cases.');
 
       // waterfall (per piece, explains the suggested discount, plus the trial if any)
       const L = e.list, mx = L * 1.04;
@@ -1148,7 +1148,7 @@ class Component extends DCLogic {
         return { k: x.k, d: x.d, ptsTxt: fPt(x.pts), bar: 'position: absolute; top: 2px; bottom: 2px; left: ' + (x.pts >= 0 ? 50 : 50 - w).toFixed(2) + '%; width: ' + Math.max(w, 0.6).toFixed(2) + '%; background: ' + (x.pts >= 0 ? 'var(--light)' : 'var(--up)') + ';' };
       });
 
-      // similar cases (synthetic) – pool with customer, country and industry, filterable
+      // historical cases (synthetic) – pool with customer, country and industry, filterable
       const rnd = seeded(hash(e.c.id + e.a.id));
       const effCls = s.ov.cls || e.c.cls;
       const peers = PEERS.concat(CUSTOMERS.filter((x) => !x.isNew && x.id !== e.c.id).map((x) => ({ id: x.id, nation: x.nation, cls: x.cls })));
@@ -1190,18 +1190,18 @@ class Component extends DCLogic {
       ];
       const fNames = [csF.cust && 'same customer', csF.nation && 'same country', csF.cls && 'same industry'].filter(Boolean);
       const csFilterTxt = anyF
-        ? 'Showing ' + filtered.length + ' of ' + e.cases + ' similar cases (' + fNames.join(', ') + ').'
-        : 'Showing all ' + e.cases + ' similar cases. Select one or more filters to narrow them down.';
+        ? 'Showing ' + filtered.length + ' of ' + e.cases + ' historical cases (' + fNames.join(', ') + ').'
+        : 'Showing all ' + e.cases + ' historical cases. Select one or more filters to narrow them down.';
       const casesTxt = e.cases === 0
-        ? 'No similar cases in the history: range estimated from the ' + e.a.family + ' family (' + fP(e.min) + ' – ' + fP(e.max) + ').'
-        : 'In 9 out of 10 similar cases the discount was between ' + fP(e.min + 0.5) + ' and ' + fP(e.max - 0.5) + '; average discount ' + fP(e.sugg - 0.5) + '.';
+        ? 'No historical cases in the history: range estimated from the ' + e.a.family + ' family (' + fP(e.min) + ' – ' + fP(e.max) + ').'
+        : 'In 9 out of 10 historical cases the discount was between ' + fP(e.min + 0.5) + ' and ' + fP(e.max - 0.5) + '; average discount ' + fP(e.sugg - 0.5) + '.';
 
       // alternatives
       const alts = [];
       if (e.a.alt) {
         const b = ARTICLES.find((x) => x.id === e.a.alt);
         const lb = b.cost * b.mult;
-        alts.push({ title: 'Similar product in standard size: ' + b.label, text: 'List price ' + fE(lb) + ' (' + fN((lb / L - 1) * 100, 1) + '%), already in the catalogue: estimated delivery 8 working days earlier. More similar cases, so a more reliable discount.', cta: 'Try ' + b.label, apply: () => set(Object.assign({ articleId: b.id, artQuery: b.label }, this.resetResult())) });
+        alts.push({ title: 'Similar product in standard size: ' + b.label, text: 'List price ' + fE(lb) + ' (' + fN((lb / L - 1) * 100, 1) + '%), already in the catalogue: estimated delivery 8 working days earlier. More historical cases, so a more reliable discount.', cta: 'Try ' + b.label, apply: () => set(Object.assign({ articleId: b.id, artQuery: b.label }, this.resetResult())) });
       }
       if (e.q < 3 * e.a.minLot) {
         const lot = 3 * e.a.minLot;
@@ -1234,10 +1234,10 @@ class Component extends DCLogic {
         netUnitTxt: fE(ev.net), netTotTxt: fE(ev.net * e.q), listTxt: fE(L), qtyTxt: e.q + ' pcs',
         marginEurTxt: fE(marginEur), marginPctTxt: fP(ev.m),
         marginVsTxt: (ev.m >= cfg.minMargin ? 'above' : 'below') + ' the ' + fP(cfg.minMargin) + ' threshold · at suggested ' + fP(mSugg),
-        artShort: e.a.label, custTxt: e.c.id + ' · ' + e.c.name,
+        artShort: e.a.label, custTxt: e.c.id,
         canUse: stKey !== 'stop', needsApproval: stKey === 'stop',
         sentence, cascade, factors, avgTxt: fP(AVG),
-        casesTxt, cs, csFilters, csFilterTxt, csAnyFilter: !!anyF, csClear: () => set({ csF: Object.assign({}, EMPTY_CSF) }), csEmpty: e.cases > 0 && filtered.length === 0, csHasRows: filtered.length > 0, hasCases: e.cases > 0, casesBtn: e.cases + ' similar cases', lastCases,
+        casesTxt, cs, csFilters, csFilterTxt, csAnyFilter: !!anyF, csClear: () => set({ csF: Object.assign({}, EMPTY_CSF) }), csEmpty: e.cases > 0 && filtered.length === 0, csHasRows: filtered.length > 0, hasCases: e.cases > 0, casesBtn: e.cases + ' historical cases', lastCases,
         alts, hasAlts: alts.length > 0, simEffect,
         belowCost: ev.net < e.a.cost,
         belowCostTxt: 'The net price ' + fE(ev.net) + ' is lower than the standard cost ' + fE(e.a.cost) + ': every piece sold loses ' + fE(e.a.cost - ev.net) + '.',
@@ -1316,7 +1316,7 @@ class Component extends DCLogic {
       reset: () => { clearTimeout(this.t); set(Object.assign({ customerId: '', articleId: '', qty: '', custQuery: '', artQuery: '', ov: Object.assign({}, EMPTY_OV), calculated: false, loading: false, hadResult: false, simOpen: false, panelOpen: false }, this.resetResult())); },
       noLast: !s.last,
       repeatLast: () => { if (s.last) this.runCalc(Object.assign({}, s.last, { ov: Object.assign({}, s.last.ov) })); },
-      loadDemo: () => this.runCalc({ customerId: 'C-10234', custQuery: 'C-10234 · Demo customer North-East', articleId: 'EKO-303015', artQuery: 'EKO 300×300×150', qty: '20', ov: Object.assign({}, EMPTY_OV) }),
+      loadDemo: () => this.runCalc({ customerId: 'C-10234', custQuery: 'C-10234', articleId: 'EKO-303015', artQuery: 'EKO 300×300×150', qty: '20', ov: Object.assign({}, EMPTY_OV) }),
       pickSimilar: () => set(Object.assign({ articleId: 'EKO-404015', artQuery: 'EKO 400×400×150' }, this.resetResult())),
       showEmpty: !s.calculated || (!e && !s.loading),
       emptyText: !s.calculated ? 'Choose customer, item and quantity to see the suggested discount.' : 'Complete customer, item and quantity to update the suggested discount.',
