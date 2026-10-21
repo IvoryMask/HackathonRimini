@@ -3,15 +3,16 @@
 Static frontend prototype (no backend). Synthetic demo data only.
 
 ## Files
-- `index.html` – overview page showing both views side by side
-- `sales-rep.html` – sales rep view (quote parameters and result)
+- `index.html` – sales rep view (quote parameters and result), served at `/`
+- `admin/index.html` – overview page showing both views side by side, served at `/admin`
+- `sales-rep.html` – redirect to `/` for old links
 - `approver.html` – sales manager approver view (phone)
 - `assets/dc-runtime.js` – generated runtime that renders the pages (don't edit)
 - `assets/react*.js` – React 18, loaded locally
 - `assets/montserrat-latin.woff2` – Montserrat font (SIL Open Font License)
 
 ## Where to edit
-In `sales-rep.html` and `approver.html`:
+In `index.html` (sales rep) and `approver.html`:
 - The layout is the markup inside `<x-dc> … </x-dc>`.
 - The data and behaviour (customers, articles, calculations) are in the
   `<script type="text/x-dc">` block near the bottom.
