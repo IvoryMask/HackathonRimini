@@ -224,7 +224,8 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 .opt{display:block;width:100%;text-align:left;min-height:44px;padding:8px 12px;border:0;border-bottom:1px solid var(--line);background:var(--card);color:var(--text);font:inherit;cursor:pointer}
 .opt:hover,.opt:focus-visible{background:var(--accent-soft)}
 .layout{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;max-width:1360px;margin:0 auto;padding:24px}
-.params{flex:1 1 340px;min-width:0;position:sticky;top:96px}
+.params{flex:1 1 340px;min-width:0}
+@media (min-width:1000px){.params{position:sticky;top:96px}}
 .result{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:20px}
 .card{background:var(--card);border:1px solid var(--line);padding:24px}
 .anim{transition:left .18s ease,width .18s ease,opacity .2s ease}
