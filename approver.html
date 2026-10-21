@@ -268,8 +268,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 </span>
 <p style="color: var(--ink); font-weight: 500">{{doneText}}</p>
 <p style="font-size: 13px; color: var(--muted)">The decision has been sent back to the sales rep with the reason. No other pending requests.</p>
-<button type="button" class="btn sec" sc-camel-on-click="{{restart}}">Restart the demo</button>
-<a href="./" style="font-size: 14px; min-height: 44px; display: inline-flex; align-items: center">Back to the sales rep view</a>
+<button type="button" class="btn sec" sc-camel-on-click="{{backToEngine}}">Back to engine</button>
 </div>
 </sc-if>
 
@@ -419,7 +418,7 @@ class Component extends DCLogic {
       confirmReject: () => s.reason && set({ done: { kind: 'no', label: 'Rejected', text: 'You rejected the request. Reason: ' + s.reason.toLowerCase() + (s.rejectNote ? ' – ' + s.rejectNote : '') + '.' } }),
       doneLabel: done ? done.label : '', doneText: done ? done.text : '',
       doneStyle: done && done.kind === 'no' ? 'background: #E50000; color: #FFFFFF' : 'background: #056A5A; color: #FFFFFF',
-      restart: () => set({ mode: 'view', done: null, reason: '', rejectNote: '', otherText: '35', fb: null, fbSent: false }),
+      backToEngine: () => { window.location.href = './'; },
       fbNotSent: !s.fbSent, fbSent: s.fbSent,
       fbYesP: s.fb === 'yes' ? 'true' : 'false', fbNoP: s.fb === 'no' ? 'true' : 'false',
       fbYes: () => set({ fb: 'yes', fbSent: true }), fbNo: () => set({ fb: 'no', fbSent: true })
