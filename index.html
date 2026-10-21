@@ -311,6 +311,13 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 .spe .cbar .anim{border-radius:4px}
 .spe details{border-top-color:var(--line)!important}
 @media (max-width:767px){.spe .card{padding:18px;border-radius:14px}.spe .layout{padding:16px}.spe header{position:static;padding:10px 16px!important}}
+/* desktop: each column scrolls on its own, the page itself stays still */
+@media (min-width:1000px){
+.spe{display:flex;flex-direction:column;height:100vh;height:100dvh;min-height:0;overflow:hidden}
+.spe header{flex:none}
+.spe .layout{flex:1 1 auto;min-height:0;width:100%;flex-wrap:nowrap;align-items:stretch;padding:0 24px}
+.spe .params,.spe .result{position:static;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:32px 10px 48px;margin:0 -10px}
+}
 </style>
 </helmet>
 <div class="spe {{themeClass}}">
