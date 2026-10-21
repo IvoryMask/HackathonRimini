@@ -18,12 +18,15 @@
   #splash { display: none; }
   @media (max-width: 767px) {
     #splash { display: flex; position: fixed; inset: 0; z-index: 1000; align-items: center; justify-content: center; background: #000000;
-      animation: splash-bg .7s ease-in-out .7s forwards, splash-out .4s ease-out 1.5s forwards; }
-    #splash img { width: 46vw; max-width: 220px; height: auto; animation: splash-logo .5s ease-out both; }
+      animation: splash-bg .7s ease-in-out .7s forwards, splash-clear .45s ease-out 1.6s forwards; }
+    #splash img { width: 46vw; max-width: 220px; height: auto; animation: splash-logo .5s ease-out both, splash-zoom .7s cubic-bezier(.55, 0, .75, .3) 1.45s forwards; }
   }
   @keyframes splash-bg { to { background: #FFFFFF; } }
+  @keyframes splash-clear { from { background: #FFFFFF; } to { background: rgba(255, 255, 255, 0); } }
   @keyframes splash-out { to { opacity: 0; visibility: hidden; } }
   @keyframes splash-logo { from { opacity: 0; transform: scale(.92); } to { opacity: 1; transform: scale(1); } }
+  /* the logo grows and fades as if flying through its centre into the page */
+  @keyframes splash-zoom { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(9); } }
   @media (max-width: 767px) and (prefers-reduced-motion: reduce) {
     #splash { animation: splash-out .3s ease-out .8s forwards; }
     #splash img { animation: none; }
@@ -33,8 +36,8 @@
 <body>
 <div id="splash" aria-hidden="true"><img src="assets/splash-logo.png" alt=""></div>
 <script>
-  // remove the splash once its fade-out has finished
-  (function () { var el = document.getElementById('splash'); if (!el) return; el.addEventListener('animationend', function (ev) { if (ev.animationName === 'splash-out') el.remove(); }); })();
+  // remove the splash once the logo zoom (or the reduced-motion fade) has finished
+  (function () { var el = document.getElementById('splash'); if (!el) return; el.addEventListener('animationend', function (ev) { if (ev.animationName === 'splash-zoom' || ev.animationName === 'splash-out') el.remove(); }); })();
 </script>
 <x-dc>
 <helmet>
