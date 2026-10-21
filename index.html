@@ -224,7 +224,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 .opt{display:block;width:100%;text-align:left;min-height:44px;padding:8px 12px;border:0;border-bottom:1px solid var(--line);background:var(--card);color:var(--text);font:inherit;cursor:pointer}
 .opt:hover,.opt:focus-visible{background:var(--accent-soft)}
 .layout{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;max-width:1360px;margin:0 auto;padding:24px}
-.params{flex:1 1 340px;min-width:0;position:sticky;top:16px}
+.params{flex:1 1 340px;min-width:0;position:sticky;top:96px}
 .result{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:20px}
 .card{background:var(--card);border:1px solid var(--line);padding:24px}
 .anim{transition:left .18s ease,width .18s ease,opacity .2s ease}
@@ -244,7 +244,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 @media (max-width:767px){
 .layout{padding:16px}
 .params{position:static}
-.calc-bar{position:sticky;bottom:0;background:var(--bg);padding:12px 0;z-index:2}
+.calc-bar{padding:12px 0 0}
 .mobilebar{display:flex;position:sticky;bottom:0;z-index:3}
 .crow,.frow{grid-template-columns:minmax(0,1fr) 110px}
 .crow .cbar,.frow .cbar{grid-column:1 / -1;order:3}
@@ -286,7 +286,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 .spe [role=listbox]{border-radius:0 0 12px 12px;box-shadow:0 12px 28px -10px rgba(14,34,64,.25)}
 .spe .cbar .anim{border-radius:4px}
 .spe details{border-top-color:var(--line)!important}
-@media (max-width:767px){.spe .card{padding:18px;border-radius:14px}.spe .layout{padding:16px}}
+@media (max-width:767px){.spe .card{padding:18px;border-radius:14px}.spe .layout{padding:16px}.spe header{position:static;padding:10px 16px!important}}
 </style>
 </helmet>
 <div class="spe {{themeClass}}">
