@@ -870,6 +870,13 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 </div>
 </sc-if>
 
+<sc-if value="{{hasToast}}" hint-placeholder-val="{{ false }}">
+<div role="status" aria-live="polite" style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 20; max-width: calc(100% - 32px); background: #056A5A; color: #FFFFFF; padding: 12px 18px; font-weight: 600; box-shadow: 0 6px 20px rgba(15,22,34,.25); display: flex; align-items: center; gap: 10px">
+<svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+<span>{{toast}}</span>
+</div>
+</sc-if>
+
 <sc-if value="{{panelOpen}}" hint-placeholder-val="{{ false }}">
 <div style="position: fixed; inset: 0; background: rgba(15,22,34,.5); display: flex; justify-content: flex-end; z-index: 10" sc-camel-on-click="{{closePanelBackdrop}}">
 <div role="dialog" aria-modal="true" aria-labelledby="h-appr" sc-camel-on-key-down="{{panelKey}}" style="background: var(--card); width: 480px; max-width: 100%; height: 100%; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 18px; border-left: 1px solid var(--line)">
@@ -905,7 +912,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <textarea id="ap-note" value="{{apNote}}" sc-camel-on-change="{{onApNote}}" placeholder="E.g. strategic customer, competitor quoting lower"></textarea>
 </div>
 <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto">
-<button type="button" class="btn" sc-camel-on-click="{{sendRequest}}">Send request</button>
+<button type="button" class="btn" sc-camel-on-click="{{sendRequest}}">Send approval</button>
 <button type="button" class="btn sec" sc-camel-on-click="{{closePanel}}">Cancel</button>
 </div>
 </div>
@@ -1341,8 +1348,13 @@ class Component extends DCLogic {
       jumpThr: () => this._ctx && setChosen(this._ctx.e.thr),
       usePrice: () => {
         const x = this._ctx; if (!x) return;
-        set({ used: { d: x.d, sugg: x.e.sugg, net: x.ev.net, m: x.ev.m, q: x.e.q, art: x.e.a.label, when: 'Recorded on ' + now() }, copied: false });
+        // start over with a blank form and confirm with a short toast
+        clearTimeout(this.t); clearTimeout(this.toastT);
+        set(Object.assign({ customerId: '', articleId: '', qty: '', custQuery: '', artQuery: '', ov: Object.assign({}, EMPTY_OV), calculated: false, loading: false, hadResult: false, simOpen: false, panelOpen: false, toast: 'The ' + fP(x.d) + ' discount was applied successfully.' }, this.resetResult()));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        this.toastT = setTimeout(() => this.setState({ toast: null }), 4000);
       },
+      toast: s.toast, hasToast: !!s.toast,
       used: usedView,
       copyLabel: s.copied ? 'Copied' : 'Copy to clipboard',
       copySummary: () => { try { navigator.clipboard.writeText(this._summary || '').then(() => set({ copied: true }), () => set({ copied: false })); } catch (err) { /* clipboard not available */ } },
@@ -1376,6 +1388,7 @@ class Component extends DCLogic {
         const who = { area: 'Sales manager, Italy area', export: 'Sales manager, Export', dir: 'Sales management' }[s.recipient];
         const item = { title: x.e.a.label + ' · ' + x.e.q + ' pcs · discount ' + fP(x.d), sub: 'Sent on ' + now() + ' to ' + who + (s.apNote ? ' · Note: ' + s.apNote : ''), status: 'Pending', d: x.d };
         set({ requests: [item].concat(this.state.requests), panelOpen: false, apNote: '' });
+        window.location.href = 'approver.html';
       }
     };
   }
