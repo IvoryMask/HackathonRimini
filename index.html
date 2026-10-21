@@ -231,6 +231,29 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 .skel{background:var(--skel);animation:pulse 1.2s ease-in-out infinite}
 @keyframes pulse{50%{opacity:.55}}
 .mobilebar{display:none}
+.cmp-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr);font-size:14px}
+.cmp-grid>span{padding:9px 0 9px 12px;border-bottom:1px solid var(--line);text-align:right;overflow-wrap:break-word}
+.cmp-grid>.cmp-k{padding-left:0;text-align:left;color:var(--muted)}
+.cmp-grid>.cmp-h{font-weight:700;color:var(--ink);display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:6px}
+.cmp-grid>.cmp-v{font-weight:600;color:var(--ink)}
+.hf{display:flex;flex-direction:column;gap:12px;padding:16px;background:var(--bg);border:1px solid var(--line);border-radius:14px}
+.hf-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.hf-head .btn.ghost{min-height:32px}
+.hf-title{font-size:14px;font-weight:700;color:var(--ink)}
+.hf-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.hf-opt{display:flex;align-items:center;gap:12px;min-height:60px;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--text);font:inherit;text-align:left;cursor:pointer;transition:border-color .15s,background .15s,box-shadow .15s}
+.hf-opt:hover:not(:disabled){border-color:var(--accent)}
+.hf-opt[aria-pressed=true]{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
+.hf-opt:disabled{opacity:.5;cursor:not-allowed}
+.hf-check{flex:none;width:20px;height:20px;border-radius:6px;border:1.5px solid var(--field);background:var(--card);display:grid;place-items:center}
+.hf-opt[aria-pressed=true] .hf-check{background:var(--accent);border-color:var(--accent)}
+.hf-opt[aria-pressed=true] .hf-check::after{content:'';width:9px;height:5px;border-left:2px solid #FFFFFF;border-bottom:2px solid #FFFFFF;transform:translateY(-1px) rotate(-45deg)}
+.hf-txt{display:flex;flex-direction:column;min-width:0;flex:1}
+.hf-l{font-size:12px;font-weight:500;color:var(--muted)}
+.hf-v{font-size:14px;font-weight:700;color:var(--ink);overflow-wrap:break-word}
+.hf-n{flex:none;font-size:12px;font-weight:600;color:var(--muted);background:var(--bg);border-radius:999px;padding:3px 9px;white-space:nowrap}
+.hf-opt[aria-pressed=true] .hf-n{background:var(--card);color:var(--accent)}
+.hf-status{font-size:12px;color:var(--muted)}
 .crow{display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr) 128px;gap:12px;align-items:center;min-height:30px}
 .frow{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr) 80px;gap:12px;align-items:center;min-height:30px}
 .spe details>summary{cursor:pointer;list-style:none;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:600;color:var(--ink)}
@@ -251,6 +274,10 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 .big{font-size:44px !important}
 .card{padding:16px}
 .hide-m{display:none !important}
+.cmp-grid{font-size:13px;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr)}
+.cs-stats{grid-template-columns:1fr !important}
+.cs-stats>div{flex-direction:row !important;justify-content:space-between;align-items:center;padding:10px 14px !important}
+.cs-stats>div>span:last-child{font-size:18px !important}
 }
 @media (prefers-reduced-motion:reduce){.anim{transition:none}.skel{animation:none}}
 </style>
@@ -576,6 +603,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <button type="button" class="btn" sc-camel-on-click="{{openApproval}}">Request approval</button>
 </sc-if>
 <button type="button" class="btn sec" sc-camel-on-click="{{openSim}}" aria-expanded="{{simOpen}}" aria-controls="sim">Try another discount</button>
+<button type="button" class="btn sec" sc-camel-on-click="{{toggleCmp}}" aria-expanded="{{cmpOpen}}" aria-controls="cmp">Standard vs non-standard</button>
 <sc-if value="{{r.canUse}}" hint-placeholder-val="{{ true }}">
 <button type="button" class="btn sec" sc-camel-on-click="{{openApproval}}">Request approval</button>
 </sc-if>
@@ -619,6 +647,29 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 </div>
 </sc-if>
 <p style="font-size: 12px; color: var(--muted)">Keyboard: arrows ±0.5 points, Shift+arrows ±2 points.</p>
+</div>
+</sc-if>
+
+<sc-if value="{{cmpOpen}}" hint-placeholder-val="{{ false }}">
+<div id="cmp" class="card" style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
+<h3 style="font-size: 16px; font-weight: 700">Margin: standard vs non-standard</h3>
+<button type="button" class="btn ghost" sc-camel-on-click="{{closeCmp}}">Close</button>
+</div>
+<div class="cmp-grid">
+<span></span>
+<span class="cmp-h">Standard <sc-if value="{{r.cmp.sCur}}" hint-placeholder-val="{{ true }}"><span class="chip">Selected</span></sc-if></span>
+<span class="cmp-h">Non-standard <sc-if value="{{r.cmp.cCur}}" hint-placeholder-val="{{ false }}"><span class="chip">Selected</span></sc-if></span>
+<sc-for list="{{r.cmp.rows}}" as="x" hint-placeholder-count="7">
+<span class="cmp-k">{{x.k}}</span>
+<span class="cmp-v">{{x.s}}</span>
+<span class="cmp-v">{{x.c}}</span>
+</sc-for>
+<span class="cmp-k">Status</span>
+<span class="cmp-v"><span class="badge" style="{{r.cmp.sStStyle}}; font-size: 12px; min-height: 26px; padding: 2px 10px">{{r.cmp.sSt}}</span></span>
+<span class="cmp-v"><span class="badge" style="{{r.cmp.cStStyle}}; font-size: 12px; min-height: 26px; padding: 2px 10px">{{r.cmp.cSt}}</span></span>
+</div>
+<p aria-live="polite" style="font-size: 15px; color: var(--ink); font-weight: 500">{{r.cmp.txt}}</p>
 </div>
 </sc-if>
 
@@ -735,23 +786,32 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <div style="display: flex; flex-direction: column; gap: 20px; padding: 6px 0 16px">
 <p style="font-size: 14px; color: var(--muted); text-wrap: pretty; max-width: 64ch">{{r.casesTxt}}</p>
 <sc-if value="{{r.hasCases}}" hint-placeholder-val="{{ true }}">
-<div style="display: flex; flex-direction: column; gap: 8px">
-<span style="font-size: 13px; font-weight: 600; color: var(--ink)">Historical data</span>
-<div style="display: flex; flex-wrap: wrap; gap: 8px" role="group" aria-label="Historical data">
-<sc-for list="{{r.csFilters}}" as="o" hint-placeholder-count="3">
-<button type="button" class="chip" aria-pressed="{{o.on}}" disabled="{{o.disabled}}" sc-camel-on-click="{{o.pick}}">{{o.label}} <span style="font-weight: 400">· {{o.value}}</span></button>
-</sc-for>
+<div class="hf">
+<div class="hf-head">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span class="hf-title">Historical data</span>
+<span style="font-size: 12px; color: var(--muted)">Narrow the similar cases to the ones closest to this quote.</span>
+</div>
 <sc-if value="{{r.csAnyFilter}}" hint-placeholder-val="{{ false }}">
 <button type="button" class="btn ghost" sc-camel-on-click="{{r.csClear}}">Clear filters</button>
 </sc-if>
 </div>
-<span style="font-size: 12px; color: var(--muted)" aria-live="polite">{{r.csFilterTxt}}</span>
+<div class="hf-opts" role="group" aria-label="Historical data">
+<sc-for list="{{r.csFilters}}" as="o" hint-placeholder-count="3">
+<button type="button" class="hf-opt" aria-pressed="{{o.on}}" disabled="{{o.disabled}}" sc-camel-on-click="{{o.pick}}">
+<span class="hf-check" aria-hidden="true"></span>
+<span class="hf-txt"><span class="hf-l">{{o.label}}</span><span class="hf-v">{{o.value}}</span></span>
+<span class="hf-n">{{o.n}}</span>
+</button>
+</sc-for>
+</div>
+<span class="hf-status" aria-live="polite">{{r.csFilterTxt}}</span>
 </div>
 <sc-if value="{{r.csEmpty}}" hint-placeholder-val="{{ false }}">
 <p style="font-size: 14px; color: var(--ink); border: 1px solid var(--line); padding: 12px 14px">No past cases match these filters. Remove a filter to see more cases.</p>
 </sc-if>
 <sc-if value="{{r.csHasRows}}" hint-placeholder-val="{{ true }}">
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line)">
+<div class="cs-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden">
 <div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; background: var(--card)"><span style="font-size: 12px; font-weight: 500; color: var(--muted)">Similar cases</span><span style="font-size: 22px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums">{{r.cs.count}}</span></div>
 <div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; background: var(--card)"><span style="font-size: 12px; font-weight: 500; color: var(--muted)">Typical range (9 of 10)</span><span style="font-size: 22px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums">{{r.cs.range}}</span></div>
 <div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; background: var(--card)"><span style="font-size: 12px; font-weight: 500; color: var(--muted)">Average discount</span><span style="font-size: 22px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums">{{r.cs.avg}}</span></div>
@@ -942,6 +1002,7 @@ function engine(p, cfg) {
   const ov = p.ov;
   const channel = ov.channel || c.channel, nation = ov.nation || c.nation, cls = ov.cls || c.cls;
   const cluster = ov.cluster || c.cluster || '', wf = ov.workflow || a.wf;
+  const isCustom = p.custom != null ? p.custom : a.custom;
   const f = [];
   f.push({ k: 'Model', d: a.family, pts: a.base - AVG });
   f.push({ k: 'Country', d: nation, pts: NAT[nation] || 0 });
@@ -955,21 +1016,21 @@ function engine(p, cfg) {
   else if (q >= 3 * a.minLot) { qp = 1.5; qd = q + ' pcs, medium-large lot'; }
   else { qd = q + ' pcs, in line with minimum lot'; }
   f.push({ k: 'Quantity', d: qd, pts: qp });
-  if (a.custom) f.push({ k: 'Custom', d: 'non-standard product', pts: -2.5 });
+  if (isCustom) f.push({ k: 'Custom', d: 'non-standard product', pts: -2.5 });
   if (ov.drawing === 'no') f.push({ k: 'Design', d: 'customer has no drawing', pts: -1 });
   if (ov.quality) f.push({ k: 'Quality gate', d: 'special checks', pts: -1 });
   if (ov.priority) f.push({ k: 'Delivery', d: 'priority', pts: -1 });
   const raw = AVG + f.reduce((s, x) => s + x.pts, 0);
   const sugg = clamp(r05(raw), 0, SCALE);
 
-  let cases = a.noHistory ? 0 : a.custom ? 3 : c.isNew ? 18 : c.hist;
+  let cases = a.noHistory ? 0 : isCustom ? 3 : c.isNew ? 18 : c.hist;
   const mc = cfg.minCases;
   let rel = cases >= mc * 2.5 ? 'high' : cases >= mc ? 'medium' : 'low';
   const relCauses = [];
   if (cases === 0) relCauses.push('No similar cases');
   else if (cases < mc) relCauses.push('Few similar cases (' + cases + ')');
   else if (rel === 'medium' && !c.isNew) relCauses.push('Limited similar cases (' + cases + ')');
-  if (a.custom) relCauses.push('Custom product');
+  if (isCustom) relCauses.push('Custom product');
   if (wf === 'C4') { rel = rel === 'high' ? 'medium' : 'low'; relCauses.push('Workflow C4, case by case'); }
   if (c.isNew) { relCauses.push('Customer with no history'); if (rel === 'high') rel = 'medium'; }
   const spread = rel === 'high' ? 3 : rel === 'medium' ? 4.5 : 7;
@@ -977,7 +1038,7 @@ function engine(p, cfg) {
   const list = Math.round(a.cost * a.mult * 100) / 100;
   const dAtMargin = (1 - a.cost / ((1 - cfg.minMargin / 100) * list)) * 100;
   const thr = Math.min(cfg.maxDisc, max, dAtMargin);
-  return { c, a, q, f, raw, sugg, cases, rel, relCauses, min, max, list, thr, dAtMargin, channel, nation, wf };
+  return { c, a, q, f, raw, sugg, cases, rel, relCauses, min, max, list, thr, dAtMargin, channel, nation, wf, isCustom };
 }
 
 function evaluate(e, d, cfg) {
@@ -1001,7 +1062,7 @@ class Component extends DCLogic {
     this.state = {
       customerId: '', articleId: '', qty: '', custQuery: '', artQuery: '', custOpen: false, artOpen: false,
       advOpen: false, ov: Object.assign({}, EMPTY_OV), calculated: false, loading: false, hadResult: false, last: null,
-      chosen: null, simText: null, simOpen: false, panelOpen: false, recipient: 'area', apNote: '',
+      chosen: null, simText: null, simOpen: false, cmpOpen: false, panelOpen: false, recipient: 'area', apNote: '',
       requests: [], used: null, copied: false, fb: null, fbReason: '', fbAlt: '', fbNote: '', fbSent: false, showCases: false, csF: Object.assign({}, EMPTY_CSF)
     };
   }
@@ -1064,7 +1125,7 @@ class Component extends DCLogic {
     const showResult = !!(s.calculated && e && !e.missing && !(s.loading && !s.hadResult));
     if (!e || e.missing) this._ctx = null;
 
-    let r = { st: ST.ok, causes: [], cascade: [], factors: [], alts: [], lastCases: [], cs: {}, bar: {}, ticks: {} };
+    let r = { st: ST.ok, causes: [], cascade: [], factors: [], alts: [], lastCases: [], cs: {}, bar: {}, ticks: {}, cmp: { rows: [] } };
     let usedView = null;
     if (e && !e.missing) {
       const d = s.chosen == null ? e.sugg : s.chosen;
@@ -1151,10 +1212,11 @@ class Component extends DCLogic {
         sugg: 'position: absolute; top: 2px; height: 32px; width: 2px; margin-left: -1px; background: var(--ink); left: ' + cp(e.sugg) + ';'
       };
       const togF = (k) => () => set({ csF: Object.assign({}, this.state.csF, { [k]: !this.state.csF[k] }) });
+      const nCases = (fn) => { const n = pool.filter(fn).length; return n + (n === 1 ? ' case' : ' cases'); };
       const csFilters = [
-        { label: 'Same customer', value: e.c.isNew ? 'no history' : e.c.id, on: csF.cust ? 'true' : 'false', disabled: !!e.c.isNew, pick: togF('cust') },
-        { label: 'Same country', value: e.nation, on: csF.nation ? 'true' : 'false', disabled: false, pick: togF('nation') },
-        { label: 'Same industry', value: effCls, on: csF.cls ? 'true' : 'false', disabled: false, pick: togF('cls') }
+        { label: 'Same customer', value: e.c.isNew ? 'no history' : e.c.id, n: nCases((k) => k.cli === e.c.id), on: csF.cust ? 'true' : 'false', disabled: !!e.c.isNew, pick: togF('cust') },
+        { label: 'Same country', value: e.nation, n: nCases((k) => k.nation === e.nation), on: csF.nation ? 'true' : 'false', disabled: false, pick: togF('nation') },
+        { label: 'Same industry', value: effCls, n: nCases((k) => k.cls === effCls), on: csF.cls ? 'true' : 'false', disabled: false, pick: togF('cls') }
       ];
       const fNames = [csF.cust && 'same customer', csF.nation && 'same country', csF.cls && 'same industry'].filter(Boolean);
       const csFilterTxt = anyF
@@ -1177,6 +1239,34 @@ class Component extends DCLogic {
         const n2 = e2.list * (1 - e2.sugg / 100);
         alts.push({ title: 'Optimal lot: ' + lot + ' pcs', text: 'With ' + lot + ' pieces the suggested discount rises to ' + fP(e2.sugg) + ': unit net price ' + fE(n2) + ' instead of ' + fE(netSugg) + '.', cta: 'Use ' + lot + ' pcs', apply: () => set(Object.assign({ qty: String(lot) }, this.resetResult())) });
       }
+
+      // standard vs non-standard comparison, both at their suggested discount
+      const base = this.params();
+      const vStd = !e.isCustom ? e : engine(Object.assign({}, base, e.a.alt ? { articleId: e.a.alt } : { custom: false }), cfg);
+      const vCus = e.isCustom ? e : engine(Object.assign({}, base, { custom: true }), cfg);
+      const vCol = (v) => {
+        const x = evaluate(v, v.sugg, cfg);
+        return { v, x, mTot: (x.net - v.a.cost) * v.q };
+      };
+      const cS = vCol(vStd), cC = vCol(vCus);
+      const cmpRows = [
+        { k: 'Item', s: cS.v.a.label, c: cC.v.a.label },
+        { k: 'Suggested discount', s: fP(cS.v.sugg), c: fP(cC.v.sugg) },
+        { k: 'Net price / pc', s: fE(cS.x.net), c: fE(cC.x.net) },
+        { k: 'Margin / pc', s: fE(cS.x.net - cS.v.a.cost), c: fE(cC.x.net - cC.v.a.cost) },
+        { k: 'Margin %', s: fP(cS.x.m), c: fP(cC.x.m) },
+        { k: 'Line margin (' + e.q + ' pcs)', s: fE(cS.mTot), c: fE(cC.mTot) },
+        { k: 'Similar cases', s: String(cS.v.cases), c: String(cC.v.cases) }
+      ];
+      const dM = cC.x.m - cS.x.m, dT = cC.mTot - cS.mTot;
+      let cmpTxt = 'Non-standard: margin ' + fPt(dM) + ' (' + (dT >= 0 ? '+' : '−') + fE(Math.abs(dT)) + ' on the line) compared with standard.';
+      if (cC.x.st === 'stop' && cS.x.st !== 'stop') cmpTxt += ' The higher margin needs sales manager approval: few similar cases for non-standard items.';
+      const cmp = {
+        rows: cmpRows, txt: cmpTxt,
+        sCur: !e.isCustom, cCur: e.isCustom,
+        sSt: ST[cS.x.st].label, sStStyle: ST[cS.x.st].style,
+        cSt: ST[cC.x.st].label, cStStyle: ST[cC.x.st].style
+      };
 
       // effect sentence
       let simEffect;
@@ -1206,7 +1296,7 @@ class Component extends DCLogic {
         canUse: stKey !== 'stop', needsApproval: stKey === 'stop',
         sentence, cascade, factors, avgTxt: fP(AVG),
         casesTxt, cs, csFilters, csFilterTxt, csAnyFilter: !!anyF, csClear: () => set({ csF: Object.assign({}, EMPTY_CSF) }), csEmpty: e.cases > 0 && filtered.length === 0, csHasRows: filtered.length > 0, hasCases: e.cases > 0, casesBtn: e.cases + ' similar cases', lastCases,
-        alts, hasAlts: alts.length > 0, simEffect,
+        alts, hasAlts: alts.length > 0, simEffect, cmp,
         belowCost: ev.net < e.a.cost,
         belowCostTxt: 'The net price ' + fE(ev.net) + ' is lower than the standard cost ' + fE(e.a.cost) + ': every piece sold loses ' + fE(e.a.cost - ev.net) + '.',
         bar: {
@@ -1294,6 +1384,7 @@ class Component extends DCLogic {
       dimStyle: s.loading ? 'opacity: .45' : 'opacity: 1',
       r,
       simOpen: s.simOpen,
+      cmpOpen: s.cmpOpen, toggleCmp: () => set({ cmpOpen: !s.cmpOpen }), closeCmp: () => set({ cmpOpen: false }),
       openSim: () => { set({ simOpen: true }); setTimeout(() => { const el = document.getElementById('s-range'); if (el) el.focus(); }, 50); },
       simText: s.simText != null ? s.simText : (r.chosen != null ? fN(r.chosen, 1) : ''),
       onSlide: (ev) => setChosen(parseFloat(ev.target.value)),
