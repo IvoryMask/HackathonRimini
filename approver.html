@@ -217,6 +217,7 @@ button.chip{min-height:44px;cursor:pointer;font-family:inherit}
 button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#FFFFFF}
 .row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
 .row span:last-child{text-align:right;color:var(--ink);font-weight:500}
+.ap-screen{width:100%;height:100vh;height:100dvh}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
@@ -246,7 +247,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 .ap .btn{min-height:52px;border-radius:12px}
 </style>
 </helmet>
-<div class="ap {{themeClass}}" style="width: 390px; height: 844px; display: flex; flex-direction: column; overflow: hidden">
+<div class="ap ap-screen {{themeClass}}" style="display: flex; flex-direction: column; overflow: hidden">
 
 <header style="background: var(--head); color: #FFFFFF; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; gap: 8px; flex: none">
 <div style="display: flex; flex-direction: column">
@@ -267,7 +268,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <p style="color: var(--ink); font-weight: 500">{{doneText}}</p>
 <p style="font-size: 13px; color: var(--muted)">The decision has been sent back to the sales rep with the reason. No other pending requests.</p>
 <button type="button" class="btn sec" sc-camel-on-click="{{restart}}">Restart the demo</button>
-<a href="sales-rep.html" style="font-size: 14px; min-height: 44px; display: inline-flex; align-items: center">Back to the sales rep view</a>
+<a href="./" style="font-size: 14px; min-height: 44px; display: inline-flex; align-items: center">Back to the sales rep view</a>
 </div>
 </sc-if>
 
