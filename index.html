@@ -881,7 +881,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <sc-raw-tr><sc-raw-td>Suggested discount</sc-raw-td><sc-raw-td>{{r.suggTxt}}</sc-raw-td></sc-raw-tr>
 <sc-raw-tr><sc-raw-td>Requested discount</sc-raw-td><sc-raw-td style="font-weight: 700; color: var(--ink)">{{r.chosenTxt}}</sc-raw-td></sc-raw-tr>
 <sc-raw-tr><sc-raw-td>Net price</sc-raw-td><sc-raw-td>{{r.netUnitTxt}} / pc</sc-raw-td></sc-raw-tr>
-<sc-raw-tr><sc-raw-td>Margin</sc-raw-td><sc-raw-td>{{r.marginPctTxt}} ({{r.marginEurTxt}})</sc-raw-td></sc-raw-tr>
+<sc-raw-tr><sc-raw-td>Profit</sc-raw-td><sc-raw-td>{{r.marginPctTxt}} ({{r.marginEurTxt}})</sc-raw-td></sc-raw-tr>
 </sc-raw-tbody>
 </sc-raw-table>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
@@ -1434,6 +1434,14 @@ class Component extends DCLogic {
         const who = { area: 'Sales manager, Italy area', export: 'Sales manager, Export', dir: 'Sales management' }[s.recipient];
         const item = { title: x.e.a.label + ' · ' + x.e.q + ' pcs · discount ' + fP(x.d), sub: 'Sent on ' + now() + ' to ' + who + (s.apNote ? ' · Note: ' + s.apNote : ''), status: 'Pending', d: x.d };
         set({ requests: [item].concat(this.state.requests), panelOpen: false, apNote: '' });
+        try {
+          sessionStorage.setItem('spe-request', JSON.stringify({
+            cust: x.e.c.id, channel: x.e.channel, nation: x.e.nation,
+            art: x.e.a.label, qty: x.e.q,
+            sugg: x.e.sugg, req: x.d, net: x.ev.net, margin: x.ev.m,
+            who: who, note: s.apNote, causes: x.ev.causes, when: now()
+          }));
+        } catch (err) { /* storage blocked: approver page falls back to demo data */ }
         window.location.href = 'approver.html';
       }
     };
