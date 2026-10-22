@@ -1146,12 +1146,13 @@ class Component extends DCLogic {
     if (e && !e.missing) {
       const d = s.chosen == null ? e.sugg : s.chosen;
       const ev = evaluate(e, d, cfg);
-      // below APPROVAL_MIN_QTY pieces there is no approval step: a blocking status becomes a review
+      // below APPROVAL_MIN_QTY pieces there is no approval step, so a blocking status is cleared
       const canAsk = e.q >= APPROVAL_MIN_QTY;
-      const stKey = ev.st === 'stop' && !canAsk ? 'warn' : ev.st;
+      const cleared = ev.st === 'stop' && !canAsk;
+      const stKey = cleared ? 'ok' : ev.st;
+      if (cleared) ev.causes = [];
       const st = Object.assign({ ok: stKey === 'ok', warn: stKey === 'warn', stop: stKey === 'stop' }, ST[stKey]);
-      if (ev.st === 'stop' && !canAsk) st.todo = 'Under ' + APPROVAL_MIN_QTY + ' pcs no approval is needed: check the causes shown before quoting.';
-      const needTxt = canAsk ? 'approval required' : 'review advised';
+      const needTxt = canAsk ? ': approval required.' : '.';
       const indicative = e.rel === 'low';
       const netSugg = e.list * (1 - e.sugg / 100);
       const mSugg = (netSugg - e.a.cost) / netSugg * 100;
@@ -1265,10 +1266,10 @@ class Component extends DCLogic {
       if (d === e.sugg) simEffect = 'At the suggested discount the margin is ' + fP(ev.m) + ' (threshold ' + fP(cfg.minMargin) + ').';
       else {
         simEffect = 'At ' + fP(d) + ' the profit ' + (ev.m < mSugg ? 'drops' : 'rises') + ' to ' + fP(ev.m);
-        if (ev.net < e.a.cost) simEffect += ': price below cost, ' + needTxt + '.';
-        else if (ev.below) simEffect += ', below the threshold: ' + needTxt + '.';
-        else if (ev.overMax) simEffect += ', but the discount is above the maximum: ' + needTxt + '.';
-        else if (ev.st === 'stop') simEffect += ': the estimate is still unreliable, ' + needTxt + '.';
+        if (ev.net < e.a.cost) simEffect += ': price below cost' + needTxt;
+        else if (ev.below) simEffect += ', below the threshold' + needTxt;
+        else if (ev.overMax) simEffect += ', but the discount is above the maximum' + needTxt;
+        else if (ev.st === 'stop') simEffect += ': the estimate is still unreliable' + needTxt;
         else if (stKey === 'warn') simEffect += ', close to the threshold: review advised.';
         else simEffect += ', above the threshold.';
       }
