@@ -280,6 +280,13 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 .hf-n{flex:none;font-size:12px;font-weight:600;color:var(--muted);background:var(--bg);border-radius:999px;padding:3px 9px;white-space:nowrap}
 .hf-opt[aria-pressed=true] .hf-n{background:var(--card);color:var(--accent)}
 .hf-status{font-size:12px;color:var(--muted)}
+.dims{display:flex;flex-direction:column;gap:6px;padding:12px;background:var(--bg);border:1px solid var(--line);border-radius:12px}
+.dims-l{font-size:13px;font-weight:600;color:var(--ink)}
+.dims-row{display:flex;align-items:flex-end;gap:6px}
+.dims-f{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:4px}
+.dims-f label{font-size:12px;font-weight:500;color:var(--muted)}
+.spe .dims-f input[type=text]{min-height:40px;padding:8px 10px;text-align:center;font-weight:600}
+.dims-x{flex:none;padding-bottom:10px;color:var(--muted);font-weight:600}
 .crow{display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr) 128px;gap:12px;align-items:center;min-height:30px}
 .frow{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr) 80px;gap:12px;align-items:center;min-height:30px}
 .spe details>summary{cursor:pointer;list-style:none;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:600;color:var(--ink)}
@@ -406,10 +413,25 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 </sc-if>
 </div>
 </sc-if>
+<sc-if value="{{isCustom}}" hint-placeholder-val="{{ false }}">
+<div class="dims" role="group" aria-labelledby="dims-l">
+<span id="dims-l" class="dims-l">Dimensions (mm) *</span>
+<div class="dims-row">
+<div class="dims-f"><label for="d-w">Width</label><input id="d-w" type="text" sc-camel-input-mode="numeric" autocomplete="off" placeholder="e.g. 380" value="{{dims.w}}" sc-camel-on-change="{{onDimW}}" aria-invalid="{{dimsInvalid}}" aria-describedby="e-dims"></div>
+<span class="dims-x" aria-hidden="true">×</span>
+<div class="dims-f"><label for="d-h">Height</label><input id="d-h" type="text" sc-camel-input-mode="numeric" autocomplete="off" placeholder="e.g. 380" value="{{dims.h}}" sc-camel-on-change="{{onDimH}}" aria-invalid="{{dimsInvalid}}" aria-describedby="e-dims"></div>
+<span class="dims-x" aria-hidden="true">×</span>
+<div class="dims-f"><label for="d-d">Depth</label><input id="d-d" type="text" sc-camel-input-mode="numeric" autocomplete="off" placeholder="e.g. 150" value="{{dims.d}}" sc-camel-on-change="{{onDimD}}" aria-invalid="{{dimsInvalid}}" aria-describedby="e-dims"></div>
+</div>
+<sc-if value="{{dimsError}}" hint-placeholder-val="{{ false }}">
+<p id="e-dims" style="font-size: 13px; color: #C00000; font-weight: 500">{{dimsError}}</p>
+</sc-if>
+</div>
+</sc-if>
 <sc-if value="{{hasArt}}" hint-placeholder-val="{{ true }}">
 <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; font-size: 13px">
 <div style="display: flex; flex-direction: column"><span style="color: var(--muted)">Family</span><span style="color: var(--ink); font-weight: 500">{{artFamily}}</span></div>
-<div style="display: flex; flex-direction: column"><span style="color: var(--muted)">Standard cost</span><span style="color: var(--ink); font-weight: 500">{{artCost}}</span></div>
+<div style="display: flex; flex-direction: column"><span style="color: var(--muted)">{{artCostLabel}}</span><span style="color: var(--ink); font-weight: 500">{{artCost}}</span></div>
 <div style="display: flex; flex-direction: column"><span style="color: var(--muted)">List price</span><span style="color: var(--ink); font-weight: 500">{{artList}}</span></div>
 </div>
 </sc-if>
@@ -965,13 +987,45 @@ const CUSTOMERS = [
   { id: 'C-40519', channel: 'End User', nation: 'Spain', cls: 'Food & Beverage', cluster: '', hist: 0, isNew: true }
 ];
 const ARTICLES = [
-  { id: 'EKO-303015', label: 'EKO 300×300×150', desc: 'EKO stainless enclosure, standard', family: 'EKO enclosures', base: 29, cost: 78.40, mult: 2.2, minLot: 10, custom: false, wf: 'Q1' },
-  { id: 'EKO-383815-SM', label: 'EKO 380×380×150 custom', desc: 'EKO stainless enclosure, non-standard size', family: 'EKO enclosures', base: 29, cost: 112.60, mult: 2.2, minLot: 10, custom: true, wf: 'Q3', alt: 'EKO-404015' },
-  { id: 'EKO-404015', label: 'EKO 400×400×150', desc: 'EKO stainless enclosure, standard', family: 'EKO enclosures', base: 29, cost: 104.90, mult: 2.2, minLot: 10, custom: false, wf: 'Q1' },
+  { id: 'CUSTOM', label: 'Custom', desc: 'EKO stainless enclosure made to the customer\'s dimensions', family: 'EKO enclosures', base: 29, cost: null, mult: 2.2, minLot: 10, custom: true, wf: 'Q3' },
+  { id: 'EKO-303015', label: 'EKO 300×300×150', desc: 'EKO stainless enclosure, standard', family: 'EKO enclosures', base: 29, cost: 78.40, mult: 2.2, minLot: 10, custom: false, wf: 'Q1', dims: [300, 300, 150] },
+  { id: 'EKO-404015', label: 'EKO 400×400×150', desc: 'EKO stainless enclosure, standard', family: 'EKO enclosures', base: 29, cost: 104.90, mult: 2.2, minLot: 10, custom: false, wf: 'Q1', dims: [400, 400, 150] },
   { id: 'ADH-03', label: 'ADH 3 holes', desc: 'ADH stainless push-button box, standard', family: 'ADH/APH push-button boxes', base: 25, cost: 41.20, mult: 2.4, minLot: 20, custom: false, wf: 'Q1' },
-  { id: 'APH-06-SM', label: 'APH 6 holes custom', desc: 'APH stainless push-button box, non-standard', family: 'ADH/APH push-button boxes', base: 25, cost: 66.80, mult: 2.4, minLot: 20, custom: true, wf: 'C3', noHistory: true },
-  { id: 'EKO-604020', label: 'EKO 600×400×200', desc: 'EKO stainless enclosure, cost not available', family: 'EKO enclosures', base: 29, cost: null, mult: 2.2, minLot: 10, custom: false, wf: 'Q1' }
+  { id: 'EKO-604020', label: 'EKO 600×400×200', desc: 'EKO stainless enclosure, cost not available', family: 'EKO enclosures', base: 29, cost: null, mult: 2.2, minLot: 10, custom: false, wf: 'Q1', dims: [600, 400, 200] }
 ];
+// custom enclosure: cost from sheet surface, fitted on the two standard EKO sizes, plus a non-standard surcharge
+const EKO_COST = { fixed: 30.70, perM2: 132.50 };
+const CUSTOM_UPLIFT = 1.135;
+const DIM_LIMITS = { w: [150, 1000], h: [150, 1000], d: [80, 400] };
+const EMPTY_DIMS = { w: '', h: '', d: '' };
+function checkDims(dims) {
+  const names = { w: 'Width', h: 'Height', d: 'Depth' };
+  const v = {};
+  for (const k of ['w', 'h', 'd']) {
+    const t = String(dims[k] || '').trim();
+    if (t === '') return { ok: false, error: '' };
+    const n = parseNum(t);
+    if (n == null || Math.round(n) !== n) return { ok: false, error: names[k] + ': enter a whole number of millimetres.' };
+    const [lo, hi] = DIM_LIMITS[k];
+    if (n < lo || n > hi) return { ok: false, error: names[k] + ' must be between ' + lo + ' and ' + hi + ' mm.' };
+    v[k] = n;
+  }
+  return { ok: true, error: '', v };
+}
+function customArticle(dims) {
+  const chk = checkDims(dims);
+  if (!chk.ok) return null;
+  const { w, h, d } = chk.v;
+  const area = 2 * (w * h + w * d + h * d) / 1e6;
+  const cost = Math.round((EKO_COST.fixed + EKO_COST.perM2 * area) * CUSTOM_UPLIFT * 100) / 100;
+  const base = ARTICLES.find((x) => x.id === 'CUSTOM');
+  const fits = ARTICLES.filter((x) => x.dims && x.cost != null && x.dims[0] >= w && x.dims[1] >= h && x.dims[2] >= d).sort((x, y) => x.cost - y.cost);
+  return Object.assign({}, base, { label: 'Custom ' + w + '×' + h + '×' + d, cost, alt: fits.length ? fits[0].id : undefined });
+}
+function articleFor(id, dims) {
+  if (id === 'CUSTOM') return customArticle(dims || EMPTY_DIMS);
+  return ARTICLES.find((x) => x.id === id) || null;
+}
 const NAT = { Italy: 1.5, Germany: -1, France: 0, Spain: 0.5 };
 const NAT_ADJ = { Italy: 'Italian', Germany: 'German', France: 'French', Spain: 'Spanish' };
 const CH = { OEM: 4, 'Panel Builder': 1.5, Dealer: 2, 'End User': -3 };
@@ -1009,7 +1063,7 @@ function parseNum(t) { const v = parseFloat(String(t).replace(',', '.')); return
 
 function engine(p, cfg) {
   const c = CUSTOMERS.find((x) => x.id === p.customerId);
-  const a = ARTICLES.find((x) => x.id === p.articleId);
+  const a = articleFor(p.articleId, p.dims);
   const q = parseNum(p.qty);
   if (!c || !a || !(q > 0) || q > 5000 || Math.round(q) !== q) return null;
   if (a.cost == null) return { missing: true };
@@ -1073,7 +1127,7 @@ class Component extends DCLogic {
   constructor(props) {
     super(props);
     this.state = {
-      customerId: '', articleId: '', qty: '', custQuery: '', artQuery: '', custOpen: false, artOpen: false,
+      customerId: '', articleId: '', qty: '', custQuery: '', artQuery: '', dims: Object.assign({}, EMPTY_DIMS), custOpen: false, artOpen: false,
       advOpen: false, ov: Object.assign({}, EMPTY_OV), calculated: false, loading: false, hadResult: false, last: null,
       chosen: null, simText: null, simOpen: false, panelOpen: false, recipient: 'area', apNote: '',
       requests: [], used: null, copied: false, fb: null, fbReason: '', fbAlt: '', fbNote: '', fbSent: false, showCases: false, csF: Object.assign({}, EMPTY_CSF)
@@ -1082,12 +1136,12 @@ class Component extends DCLogic {
   cfg() {
     return { minMargin: this.props.minMargin ?? 25, maxDisc: this.props.maxDiscount ?? 38, minCases: this.props.minCases ?? 8 };
   }
-  params() { const s = this.state; return { customerId: s.customerId, articleId: s.articleId, qty: s.qty, ov: s.ov }; }
+  params() { const s = this.state; return { customerId: s.customerId, articleId: s.articleId, dims: s.dims, qty: s.qty, ov: s.ov }; }
   resetResult() { return { chosen: null, simText: null, used: null, fb: null, fbSent: false, fbReason: '', fbAlt: '', fbNote: '', showCases: false, copied: false }; }
   runCalc(extra) {
     const s = Object.assign({}, this.state, extra || {});
     this.setState(Object.assign({}, extra || {}, this.resetResult(), { calculated: true, loading: true, custOpen: false, artOpen: false, hadResult: this.state.calculated && !this.state.loading,
-      last: { customerId: s.customerId, articleId: s.articleId, qty: s.qty, ov: Object.assign({}, s.ov), custQuery: s.custQuery, artQuery: s.artQuery } }));
+      last: { customerId: s.customerId, articleId: s.articleId, dims: Object.assign({}, s.dims), qty: s.qty, ov: Object.assign({}, s.ov), custQuery: s.custQuery, artQuery: s.artQuery } }));
     clearTimeout(this.t);
     this.t = setTimeout(() => this.setState({ loading: false }), 650);
   }
@@ -1099,6 +1153,10 @@ class Component extends DCLogic {
     const set = (o) => this.setState(o);
     const c = CUSTOMERS.find((x) => x.id === s.customerId);
     const a = ARTICLES.find((x) => x.id === s.articleId);
+    const isCustom = s.articleId === 'CUSTOM';
+    const dimChk = isCustom ? checkDims(s.dims) : { ok: true, error: '' };
+    const aInfo = isCustom ? customArticle(s.dims) : a;
+    const dimSet = (k) => (ev) => set(Object.assign({ dims: Object.assign({}, this.state.dims, { [k]: ev.target.value.replace(/[^0-9]/g, '') }) }, this.state.calculated ? { chosen: null, simText: null, used: null } : {}));
 
     const cq = s.custQuery.trim().toLowerCase();
     const custSearching = cq && !(c && s.custQuery === c.id);
@@ -1113,8 +1171,11 @@ class Component extends DCLogic {
     const artMatches = ARTICLES.filter((x) => (x.id + ' ' + x.label + ' ' + x.desc + ' ' + x.family).toLowerCase().includes(aq));
     const artOptions = (artBrowse ? ARTICLES : artMatches).map((x) => ({
       label: x.label,
-      sub: x.id + ' · ' + x.desc,
-      pick: () => set(Object.assign({ articleId: x.id, artQuery: x.label, artOpen: false }, s.calculated ? this.resetResult() : {}))
+      sub: x.id === 'CUSTOM' ? 'Enter width, height and depth · ' + x.desc : x.id + ' · ' + x.desc,
+      pick: () => {
+        set(Object.assign({ articleId: x.id, artQuery: x.label, artOpen: false }, s.calculated ? this.resetResult() : {}));
+        if (x.id === 'CUSTOM') setTimeout(() => { const el = document.getElementById('d-w'); if (el) el.focus(); }, 50);
+      }
     }));
 
     const qn = parseNum(s.qty);
@@ -1133,7 +1194,7 @@ class Component extends DCLogic {
       set(Object.assign({ ov: Object.assign({}, this.state.ov, { [k]: v }) }, this.state.calculated ? { chosen: null, simText: null, used: null } : {}));
     };
 
-    const canCalc = !!(c && a && s.qty !== '' && !qtyError);
+    const canCalc = !!(c && a && dimChk.ok && s.qty !== '' && !qtyError);
     const e = s.calculated ? engine(this.params(), cfg) : null;
     const showResult = !!(s.calculated && e && !e.missing && !(s.loading && !s.hadResult));
     if (!e || e.missing) this._ctx = null;
@@ -1248,7 +1309,7 @@ class Component extends DCLogic {
       }
       if (e.q < 3 * e.a.minLot) {
         const lot = 3 * e.a.minLot;
-        const e2 = engine({ customerId: e.c.id, articleId: e.a.id, qty: String(lot), ov: s.ov }, cfg);
+        const e2 = engine({ customerId: e.c.id, articleId: e.a.id, dims: s.dims, qty: String(lot), ov: s.ov }, cfg);
         const n2 = e2.list * (1 - e2.sugg / 100);
         alts.push({ title: 'Optimal lot: ' + lot + ' pcs', text: 'With ' + lot + ' pieces the suggested discount rises to ' + fP(e2.sugg) + ': unit net price ' + fE(n2) + ' instead of ' + fE(netSugg) + '.', cta: 'Use ' + lot + ' pcs', apply: () => set(Object.assign({ qty: String(lot) }, this.resetResult())) });
       }
@@ -1344,8 +1405,11 @@ class Component extends DCLogic {
       artListTitle: artBrowse ? 'Recent' : 'Results',
       onArtQuery: (ev) => set({ artQuery: ev.target.value, artOpen: true, articleId: '' }),
       openArt: () => set({ artOpen: true, custOpen: false }),
-      hasArt: !!a, artFamily: a ? a.family : '', artCost: a ? (a.cost == null ? 'not available' : fE(a.cost)) : '',
-      artList: a ? (a.cost == null ? '—' : fE(a.cost * a.mult) + ' (× ' + fN(a.mult, 2) + ')') : '',
+      artCostLabel: isCustom ? 'Estimated cost' : 'Standard cost',
+      hasArt: !!aInfo, artFamily: aInfo ? aInfo.family : '', artCost: aInfo ? (aInfo.cost == null ? 'not available' : fE(aInfo.cost)) : '',
+      artList: aInfo ? (aInfo.cost == null ? '—' : fE(aInfo.cost * aInfo.mult) + ' (× ' + fN(aInfo.mult, 2) + ')') : '',
+      isCustom, dims: s.dims, dimsError: dimChk.error, dimsInvalid: dimChk.error ? 'true' : 'false',
+      onDimW: dimSet('w'), onDimH: dimSet('h'), onDimD: dimSet('d'),
       qty: s.qty, onQty: (ev) => set(Object.assign({ qty: ev.target.value.replace(/[^0-9.,]/g, '') }, s.calculated ? { chosen: null, simText: null, used: null } : {})),
       qtyError, qtyInvalid: qtyError ? 'true' : 'false', lotHint,
       advOpen: s.advOpen, toggleAdv: () => set({ advOpen: !s.advOpen }),
@@ -1356,9 +1420,9 @@ class Component extends DCLogic {
       onQg: ovSet('quality', true), onPr: ovSet('priority', true),
       cannotCalc: !canCalc,
       onSubmit: (ev) => { ev.preventDefault(); if (canCalc) this.runCalc(); },
-      reset: () => { clearTimeout(this.t); set(Object.assign({ customerId: '', articleId: '', qty: '', custQuery: '', artQuery: '', ov: Object.assign({}, EMPTY_OV), calculated: false, loading: false, hadResult: false, simOpen: false, panelOpen: false }, this.resetResult())); },
+      reset: () => { clearTimeout(this.t); set(Object.assign({ customerId: '', articleId: '', qty: '', custQuery: '', artQuery: '', dims: Object.assign({}, EMPTY_DIMS), ov: Object.assign({}, EMPTY_OV), calculated: false, loading: false, hadResult: false, simOpen: false, panelOpen: false }, this.resetResult())); },
       noLast: !s.last,
-      repeatLast: () => { if (s.last) this.runCalc(Object.assign({}, s.last, { ov: Object.assign({}, s.last.ov) })); },
+      repeatLast: () => { if (s.last) this.runCalc(Object.assign({}, s.last, { ov: Object.assign({}, s.last.ov), dims: Object.assign({}, s.last.dims || EMPTY_DIMS) })); },
       loadDemo: () => this.runCalc({ customerId: 'C-10234', custQuery: 'C-10234', articleId: 'EKO-303015', artQuery: 'EKO 300×300×150', qty: '20', ov: Object.assign({}, EMPTY_OV) }),
       pickSimilar: () => set(Object.assign({ articleId: 'EKO-404015', artQuery: 'EKO 400×400×150' }, this.resetResult())),
       showEmpty: !s.calculated || (!e && !s.loading),
@@ -1384,7 +1448,7 @@ class Component extends DCLogic {
         const x = this._ctx; if (!x) return;
         // start over with a blank form and confirm with a short toast
         clearTimeout(this.t); clearTimeout(this.toastT);
-        set(Object.assign({ customerId: '', articleId: '', qty: '', custQuery: '', artQuery: '', ov: Object.assign({}, EMPTY_OV), calculated: false, loading: false, hadResult: false, simOpen: false, panelOpen: false, toast: 'The ' + fP(x.d) + ' discount was applied successfully.' }, this.resetResult()));
+        set(Object.assign({ customerId: '', articleId: '', qty: '', custQuery: '', artQuery: '', dims: Object.assign({}, EMPTY_DIMS), ov: Object.assign({}, EMPTY_OV), calculated: false, loading: false, hadResult: false, simOpen: false, panelOpen: false, toast: 'The ' + fP(x.d) + ' discount was applied successfully.' }, this.resetResult()));
         window.scrollTo({ top: 0, behavior: 'smooth' });
         this.toastT = setTimeout(() => this.setState({ toast: null }), 4000);
       },
