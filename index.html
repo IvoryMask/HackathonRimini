@@ -534,7 +534,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <sc-if value="{{r.indicative}}" hint-placeholder-val="{{ false }}">
 <div aria-live="polite">
 <span class="big" style="font-size: 56px; font-weight: 700; line-height: 1.05; color: var(--ink)">{{r.rangeTxt}}</span>
-<p style="font-size: 14px; color: var(--muted); margin-top: 4px">Midpoint {{r.suggTxt}}: little data, so the range is what counts.</p>
+<p style="font-size: 14px; color: var(--muted); margin-top: 4px">Data is limited, therefore a range is provided.</p>
 </div>
 </sc-if>
 <sc-if value="{{r.precise}}" hint-placeholder-val="{{ true }}">
@@ -547,7 +547,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <div style="display: flex; flex-direction: column; gap: 2px; text-align: right" aria-live="polite">
 <span style="font-size: 13px; font-weight: 500; color: var(--muted)">Net price</span>
 <span style="font-size: 30px; font-weight: 700; color: var(--ink)">{{r.netUnitTxt}} <span style="font-size: 15px; font-weight: 500; color: var(--muted)">/ pc</span></span>
-<span style="font-size: 14px; color: var(--muted)">Line total {{r.netTotTxt}}</span>
+<span style="font-size: 14px; color: var(--muted)">Total {{r.netTotTxt}}</span>
 </div>
 </div>
 
@@ -568,8 +568,8 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: baseline; border-top: 1px solid var(--line); padding-top: 16px" aria-live="polite">
 <div style="display: flex; flex-direction: column">
-<span style="font-size: 13px; font-weight: 500; color: var(--muted)">Expected margin</span>
-<span style="font-size: 26px; font-weight: 700; color: var(--ink)">{{r.marginEurTxt}} <span style="font-weight: 600">· {{r.marginPctTxt}}</span></span>
+<span style="font-size: 13px; font-weight: 500; color: var(--muted)">Expected profit</span>
+<span style="font-size: 26px; font-weight: 700; color: var(--ink)">{{r.marginEurTxt}}</span>
 </div>
 <span style="font-size: 14px; color: var(--muted)">{{r.marginVsTxt}}</span>
 </div>
@@ -713,7 +713,6 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <div role="status" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
 <svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
 <span>Feedback recorded. Thank you.</span>
-<button type="button" class="btn ghost" sc-camel-on-click="{{fbEdit}}">Change answer</button>
 </div>
 </sc-if>
 </div>
@@ -844,19 +843,6 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 </details>
 </sc-if>
 
-<details open="{{true}}" style="border-top: 1px solid var(--line)">
-<summary><span>Factor contributions (discount points)</span><svg class="chev" width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
-<div style="display: flex; flex-direction: column; gap: 4px; padding: 4px 0 12px">
-<p style="font-size: 13px; color: var(--muted); margin-bottom: 6px">Starting point: company average discount {{r.avgTxt}}. Factors that increase the discount are on the right, those that reduce it on the left.</p>
-<sc-for list="{{r.factors}}" as="f" hint-placeholder-count="7">
-<div class="frow">
-<span style="font-size: 14px"><strong style="font-weight: 600; color: var(--ink)">{{f.k}}</strong> · {{f.d}}</span>
-<div class="cbar" style="position: relative; height: 18px"><div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--field)"></div><div class="anim" style="{{f.bar}}"></div></div>
-<span style="text-align: right; font-weight: 600; color: var(--ink)">{{f.ptsTxt}}</span>
-</div>
-</sc-for>
-</div>
-</details>
 </div>
 
 </div>
@@ -908,9 +894,10 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <div style="display: flex; flex-direction: column; gap: 6px">
 <label for="ap-to">Recipient (sales manager, from CRM)</label>
 <sc-raw-select id="ap-to" value="{{recipient}}" sc-camel-on-change="{{onRecipient}}">
-<option value="area">Sales manager, Italy area – [name from CRM]</option>
-<option value="export">Sales manager, Export – [name from CRM]</option>
-<option value="dir">Sales management – [name from CRM]</option>
+<option value="area">Sales manager, Italy area – Ilkim Elif Kervan</option>
+<option value="export">Sales manager, Export – Sebnem Uslu</option>
+<option value="dir">Sales management – Joel Mera</option>
+<option value="dir">Sales management – Andrea Falco</option>
 </sc-raw-select>
 </div>
 <div style="display: flex; flex-direction: column; gap: 6px">
@@ -976,8 +963,8 @@ const PEERS = [
 ];
 const EMPTY_OV = { channel: '', nation: '', cls: '', cluster: '', workflow: '', drawing: 'si', quality: false, priority: false };
 const ST = {
-  ok: { label: 'Ready to use', style: 'background: #056A5A; color: #FFFFFF', todo: 'You can use this price.' },
-  warn: { label: 'Review advised', style: 'background: #F5B700; color: #142C45', todo: 'You can use it: check the cause shown.' },
+  ok: { label: 'Ready to use', style: 'background: #056A5A; color: #FFFFFF', todo: '' },
+  warn: { label: 'Review advised', style: 'background: #F5B700; color: #142C45', todo: '' },
   stop: { label: 'Approval required', style: 'background: #E50000; color: #FFFFFF', todo: 'Request approval from the sales manager before quoting it.' }
 };
 const REASONS = ['Too high', 'Too low', 'Customer context not considered', 'Unsuitable product', 'Other'];
@@ -1041,7 +1028,7 @@ function evaluate(e, d, cfg) {
   const below = m < cfg.minMargin;
   if (overMax) causes.push('Discount above maximum');
   if (net < e.a.cost) causes.push('Below cost');
-  else if (below) causes.push('Margin below threshold');
+ // else if (below) causes.push('Margin below threshold');
   let st = 'ok';
   if (e.rel === 'low' || overMax || below) st = 'stop';
   else if (e.rel === 'medium' || m < cfg.minMargin + 3) { st = 'warn'; if (m < cfg.minMargin + 3) causes.push('Margin close to threshold'); }
@@ -1236,7 +1223,7 @@ class Component extends DCLogic {
       let simEffect;
       if (d === e.sugg) simEffect = 'At the suggested discount the margin is ' + fP(ev.m) + ' (threshold ' + fP(cfg.minMargin) + ').';
       else {
-        simEffect = 'At ' + fP(d) + ' the margin ' + (ev.m < mSugg ? 'drops' : 'rises') + ' to ' + fP(ev.m);
+        simEffect = 'At ' + fP(d) + ' the profit ' + (ev.m < mSugg ? 'drops' : 'rises') + ' to ' + fP(ev.m);
         if (ev.net < e.a.cost) simEffect += ': price below cost, approval required.';
         else if (ev.below) simEffect += ', below the threshold: approval required.';
         else if (ev.overMax) simEffect += ', but the discount is above the maximum: approval required.';
@@ -1255,7 +1242,7 @@ class Component extends DCLogic {
         rangeTxt: fN(e.min, 1) + '–' + fN(e.max, 1) + '%', minTxt: fP(e.min), maxTxt: fP(e.max), thrTxt: fP(e.thr),
         netUnitTxt: fE(ev.net), netTotTxt: fE(ev.net * e.q), listTxt: fE(L), qtyTxt: e.q + ' pcs',
         marginEurTxt: fE(marginEur), marginPctTxt: fP(ev.m),
-        marginVsTxt: (ev.m >= cfg.minMargin ? 'above' : 'below') + ' the ' + fP(cfg.minMargin) + ' threshold · at suggested ' + fP(mSugg),
+        marginVsTxt: "",
         artShort: e.a.label, custTxt: e.c.id,
         canUse: stKey !== 'stop', needsApproval: stKey === 'stop',
         sentence, cascade, factors, avgTxt: fP(AVG),
@@ -1281,7 +1268,7 @@ class Component extends DCLogic {
         };
       }
 
-      this._summary = 'Smart Pricing Engine – quote summary\nCustomer: ' + r.custTxt + '\nItem: ' + e.a.label + ' (' + e.a.id + ')\nQuantity: ' + e.q + ' pcs\nList price: ' + fE(L) + '\nDiscount: ' + fP(d) + ' (suggested ' + fP(e.sugg) + ')\nNet price: ' + fE(ev.net) + ' / pc – total ' + fE(ev.net * e.q) + '\nExpected margin: ' + fE(marginEur) + ' (' + fP(ev.m) + ')\nStatus: ' + st.label + '\nWhy: ' + sentence + '\n';
+      this._summary = 'Smart Pricing Engine – quote summary\nCustomer: ' + r.custTxt + '\nItem: ' + e.a.label + ' (' + e.a.id + ')\nQuantity: ' + e.q + ' pcs\nList price: ' + fE(L) + '\nDiscount: ' + fP(d) + ' (suggested ' + fP(e.sugg) + ')\nNet price: ' + fE(ev.net) + ' / pc – total ' + fE(ev.net * e.q) + '\nExpected profit: ' + fE(marginEur) + ' (' + fP(ev.m) + ')\nStatus: ' + st.label + '\nWhy: ' + sentence + '\n';
       this._ctx = { e, d, ev, st };
     }
 
