@@ -1146,11 +1146,13 @@ class Component extends DCLogic {
     if (e && !e.missing) {
       const d = s.chosen == null ? e.sugg : s.chosen;
       const ev = evaluate(e, d, cfg);
-      // below APPROVAL_MIN_QTY pieces there is no approval step, so a blocking status is cleared
+      // from APPROVAL_MIN_QTY pieces every quote needs approval; below it there is no approval step,
+      // so a blocking status is cleared
       const canAsk = e.q >= APPROVAL_MIN_QTY;
       const cleared = ev.st === 'stop' && !canAsk;
-      const stKey = cleared ? 'ok' : ev.st;
+      const stKey = canAsk ? 'stop' : cleared ? 'ok' : ev.st;
       if (cleared) ev.causes = [];
+      if (canAsk) ev.causes.unshift(APPROVAL_MIN_QTY + ' pcs or more');
       const st = Object.assign({ ok: stKey === 'ok', warn: stKey === 'warn', stop: stKey === 'stop' }, ST[stKey]);
       const needTxt = canAsk ? ': approval required.' : '.';
       const indicative = e.rel === 'low';
