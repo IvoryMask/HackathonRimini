@@ -581,15 +581,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <span style="font-size: 13px; font-weight: 500; color: var(--muted)">Suggested discount</span>
 <sc-if value="{{r.indicative}}" hint-placeholder-val="{{ false }}"><span class="chip">Indicative</span></sc-if>
 </div>
-<sc-if value="{{r.indicative}}" hint-placeholder-val="{{ false }}">
-<div aria-live="polite">
-<span class="big" style="font-size: 56px; font-weight: 700; line-height: 1.05; color: var(--ink)">{{r.rangeTxt}}</span>
-<p style="font-size: 14px; color: var(--muted); margin-top: 4px">Midpoint {{r.suggTxt}}: little data, so the range is what counts.</p>
-</div>
-</sc-if>
-<sc-if value="{{r.precise}}" hint-placeholder-val="{{ true }}">
 <span class="big" aria-live="polite" style="font-size: 72px; font-weight: 700; line-height: 1; color: var(--ink)">{{r.suggTxt}}</span>
-</sc-if>
 <sc-if value="{{r.isCustomChosen}}" hint-placeholder-val="{{ false }}">
 <p style="font-size: 14px; font-weight: 600; color: var(--link)">Discount you are trying: {{r.chosenTxt}}</p>
 </sc-if>
@@ -624,23 +616,6 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <span style="font-size: 14px; color: var(--muted)">{{r.marginVsTxt}}</span>
 </div>
 
-<div style="display: flex; flex-direction: column; gap: 8px">
-<span style="font-size: 13px; font-weight: 500; color: var(--muted)">Discount range</span>
-<div style="position: relative; height: 28px" aria-hidden="true">
-<div style="position: absolute; left: 0; right: 0; top: 12px; height: 4px; background: var(--line)"></div>
-<div class="anim" style="{{r.bar.seg}}"></div>
-<div class="anim" style="{{r.bar.thr}}"></div>
-<div class="anim" style="{{r.bar.sugg}}"></div>
-<sc-if value="{{r.isCustomChosen}}" hint-placeholder-val="{{ false }}"><div class="anim" style="{{r.bar.chosen}}"></div></sc-if>
-</div>
-<div style="display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--muted)">
-<span><span style="display: inline-block; width: 14px; height: 6px; background: var(--light); vertical-align: middle; margin-right: 6px"></span>Min {{r.minTxt}} – Max {{r.maxTxt}}</span>
-<span><span style="display: inline-block; width: 4px; height: 12px; background: var(--ink); vertical-align: middle; margin-right: 6px"></span>Suggested {{r.suggTxt}}</span>
-<sc-if value="{{r.isCustomChosen}}" hint-placeholder-val="{{ false }}"><span><span style="display: inline-block; width: 10px; height: 10px; border: 2px solid var(--link); vertical-align: middle; margin-right: 6px"></span>Yours {{r.chosenTxt}}</span></sc-if>
-<span><span style="display: inline-block; width: 0; height: 12px; border-left: 2px dashed #E50000; vertical-align: middle; margin-right: 6px"></span>Approval threshold {{r.thrTxt}}</span>
-</div>
-</div>
-
 <div style="overflow-x: auto">
 <sc-raw-table class="tbl">
 <sc-raw-thead><sc-raw-tr><sc-raw-th>Quote line</sc-raw-th><sc-raw-th>List price</sc-raw-th><sc-raw-th>Discount</sc-raw-th><sc-raw-th>Unit net price</sc-raw-th><sc-raw-th>Quantity</sc-raw-th><sc-raw-th>Line total</sc-raw-th></sc-raw-tr></sc-raw-thead>
@@ -652,11 +627,11 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <sc-if value="{{r.canUse}}" hint-placeholder-val="{{ true }}">
 <button type="button" class="btn" sc-camel-on-click="{{usePrice}}">Use this price</button>
 </sc-if>
-<sc-if value="{{r.needsApproval}}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{r.approvalMain}}" hint-placeholder-val="{{ false }}">
 <button type="button" class="btn" sc-camel-on-click="{{openApproval}}">Request approval</button>
 </sc-if>
 <button type="button" class="btn sec" sc-camel-on-click="{{openSim}}" aria-expanded="{{simOpen}}" aria-controls="sim">Try another discount</button>
-<sc-if value="{{r.canUse}}" hint-placeholder-val="{{ true }}">
+<sc-if value="{{r.approvalSec}}" hint-placeholder-val="{{ false }}">
 <button type="button" class="btn sec" sc-camel-on-click="{{openApproval}}">Request approval</button>
 </sc-if>
 </div>
@@ -998,6 +973,7 @@ const EKO_COST = { fixed: 30.70, perM2: 132.50 };
 const CUSTOM_UPLIFT = 1.135;
 const DIM_LIMITS = { w: [150, 1000], h: [150, 1000], d: [80, 400] };
 const EMPTY_DIMS = { w: '', h: '', d: '' };
+const APPROVAL_MIN_QTY = 100;
 function checkDims(dims) {
   const names = { w: 'Width', h: 'Height', d: 'Depth' };
   const v = {};
@@ -1206,6 +1182,8 @@ class Component extends DCLogic {
       const ev = evaluate(e, d, cfg);
       const stKey = ev.st;
       const st = Object.assign({ ok: stKey === 'ok', warn: stKey === 'warn', stop: stKey === 'stop' }, ST[stKey]);
+      const canAsk = e.a.custom || e.q >= APPROVAL_MIN_QTY;
+      if (stKey === 'stop' && !canAsk) st.todo = 'Approval can be requested only from ' + APPROVAL_MIN_QTY + ' pcs: try another discount within the limits.';
       const indicative = e.rel === 'low';
       const netSugg = e.list * (1 - e.sugg / 100);
       const mSugg = (netSugg - e.a.cost) / netSugg * 100;
@@ -1333,13 +1311,15 @@ class Component extends DCLogic {
       r = {
         st, causes: ev.causes, indicative, precise: !indicative,
         suggTxt: fP(e.sugg), chosen: d, chosenTxt: fP(d), isCustomChosen: d !== e.sugg,
-        headlineTxt: indicative ? fP(e.min) + '–' + fP(e.max) : fP(d),
+        headlineTxt: fP(d),
         rangeTxt: fN(e.min, 1) + '–' + fN(e.max, 1) + '%', minTxt: fP(e.min), maxTxt: fP(e.max), thrTxt: fP(e.thr),
         netUnitTxt: fE(ev.net), netTotTxt: fE(ev.net * e.q), listTxt: fE(L), qtyTxt: e.q + ' pcs',
         marginEurTxt: fE(marginEur), marginPctTxt: fP(ev.m),
         marginVsTxt: (ev.m >= cfg.minMargin ? 'above' : 'below') + ' the ' + fP(cfg.minMargin) + ' threshold · at suggested ' + fP(mSugg),
         artShort: e.a.label, custTxt: e.c.id,
         canUse: stKey !== 'stop', needsApproval: stKey === 'stop',
+        // approval requests are offered for custom items and for lots of APPROVAL_MIN_QTY pieces or more
+        approvalMain: stKey === 'stop' && canAsk, approvalSec: stKey !== 'stop' && canAsk,
         sentence, cascade, factors, avgTxt: fP(AVG),
         casesTxt, cs, csFilters, csFilterTxt, csAnyFilter: !!anyF, csClear: () => set({ csF: Object.assign({}, EMPTY_CSF) }), csEmpty: e.cases > 0 && filtered.length === 0, csHasRows: filtered.length > 0, hasCases: e.cases > 0, casesBtn: e.cases + ' historical cases', lastCases,
         alts, hasAlts: alts.length > 0, simEffect,
