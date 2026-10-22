@@ -384,7 +384,6 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <sc-if value="{{hasCust}}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; color: var(--muted)">
 <span>{{custSummary}}</span>
-<button type="button" class="btn ghost" style="min-height: 32px; padding: 0 4px; font-size: 13px" sc-camel-on-click="{{openAdv}}">Edit</button>
 </div>
 </sc-if>
 </div>
@@ -432,45 +431,17 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="{{advChevStyle}}"><polyline points="6 9 12 15 18 9"></polyline></svg>
 </button>
 <sc-if value="{{advOpen}}" hint-placeholder-val="{{ false }}">
-<div id="adv" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; padding-top: 8px">
-<div style="display: flex; flex-direction: column; gap: 6px">
-<label for="a-ch">Channel</label>
-<sc-raw-select id="a-ch" value="{{ov.channel}}" sc-camel-on-change="{{onCh}}">
-<option value="">From customer ({{defs.channel}})</option>
-<option value="OEM">OEM</option>
-<option value="Panel Builder">Panel Builder</option>
-<option value="Dealer">Dealer</option>
-<option value="End User">End User</option>
-</sc-raw-select>
-</div>
-<div style="display: flex; flex-direction: column; gap: 6px">
-<label for="a-na">Country</label>
-<sc-raw-select id="a-na" value="{{ov.nation}}" sc-camel-on-change="{{onNa}}">
-<option value="">From customer ({{defs.nation}})</option>
-<option value="Italy">Italy</option>
-<option value="Germany">Germany</option>
-<option value="France">France</option>
-<option value="Spain">Spain</option>
-</sc-raw-select>
-</div>
-<div style="display: flex; flex-direction: column; gap: 6px">
-<label for="a-cl">Class (industry)</label>
-<sc-raw-select id="a-cl" value="{{ov.cls}}" sc-camel-on-change="{{onCl}}">
-<option value="">From customer ({{defs.cls}})</option>
-<option value="Food &amp; Beverage">Food &amp; Beverage</option>
-<option value="Pharma">Pharma</option>
-<option value="Oil &amp; Gas">Oil &amp; Gas</option>
-</sc-raw-select>
-</div>
-<div style="display: flex; flex-direction: column; gap: 6px">
-<label for="a-cu">Cluster</label>
-<sc-raw-select id="a-cu" value="{{ov.cluster}}" sc-camel-on-change="{{onCu}}">
-<option value="">From CRM ({{defs.cluster}})</option>
-<option value="A">A – high potential</option>
-<option value="B">B – medium</option>
-<option value="C">C – low</option>
-</sc-raw-select>
-</div>
+  <div id="adv" style="display: flex; flex-direction: column; gap: 16px; padding-top: 8px">
+    <div style="display: flex; flex-direction: column; gap: 8px">
+    <span style="font-size: 12px; font-weight: 600; color: var(--muted)">From customer record</span>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 14px; font-size: 13px">
+    <div style="display: flex; flex-direction: column"><span style="color: var(--muted)">Channel</span><span style="color: var(--ink); font-weight: 500">{{defs.channel}}</span></div>
+    <div style="display: flex; flex-direction: column"><span style="color: var(--muted)">Country</span><span style="color: var(--ink); font-weight: 500">{{defs.nation}}</span></div>
+    <div style="display: flex; flex-direction: column"><span style="color: var(--muted)">Class (industry)</span><span style="color: var(--ink); font-weight: 500">{{defs.cls}}</span></div>
+    <div style="display: flex; flex-direction: column"><span style="color: var(--muted)">Cluster</span><span style="color: var(--ink); font-weight: 500">{{defs.cluster}}</span></div>
+    </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px">
 <div style="display: flex; flex-direction: column; gap: 6px">
 <label for="a-wf">Workflow</label>
 <sc-raw-select id="a-wf" value="{{ov.workflow}}" sc-camel-on-change="{{onWf}}">
@@ -496,6 +467,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <div style="display: flex; align-items: center; gap: 10px; min-height: 44px">
 <input id="a-pr" type="checkbox" checked="{{ov.priority}}" sc-camel-on-change="{{onPr}}">
 <label for="a-pr">Priority delivery</label>
+</div>
 </div>
 </div>
 </sc-if>
@@ -960,9 +932,16 @@ const LOCALE = 'en-GB';
 const AVG = 27;
 const CUSTOMERS = [
   { id: 'C-10234', channel: 'Dealer', nation: 'Italy', cls: 'Food & Beverage', cluster: 'B', hist: 34, isNew: false },
+  { id: 'C-10587', channel: 'OEM', nation: 'Italy', cls: 'Pharma', cluster: 'A', hist: 42, isNew: false },
+  { id: 'C-11420', channel: 'Panel Builder', nation: 'Italy', cls: 'Oil & Gas', cluster: 'B', hist: 15, isNew: false },
   { id: 'C-20871', channel: 'OEM', nation: 'Germany', cls: 'Pharma', cluster: 'A', hist: 21, isNew: false },
+  { id: 'C-20315', channel: 'Dealer', nation: 'Germany', cls: 'Food & Beverage', cluster: 'B', hist: 27, isNew: false },
+  { id: 'C-21904', channel: 'End User', nation: 'Germany', cls: 'Oil & Gas', cluster: 'C', hist: 6, isNew: false },
   { id: 'C-31006', channel: 'Panel Builder', nation: 'France', cls: 'Oil & Gas', cluster: 'C', hist: 9, isNew: false },
-  { id: 'C-40519', channel: 'End User', nation: 'Spain', cls: 'Food & Beverage', cluster: '', hist: 0, isNew: true }
+  { id: 'C-30742', channel: 'OEM', nation: 'France', cls: 'Food & Beverage', cluster: 'A', hist: 31, isNew: false },
+  { id: 'C-40519', channel: 'End User', nation: 'Spain', cls: 'Food & Beverage', cluster: '', hist: 0, isNew: true },
+  { id: 'C-41288', channel: 'Dealer', nation: 'Spain', cls: 'Pharma', cluster: 'B', hist: 12, isNew: false },
+  { id: 'C-50011', channel: 'Panel Builder', nation: 'France', cls: 'Pharma', cluster: '', hist: 0, isNew: true }
 ];
 const ARTICLES = [
   { id: 'EKO-303015', label: 'EKO 300×300×150', desc: 'EKO stainless enclosure, standard', family: 'EKO enclosures', base: 29, cost: 78.40, mult: 2.2, minLot: 10, custom: false, wf: 'Q1' },
@@ -1339,7 +1318,7 @@ class Component extends DCLogic {
       onCustQuery: (ev) => set({ custQuery: ev.target.value, custOpen: true, customerId: '' }),
       openCust: () => set({ custOpen: true, artOpen: false }),
       hasCust: !!c, custSummary: c ? c.channel + ' · ' + c.nation + ' · ' + c.cls + ' · ' + (c.cluster ? 'Cluster ' + c.cluster : 'Customer with no history') : '',
-      openAdv: () => set({ advOpen: true }),
+      openAdv: () => set({ advOpen: false }),
       artQuery: s.artQuery, artOpen: s.artOpen, artOptions, artNoMatch: artOptions.length === 0,
       artListTitle: artBrowse ? 'Recent' : 'Results',
       onArtQuery: (ev) => set({ artQuery: ev.target.value, artOpen: true, articleId: '' }),
