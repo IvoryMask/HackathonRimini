@@ -1146,10 +1146,12 @@ class Component extends DCLogic {
     if (e && !e.missing) {
       const d = s.chosen == null ? e.sugg : s.chosen;
       const ev = evaluate(e, d, cfg);
-      const stKey = ev.st;
+      // below APPROVAL_MIN_QTY pieces there is no approval step: a blocking status becomes a review
+      const canAsk = e.q >= APPROVAL_MIN_QTY;
+      const stKey = ev.st === 'stop' && !canAsk ? 'warn' : ev.st;
       const st = Object.assign({ ok: stKey === 'ok', warn: stKey === 'warn', stop: stKey === 'stop' }, ST[stKey]);
-      const canAsk = e.a.custom || e.q >= APPROVAL_MIN_QTY;
-      if (stKey === 'stop' && !canAsk) st.todo = 'Approval can be requested only from ' + APPROVAL_MIN_QTY + ' pcs: try another discount within the limits.';
+      if (ev.st === 'stop' && !canAsk) st.todo = 'Under ' + APPROVAL_MIN_QTY + ' pcs no approval is needed: check the causes shown before quoting.';
+      const needTxt = canAsk ? 'approval required' : 'review advised';
       const indicative = e.rel === 'low';
       const netSugg = e.list * (1 - e.sugg / 100);
       const mSugg = (netSugg - e.a.cost) / netSugg * 100;
@@ -1263,10 +1265,10 @@ class Component extends DCLogic {
       if (d === e.sugg) simEffect = 'At the suggested discount the margin is ' + fP(ev.m) + ' (threshold ' + fP(cfg.minMargin) + ').';
       else {
         simEffect = 'At ' + fP(d) + ' the profit ' + (ev.m < mSugg ? 'drops' : 'rises') + ' to ' + fP(ev.m);
-        if (ev.net < e.a.cost) simEffect += ': price below cost, approval required.';
-        else if (ev.below) simEffect += ', below the threshold: approval required.';
-        else if (ev.overMax) simEffect += ', but the discount is above the maximum: approval required.';
-        else if (stKey === 'stop') simEffect += ': the estimate is still unreliable, approval required.';
+        if (ev.net < e.a.cost) simEffect += ': price below cost, ' + needTxt + '.';
+        else if (ev.below) simEffect += ', below the threshold: ' + needTxt + '.';
+        else if (ev.overMax) simEffect += ', but the discount is above the maximum: ' + needTxt + '.';
+        else if (ev.st === 'stop') simEffect += ': the estimate is still unreliable, ' + needTxt + '.';
         else if (stKey === 'warn') simEffect += ', close to the threshold: review advised.';
         else simEffect += ', above the threshold.';
       }
@@ -1284,7 +1286,7 @@ class Component extends DCLogic {
         marginVsTxt: "",
         artShort: e.a.label, custTxt: e.c.id,
         canUse: stKey !== 'stop', needsApproval: stKey === 'stop',
-        // approval requests are offered for custom items and for lots of APPROVAL_MIN_QTY pieces or more
+        // approval requests are offered only for lots of APPROVAL_MIN_QTY pieces or more
         approvalMain: stKey === 'stop' && canAsk, approvalSec: stKey !== 'stop' && canAsk,
         sentence, cascade, factors, avgTxt: fP(AVG),
         casesTxt, cs, csFilters, csFilterTxt, csAnyFilter: !!anyF, csClear: () => set({ csF: Object.assign({}, EMPTY_CSF) }), csEmpty: e.cases > 0 && filtered.length === 0, csHasRows: filtered.length > 0, hasCases: e.cases > 0, casesBtn: e.cases + ' historical cases', lastCases,
