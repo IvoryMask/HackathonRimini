@@ -372,7 +372,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <div style="display: flex; flex-direction: column; gap: 6px; position: relative">
 <label for="f-cli">Customer *</label>
 <div style="position: relative">
-<input id="f-cli" type="text" autocomplete="off" placeholder="Customer code (e.g. C-10234)" value="{{custQuery}}" sc-camel-on-change="{{onCustQuery}}" sc-camel-on-focus="{{openCust}}" aria-expanded="{{custOpen}}" aria-controls="l-cli">
+<input id="f-cli" type="text" autocomplete="off" placeholder="{{custPlaceholder}}" value="{{custQuery}}" sc-camel-on-change="{{onCustQuery}}" sc-camel-on-focus="{{openCust}}" aria-expanded="{{custOpen}}" aria-controls="l-cli">
 </div>
 <sc-if value="{{custOpen}}" hint-placeholder-val="{{ false }}">
 <div id="l-cli" role="listbox" style="border: 1px solid var(--field); border-top: 0; background: var(--card); max-height: 280px; overflow: auto">
@@ -384,7 +384,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 </button>
 </sc-for>
 <sc-if value="{{custNoMatch}}" hint-placeholder-val="{{ false }}">
-<div style="padding: 10px 12px; font-size: 13px; color: var(--muted)">No customer found. Try the code (e.g. C-10234).</div>
+<div style="padding: 10px 12px; font-size: 13px; color: var(--muted)"><div style="padding: 10px 12px; font-size: 13px; color: var(--muted)">No customer found. Try a name (e.g. {{custExample}}).</div></div>
 </sc-if>
 </div>
 </sc-if>
@@ -551,7 +551,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <div style="display: flex; flex-direction: column; gap: 4px">
 <div style="display: flex; align-items: center; gap: 10px">
 <span style="font-size: 13px; font-weight: 500; color: var(--muted)">Suggested discount</span>
-<sc-if value="{{r.indicative}}" hint-placeholder-val="{{ false }}"><span class="chip">Indicative</span></sc-if>
+<sc-if value="{{r.indicative}}" hint-placeholder-val="{{ false }}"></sc-if>
 </div>
 <span class="big" aria-live="polite" style="font-size: 72px; font-weight: 700; line-height: 1; color: var(--ink)">{{r.suggTxt}}</span>
 <sc-if value="{{r.isCustomChosen}}" hint-placeholder-val="{{ false }}">
@@ -588,6 +588,23 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <span style="font-size: 14px; color: var(--muted)">{{r.marginVsTxt}}</span>
 </div>
 
+<div style="display: flex; flex-direction: column; gap: 8px">
+  <span style="font-size: 13px; font-weight: 500; color: var(--muted)">Discount range</span>
+  <div style="position: relative; height: 28px" aria-hidden="true">
+  <div style="position: absolute; left: 0; right: 0; top: 12px; height: 4px; background: var(--line)"></div>
+  <div class="anim" style="{{r.bar.seg}}"></div>
+  <div class="anim" style="{{r.bar.thr}}"></div>
+  <div class="anim" style="{{r.bar.sugg}}"></div>
+  <sc-if value="{{r.isCustomChosen}}" hint-placeholder-val="{{ false }}"><div class="anim" style="{{r.bar.chosen}}"></div></sc-if>
+  </div>
+  <div style="display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--muted)">
+  <span><span style="display: inline-block; width: 14px; height: 6px; background: var(--light); vertical-align: middle; margin-right: 6px"></span>Min {{r.minTxt}} – Max {{r.maxTxt}}</span>
+  <span><span style="display: inline-block; width: 4px; height: 12px; background: var(--ink); vertical-align: middle; margin-right: 6px"></span>Suggested {{r.suggTxt}}</span>
+  <sc-if value="{{r.isCustomChosen}}" hint-placeholder-val="{{ false }}"><span><span style="display: inline-block; width: 10px; height: 10px; border: 2px solid var(--link); vertical-align: middle; margin-right: 6px"></span>Yours {{r.chosenTxt}}</span></sc-if>
+  <span><span style="display: inline-block; width: 0; height: 12px; border-left: 2px dashed #E50000; vertical-align: middle; margin-right: 6px"></span>Approval threshold {{r.thrTxt}}</span>
+  </div>
+  </div>
+
 <div style="overflow-x: auto">
 <sc-raw-table class="tbl">
 <sc-raw-thead><sc-raw-tr><sc-raw-th>Quote line</sc-raw-th><sc-raw-th>List price</sc-raw-th><sc-raw-th>Discount</sc-raw-th><sc-raw-th>Unit net price</sc-raw-th><sc-raw-th>Quantity</sc-raw-th><sc-raw-th>Line total</sc-raw-th></sc-raw-tr></sc-raw-thead>
@@ -596,18 +613,18 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px">
-<sc-if value="{{r.canUse}}" hint-placeholder-val="{{ true }}">
-<button type="button" class="btn" sc-camel-on-click="{{usePrice}}">Use this price</button>
-</sc-if>
-<sc-if value="{{r.approvalMain}}" hint-placeholder-val="{{ false }}">
-<button type="button" class="btn" sc-camel-on-click="{{openApproval}}">Request approval</button>
-</sc-if>
-<button type="button" class="btn sec" sc-camel-on-click="{{openSim}}" aria-expanded="{{simOpen}}" aria-controls="sim">Try another discount</button>
-<sc-if value="{{r.approvalSec}}" hint-placeholder-val="{{ false }}">
-<button type="button" class="btn sec" sc-camel-on-click="{{openApproval}}">Request approval</button>
-</sc-if>
-</div>
-</div>
+  <sc-if value="{{r.canUse}}" hint-placeholder-val="{{ true }}">
+  <button type="button" class="btn" sc-camel-on-click="{{usePrice}}">Use this price</button>
+  </sc-if>
+  <sc-if value="{{r.needsApproval}}" hint-placeholder-val="{{ false }}">
+  <button type="button" class="btn" sc-camel-on-click="{{openApproval}}">Request approval</button>
+  </sc-if>
+  <button type="button" class="btn sec" sc-camel-on-click="{{openSim}}" aria-expanded="{{simOpen}}" aria-controls="sim">Try another discount</button>
+  <sc-if value="{{r.canUse}}" hint-placeholder-val="{{ true }}">
+  <button type="button" class="btn sec" sc-camel-on-click="{{openApproval}}">Request approval</button>
+  </sc-if>
+  </div>
+  </div>
 
 <sc-if value="{{simOpen}}" hint-placeholder-val="{{ false }}">
 <div id="sim" class="card" style="display: flex; flex-direction: column; gap: 14px">
@@ -806,7 +823,7 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 </div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 6px">
-<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><span style="font-size: 13px; font-weight: 600; color: var(--ink)">Most recent cases</span><span style="font-size: 12px; color: var(--muted)">Synthetic demo data</span></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><span style="font-size: 13px; font-weight: 600; color: var(--ink)">Most recent cases</span><span style="font-size: 12px; color: var(--muted)"></span></div>
 <div style="overflow-x: auto">
 <sc-raw-table class="tbl">
 <sc-raw-thead><sc-raw-tr><sc-raw-th>Date</sc-raw-th><sc-raw-th>Customer</sc-raw-th><sc-raw-th>Country</sc-raw-th><sc-raw-th>Industry</sc-raw-th><sc-raw-th>Item</sc-raw-th><sc-raw-th>Qty</sc-raw-th><sc-raw-th>Discount</sc-raw-th><sc-raw-th>vs suggested</sc-raw-th></sc-raw-tr></sc-raw-thead>
@@ -891,8 +908,8 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 <div style="display: flex; flex-direction: column; gap: 6px">
 <label for="ap-to">Recipient (sales manager, from CRM)</label>
 <sc-raw-select id="ap-to" value="{{recipient}}" sc-camel-on-change="{{onRecipient}}">
-<option value="area">Sales manager, Italy area – Ilkim Elif Kervan</option>
-<option value="export">Sales manager, Export – Sebnem Uslu</option>
+<option value="area">Sales director, Italy area – Ilkim Elif Kervan</option>
+<option value="export">Sales director, Export – Sebnem Uslu</option>
 <option value="dir">Sales management – Joel Mera</option>
 <option value="dir">Sales management – Andrea Falco</option>
 </sc-raw-select>
@@ -915,17 +932,17 @@ button.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accen
 const LOCALE = 'en-GB';
 const AVG = 27;
 const CUSTOMERS = [
-  { id: 'C-10234', channel: 'Dealer', nation: 'Italy', cls: 'Food & Beverage', cluster: 'B', hist: 34, isNew: false },
-  { id: 'C-10587', channel: 'OEM', nation: 'Italy', cls: 'Pharma', cluster: 'A', hist: 42, isNew: false },
-  { id: 'C-11420', channel: 'Panel Builder', nation: 'Italy', cls: 'Oil & Gas', cluster: 'B', hist: 15, isNew: false },
-  { id: 'C-20871', channel: 'OEM', nation: 'Germany', cls: 'Pharma', cluster: 'A', hist: 21, isNew: false },
-  { id: 'C-20315', channel: 'Dealer', nation: 'Germany', cls: 'Food & Beverage', cluster: 'B', hist: 27, isNew: false },
-  { id: 'C-21904', channel: 'End User', nation: 'Germany', cls: 'Oil & Gas', cluster: 'C', hist: 6, isNew: false },
-  { id: 'C-31006', channel: 'Panel Builder', nation: 'France', cls: 'Oil & Gas', cluster: 'C', hist: 9, isNew: false },
-  { id: 'C-30742', channel: 'OEM', nation: 'France', cls: 'Food & Beverage', cluster: 'A', hist: 31, isNew: false },
-  { id: 'C-40519', channel: 'End User', nation: 'Spain', cls: 'Food & Beverage', cluster: '', hist: 0, isNew: true },
-  { id: 'C-41288', channel: 'Dealer', nation: 'Spain', cls: 'Pharma', cluster: 'B', hist: 12, isNew: false },
-  { id: 'C-50011', channel: 'Panel Builder', nation: 'France', cls: 'Pharma', cluster: '', hist: 0, isNew: true }
+  { id: 'Manifest', channel: 'Dealer', nation: 'Italy', cls: 'Food & Beverage', cluster: 'B', hist: 34, isNew: false },
+  { id: 'Vertex', channel: 'OEM', nation: 'Italy', cls: 'Pharma', cluster: 'A', hist: 42, isNew: false },
+  { id: 'Cobalt', channel: 'Panel Builder', nation: 'Italy', cls: 'Oil & Gas', cluster: 'B', hist: 15, isNew: false },
+  { id: 'Lumen', channel: 'OEM', nation: 'Germany', cls: 'Pharma', cluster: 'A', hist: 21, isNew: false },
+  { id: 'Halcyon', channel: 'Dealer', nation: 'Germany', cls: 'Food & Beverage', cluster: 'B', hist: 27, isNew: false },
+  { id: 'Ember', channel: 'End User', nation: 'Germany', cls: 'Oil & Gas', cluster: 'C', hist: 6, isNew: false },
+  { id: 'Arbor', channel: 'Panel Builder', nation: 'France', cls: 'Oil & Gas', cluster: 'C', hist: 9, isNew: false },
+  { id: 'Quill', channel: 'OEM', nation: 'France', cls: 'Food & Beverage', cluster: 'A', hist: 31, isNew: false },
+  { id: 'Solstice', channel: 'End User', nation: 'Spain', cls: 'Food & Beverage', cluster: '', hist: 0, isNew: true },
+  { id: 'Tundra', channel: 'Dealer', nation: 'Spain', cls: 'Pharma', cluster: 'B', hist: 12, isNew: false },
+  { id: 'Nimbus', channel: 'Panel Builder', nation: 'France', cls: 'Pharma', cluster: '', hist: 0, isNew: true }
 ];
 const ARTICLES = [
   { id: 'CUSTOM', label: 'Custom', desc: 'EKO stainless enclosure made to the customer\'s dimensions', family: 'EKO enclosures', base: 29, cost: null, mult: 2.2, minLot: 10, custom: true, wf: 'Q3' },
@@ -1083,7 +1100,8 @@ class Component extends DCLogic {
   runCalc(extra) {
     const s = Object.assign({}, this.state, extra || {});
     this.setState(Object.assign({}, extra || {}, this.resetResult(), { calculated: true, loading: true, custOpen: false, artOpen: false, hadResult: this.state.calculated && !this.state.loading,
-      last: { customerId: s.customerId, articleId: s.articleId, dims: Object.assign({}, s.dims), qty: s.qty, ov: Object.assign({}, s.ov), custQuery: s.custQuery, artQuery: s.artQuery } }));
+      last: { customerId: s.customerId, articleId: s.articleId, dims: Object.assign({}, s.dims), qty: s.qty, ov: Object.assign({}, s.ov), custQuery: s.custQuery, custPlaceholder: 'Customer name (e.g. ' + CUSTOMERS[0].id + ')',
+      custExample: CUSTOMERS[0].id, artQuery: s.artQuery } }));
     clearTimeout(this.t);
     this.t = setTimeout(() => this.setState({ loading: false }), 650);
   }
@@ -1204,7 +1222,7 @@ class Component extends DCLogic {
       // historical cases (synthetic) – pool with customer, country and industry, filterable
       const rnd = seeded(hash(e.c.id + e.a.id));
       const effCls = s.ov.cls || e.c.cls;
-      const peers = PEERS.concat(CUSTOMERS.filter((x) => !x.isNew && x.id !== e.c.id).map((x) => ({ id: x.id, nation: x.nation, cls: x.cls })));
+      const peers = CUSTOMERS.filter((x) => !x.isNew && x.id !== e.c.id).map((x) => ({ id: x.id, nation: x.nation, cls: x.cls }));
       const pool = [];
       for (let i = 0; i < e.cases; i++) {
         const own = !e.c.isNew && (i < 2 || rnd() < 0.25);
@@ -1374,7 +1392,7 @@ class Component extends DCLogic {
       reset: () => { clearTimeout(this.t); set(Object.assign({ customerId: '', articleId: '', qty: '', custQuery: '', artQuery: '', dims: Object.assign({}, EMPTY_DIMS), ov: Object.assign({}, EMPTY_OV), calculated: false, loading: false, hadResult: false, simOpen: false, panelOpen: false }, this.resetResult())); },
       noLast: !s.last,
       repeatLast: () => { if (s.last) this.runCalc(Object.assign({}, s.last, { ov: Object.assign({}, s.last.ov), dims: Object.assign({}, s.last.dims || EMPTY_DIMS) })); },
-      loadDemo: () => this.runCalc({ customerId: 'C-10234', custQuery: 'C-10234', articleId: 'EKO-303015', artQuery: 'EKO 300×300×150', qty: '20', ov: Object.assign({}, EMPTY_OV) }),
+      loadDemo: () => this.runCalc({ customerId: CUSTOMERS[0].id, custQuery: CUSTOMERS[0].id, articleId: 'EKO-303015', artQuery: 'EKO 300×300×150', qty: '20', ov: Object.assign({}, EMPTY_OV) }),
       pickSimilar: () => set(Object.assign({ articleId: 'EKO-404015', artQuery: 'EKO 400×400×150' }, this.resetResult())),
       showEmpty: !s.calculated || (!e && !s.loading),
       emptyText: !s.calculated ? 'Choose customer, item and quantity to see the suggested discount.' : 'Complete customer, item and quantity to update the suggested discount.',
@@ -1434,7 +1452,7 @@ class Component extends DCLogic {
       apNote: s.apNote, onApNote: (ev) => set({ apNote: ev.target.value }),
       sendRequest: () => {
         const x = this._ctx; if (!x) return;
-        const who = { area: 'Sales manager, Italy area', export: 'Sales manager, Export', dir: 'Sales management' }[s.recipient];
+        const who = { area: 'Sales director, Italy area', export: 'Sales director, Export', dir: 'Sales management' }[s.recipient];
         const item = { title: x.e.a.label + ' · ' + x.e.q + ' pcs · discount ' + fP(x.d), sub: 'Sent on ' + now() + ' to ' + who + (s.apNote ? ' · Note: ' + s.apNote : ''), status: 'Pending', d: x.d };
         set({ requests: [item].concat(this.state.requests), panelOpen: false, apNote: '' });
         try {
